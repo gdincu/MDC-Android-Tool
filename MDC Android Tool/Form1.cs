@@ -127,5 +127,10 @@ namespace WindowsFormsApp1
                 
             runCommand(_intent);
         }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("D:/repos/MDC Android Tool/MDC Android Tool/CloseCurrentApp.bat");
+        }
     }
 }

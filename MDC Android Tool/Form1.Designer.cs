@@ -37,6 +37,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.button8 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button7 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -147,6 +148,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.button8);
             this.tabPage3.Controls.Add(this.groupBox2);
             this.tabPage3.Controls.Add(this.button2);
             this.tabPage3.Controls.Add(this.listBox2);
@@ -158,6 +160,16 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "TripStart & EOT";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(24, 200);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(100, 50);
+            this.button8.TabIndex = 5;
+            this.button8.Text = "Close App";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // groupBox2
             // 
@@ -331,6 +343,7 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button button8;
     }
 }
 
