@@ -49,5 +49,19 @@ namespace WindowsFormsApp1
         {
 
         }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            textBox1.Clear();
+            textBox1.Text = "TTT";
+
+            //string anyCommand = "/C adb devices -l | find 'model: '";
+            //textBox1.Text += System.Diagnostics.Process.Start("CMD.exe", anyCommand).StandardOutput.ReadToEnd();
+        }
     }
 }

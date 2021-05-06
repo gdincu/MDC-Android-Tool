@@ -36,6 +36,7 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.button3 = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -70,7 +71,7 @@
             this.tabControl1.Location = new System.Drawing.Point(22, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 3;
-            this.tabControl1.Size = new System.Drawing.Size(755, 426);
+            this.tabControl1.Size = new System.Drawing.Size(755, 388);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -80,17 +81,18 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(747, 398);
+            this.tabPage1.Size = new System.Drawing.Size(747, 360);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Item Scan";
             this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // tabPage2
             // 
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(747, 398);
+            this.tabPage2.Size = new System.Drawing.Size(747, 360);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Logs";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -101,7 +103,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(747, 398);
+            this.tabPage3.Size = new System.Drawing.Size(747, 360);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "TripStart & EOT";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -121,16 +123,25 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 24);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(747, 398);
+            this.tabPage4.Size = new System.Drawing.Size(747, 360);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Device";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(29, 415);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(263, 23);
+            this.textBox1.TabIndex = 3;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "MDC Android Tool";
@@ -138,6 +149,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -151,6 +163,7 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
