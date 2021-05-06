@@ -42,7 +42,8 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            runCommand(scanItem(tempList[selection]));
+            runCommand(scanItem(tempList[listBox1.SelectedItem.ToString()]));
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -94,7 +95,17 @@ namespace WindowsFormsApp1
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selection = listBox1.SelectedItem.ToString();
+         
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            runCommand(scanItem(listBox2.SelectedItem.ToString()));
+        }
+
+        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
