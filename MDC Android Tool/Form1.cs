@@ -14,9 +14,7 @@ namespace WindowsFormsApp1
     public partial class Form1 : Form
     {
 
-        String selection = "";
-        IDictionary<string, string> tempList = new Dictionary<string, string>();
-        
+        private IDictionary<string, string> tempList = new Dictionary<string, string>();
 
         public Form1()
         {
@@ -42,7 +40,11 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            runCommand(scanItem(tempList[listBox1.SelectedItem.ToString()]));
+
+            if (tempList.ContainsKey(listBox1.SelectedItem.ToString()))
+                runCommand(scanItem(tempList[listBox1.SelectedItem.ToString()]));
+            else
+                MessageBox.Show("Item not found!");
 
         }
 
@@ -106,6 +108,24 @@ namespace WindowsFormsApp1
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void groupBox1_Enter_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            String _intent = "/C adb shell am broadcast -a 'com.mdcinternational.selfscanner.sendselfscannerconfig' --es 'storenumber' '"
+                + textBox2.Text
+                + "' --es 'soapendpoint' '"
+                + listBox3.SelectedItem.ToString()
+                + "' --es 'terminalid' '"
+                + textBox3.Text
+                + "'";
+                
+            runCommand(_intent);
         }
     }
 }
