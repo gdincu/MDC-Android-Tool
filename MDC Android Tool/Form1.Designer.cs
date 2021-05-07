@@ -318,8 +318,6 @@
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.Opacity = 0.9D;
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MDC Android Tool";
             this.tabControl1.ResumeLayout(false);

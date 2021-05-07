@@ -23,10 +23,10 @@ namespace WindowsFormsApp1
             tempList.Clear();
             tempList.Add("Regular_Item", "16000275270");
             tempList.Add("​Promotion_Item", "70847811299");
-            tempList.Add("​Age_Restriction_21", "80660957159");
+            tempList.Add("Age_Restriction_21", "80660957159");
             tempList.Add("LidItemMessage_Item", "7000570550014");
-            tempList.Add("​Liquidation_Discount", "8000570550020​");
-            tempList.Add("​Forbidden_Item", "8000570550181​");
+            tempList.Add("Liquidation_Discount", "8000570550020​");
+            tempList.Add("Forbidden_Item", "8000570550181​");
         }
 
         private String scanItem(String ItemBarcode)
