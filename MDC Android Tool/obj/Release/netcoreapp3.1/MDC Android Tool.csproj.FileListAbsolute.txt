@@ -13,3 +13,18 @@ D:\repos\MDC Android Tool\MDC Android Tool\obj\Release\netcoreapp3.1\MDC Android
 D:\repos\MDC Android Tool\MDC Android Tool\obj\Release\netcoreapp3.1\MDC Android Tool.dll
 D:\repos\MDC Android Tool\MDC Android Tool\obj\Release\netcoreapp3.1\MDC Android Tool.pdb
 D:\repos\MDC Android Tool\MDC Android Tool\obj\Release\netcoreapp3.1\MDC Android Tool.genruntimeconfig.cache
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Release\netcoreapp3.1\MDC Android Tool.exe
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Release\netcoreapp3.1\MDC Android Tool.deps.json
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Release\netcoreapp3.1\MDC Android Tool.runtimeconfig.json
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Release\netcoreapp3.1\MDC Android Tool.runtimeconfig.dev.json
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Release\netcoreapp3.1\MDC Android Tool.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Release\netcoreapp3.1\MDC Android Tool.pdb
+D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Release\netcoreapp3.1\MDC Android Tool.csprojAssemblyReference.cache
+D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Release\netcoreapp3.1\WindowsFormsApp1.Form1.resources
+D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Release\netcoreapp3.1\MDC Android Tool.csproj.GenerateResource.cache
+D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Release\netcoreapp3.1\MDC Android Tool.AssemblyInfoInputs.cache
+D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Release\netcoreapp3.1\MDC Android Tool.AssemblyInfo.cs
+D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Release\netcoreapp3.1\MDC Android Tool.csproj.CoreCompileInputs.cache
+D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Release\netcoreapp3.1\MDC Android Tool.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Release\netcoreapp3.1\MDC Android Tool.pdb
+D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Release\netcoreapp3.1\MDC Android Tool.genruntimeconfig.cache

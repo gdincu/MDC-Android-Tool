@@ -5,7 +5,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <AssemblyName>MDC Android Tool</AssemblyName>
-    <ApplicationIcon>OneDrive.ico</ApplicationIcon>
+    <ApplicationIcon>16549840331600005546-48.ico</ApplicationIcon>
   </PropertyGroup>
 
 </Project>

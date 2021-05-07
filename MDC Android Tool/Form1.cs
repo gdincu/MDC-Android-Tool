@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.IO;
 
 namespace WindowsFormsApp1
 {
@@ -78,12 +79,10 @@ namespace WindowsFormsApp1
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            textBox1.Clear();
-            textBox1.Text = "TTT";
-
             //string anyCommand = "/C adb devices -l | find 'model: '";
             //textBox1.Text += System.Diagnostics.Process.Start("CMD.exe", anyCommand).StandardOutput.ReadToEnd();
         }
+
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -130,7 +129,10 @@ namespace WindowsFormsApp1
 
         private void button8_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("D:/repos/MDC Android Tool/MDC Android Tool/CloseCurrentApp.bat");
+            //MessageBox.Show(Path.Combine(Environment.CurrentDirectory, "CloseCurrentApp.bat"));
+            System.Diagnostics.Process.Start(Path.Combine(Environment.CurrentDirectory, "CloseCurrentApp.bat"));
+
         }
+        
     }
 }

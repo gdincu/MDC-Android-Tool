@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\repos\\MDC Android Tool\\MDC Android Tool\\MDC Android Tool.csproj": {}
+    "D:\\repos\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj": {}
   },
   "projects": {
-    "D:\\repos\\MDC Android Tool\\MDC Android Tool\\MDC Android Tool.csproj": {
+    "D:\\repos\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\repos\\MDC Android Tool\\MDC Android Tool\\MDC Android Tool.csproj",
+        "projectUniqueName": "D:\\repos\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj",
         "projectName": "MDC Android Tool",
-        "projectPath": "D:\\repos\\MDC Android Tool\\MDC Android Tool\\MDC Android Tool.csproj",
+        "projectPath": "D:\\repos\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj",
         "packagesPath": "C:\\Users\\i.g.dincu\\.nuget\\packages\\",
-        "outputPath": "D:\\repos\\MDC Android Tool\\MDC Android Tool\\obj\\",
+        "outputPath": "D:\\repos\\MDC-Android-Tool\\MDC Android Tool\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
