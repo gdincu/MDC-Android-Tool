@@ -49,8 +49,8 @@
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.button3 = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.button9 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -270,6 +270,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.button9);
             this.tabPage4.Controls.Add(this.button6);
             this.tabPage4.Location = new System.Drawing.Point(4, 24);
             this.tabPage4.Name = "tabPage4";
@@ -278,6 +279,17 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Device";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // button9
+            // 
+            this.button9.FlatAppearance.BorderSize = 0;
+            this.button9.Location = new System.Drawing.Point(28, 77);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(100, 50);
+            this.button9.TabIndex = 1;
+            this.button9.Text = "Device Details";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button6
             // 
@@ -289,25 +301,12 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // textBox1
-            // 
-            this.textBox1.AcceptsReturn = true;
-            this.textBox1.AcceptsTab = true;
-            this.textBox1.Location = new System.Drawing.Point(29, 415);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.PlaceholderText = "Device Name and Android version";
-            this.textBox1.Size = new System.Drawing.Size(263, 23);
-            this.textBox1.TabIndex = 3;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
             // Form1
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 449);
-            this.ControlBox = false;
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -329,7 +328,6 @@
             this.tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -343,7 +341,6 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
@@ -358,6 +355,7 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
     }
 }
 

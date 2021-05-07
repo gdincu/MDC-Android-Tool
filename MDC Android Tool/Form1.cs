@@ -133,6 +133,20 @@ namespace WindowsFormsApp1
             System.Diagnostics.Process.Start(Path.Combine(Environment.CurrentDirectory, "CloseCurrentApp.bat"));
 
         }
-        
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+            Process myProcess = new Process();
+            myProcess.StartInfo.UseShellExecute = false;
+            myProcess.StartInfo.FileName = Path.Combine(Environment.CurrentDirectory, "DeviceDetails.bat");
+            myProcess.StartInfo.CreateNoWindow = true;
+            myProcess.StartInfo.RedirectStandardOutput = true;
+            myProcess.Start();
+            String DeviceDetails = myProcess.StandardOutput.ReadToEnd();
+            MessageBox.Show(DeviceDetails,"Paste these details where needed!");
+            Clipboard.SetText(DeviceDetails);
+
+        }
     }
 }

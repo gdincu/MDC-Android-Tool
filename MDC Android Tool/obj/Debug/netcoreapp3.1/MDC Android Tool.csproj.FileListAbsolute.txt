@@ -42,3 +42,4 @@ D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android T
 D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.dll
 D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.pdb
 D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.genruntimeconfig.cache
+D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.csprojAssemblyReference.cache
