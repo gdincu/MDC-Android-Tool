@@ -28,3 +28,22 @@ D:\repos\MDC Android Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\MDC Android T
 D:\repos\MDC Android Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\MDC Android Tool.dll
 D:\repos\MDC Android Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\MDC Android Tool.pdb
 D:\repos\MDC Android Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.genruntimeconfig.cache
+E:\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\MDC Android Tool.exe
+E:\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\MDC Android Tool.deps.json
+E:\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\MDC Android Tool.runtimeconfig.json
+E:\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\MDC Android Tool.runtimeconfig.dev.json
+E:\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\MDC Android Tool.dll
+E:\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\MDC Android Tool.pdb
+E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC_Android_Tool.DeviceControl.resources
+E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\WindowsFormsApp1.Form1.resources
+E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC_Android_Tool.ItemScanControl.resources
+E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC_Android_Tool.LogsControl.resources
+E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC_Android_Tool.Properties.Resources.resources
+E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC_Android_Tool.TripStartControl.resources
+E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.csproj.GenerateResource.cache
+E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.AssemblyInfoInputs.cache
+E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.AssemblyInfo.cs
+E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.csproj.CoreCompileInputs.cache
+E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.dll
+E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.pdb
+E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.genruntimeconfig.cache
