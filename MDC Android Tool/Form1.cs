@@ -157,5 +157,14 @@ namespace WindowsFormsApp1
 
         }
 
+        private void listBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            runCommand(scanItem(Commands[listBox4.SelectedItem.ToString()]));
+        }
     }
 }
