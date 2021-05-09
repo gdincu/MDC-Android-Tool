@@ -36,9 +36,7 @@ E:\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\MDC Android Tool.dl
 E:\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\MDC Android Tool.pdb
 E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC_Android_Tool.DeviceControl.resources
 E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\WindowsFormsApp1.Form1.resources
-E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC_Android_Tool.ItemScanControl.resources
 E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC_Android_Tool.LogsControl.resources
-E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC_Android_Tool.Properties.Resources.resources
 E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC_Android_Tool.TripStartControl.resources
 E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.csproj.GenerateResource.cache
 E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.AssemblyInfoInputs.cache
@@ -47,3 +45,5 @@ E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.cs
 E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.dll
 E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.pdb
 E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.genruntimeconfig.cache
+E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.csproj.AssemblyReference.cache
+E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC_Android_Tool.ItemAddControl.resources

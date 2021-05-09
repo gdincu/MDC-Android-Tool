@@ -41,6 +41,7 @@
             this.logsControl1 = new MDC_Android_Tool.LogsControl();
             this.deviceControl1 = new MDC_Android_Tool.DeviceControl();
             this.tripStartControl1 = new MDC_Android_Tool.TripStartControl();
+            this.itemAddControl1 = new MDC_Android_Tool.ItemAddControl();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -167,11 +168,19 @@
             this.tripStartControl1.Size = new System.Drawing.Size(550, 400);
             this.tripStartControl1.TabIndex = 7;
             // 
+            // itemAddControl1
+            // 
+            this.itemAddControl1.Location = new System.Drawing.Point(208, 16);
+            this.itemAddControl1.Name = "itemAddControl1";
+            this.itemAddControl1.Size = new System.Drawing.Size(550, 400);
+            this.itemAddControl1.TabIndex = 8;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 400);
+            this.Controls.Add(this.itemAddControl1);
             this.Controls.Add(this.logsControl1);
             this.Controls.Add(this.tripStartControl1);
             this.Controls.Add(this.deviceControl1);
@@ -203,6 +212,7 @@
         private MDC_Android_Tool.LogsControl logsControl1;
         private MDC_Android_Tool.DeviceControl deviceControl1;
         private MDC_Android_Tool.TripStartControl tripStartControl1;
+        private MDC_Android_Tool.ItemAddControl itemAddControl1;
     }
 }
 

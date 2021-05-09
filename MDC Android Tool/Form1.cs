@@ -32,7 +32,7 @@ namespace WindowsFormsApp1
         }
         private void Button9_Click(object sender, EventArgs e)
         {
-            
+            itemAddControl1.BringToFront();
         }
 
         private void Button10_Click(object sender, EventArgs e)
