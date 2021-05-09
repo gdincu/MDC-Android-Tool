@@ -1,25 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\repos\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj": {}
+    "E:\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj": {}
   },
   "projects": {
-    "D:\\repos\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj": {
+    "E:\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\repos\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj",
+        "projectUniqueName": "E:\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj",
         "projectName": "MDC Android Tool",
-        "projectPath": "D:\\repos\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj",
-        "packagesPath": "C:\\Users\\i.g.dincu\\.nuget\\packages\\",
-        "outputPath": "D:\\repos\\MDC-Android-Tool\\MDC Android Tool\\obj\\",
+        "projectPath": "E:\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj",
+        "packagesPath": "C:\\Users\\Pavilion\\.nuget\\packages\\",
+        "outputPath": "E:\\MDC-Android-Tool\\MDC Android Tool\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\i.g.dincu\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Pavilion\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -30,6 +29,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -41,6 +41,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "imports": [
             "net461",
             "net462",
@@ -59,7 +60,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300-preview.21180.15\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -9,29 +9,39 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using System.Xml.Linq;
 
 namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
 
-        private IDictionary<string, string> tempList = new Dictionary<string, string>();
-
+        public IDictionary<string, string> Items = new Dictionary<string, string>();
+        public IDictionary<string, string> Commands = new Dictionary<string, string>();
+        public IDictionary<string, string> EOTBarcodes = new Dictionary<string, string>();
+        public IDictionary<string, string> URIs = new Dictionary<string, string>();
+        String Settings = Path.Combine(Environment.CurrentDirectory, "MDCAndroidTool.xml");        
+            
         public Form1()
         {
-            InitializeComponent();
-            tempList.Clear();
-            tempList.Add("Regular_Item", "16000275270");
-            tempList.Add("​Promotion_Item", "70847811299");
-            tempList.Add("Age_Restriction_21", "80660957159");
-            tempList.Add("LidItemMessage_Item", "7000570550014");
-            tempList.Add("Liquidation_Discount", "8000570550020​");
-            tempList.Add("Forbidden_Item", "8000570550181​");
+            ReadValues(Items, "Items");
+            ReadValues(Commands, "Commands");
+            ReadValues(EOTBarcodes, "EOTBarcodes");
+            ReadValues(URIs, "URIs");
+            InitializeComponent();            
+        }
+
+        private void ReadValues (IDictionary<string, string> Dictionary, string TagName)
+        {
+            Dictionary.Clear();
+            foreach (XElement level1Element in XElement.Load(Settings).Elements(TagName))
+                foreach (XElement level2Element in level1Element.Elements(TagName[..^1]))
+                    Dictionary.Add(level2Element.Attribute("name").Value, level2Element.Attribute("value").Value);
         }
 
         private String scanItem(String ItemBarcode)
         {
-            return "/C adb shell am broadcast -a 'barcodescanner.RECVR' --es 'com.motorolasolutions.emdk.datawedge.data_string' '" + ItemBarcode + "' --es 'com.motorolasolutions.emdk.datawedge.source' 'scanner' --es 'com.motorolasolutions.emdk.datawedge.label_type' 'LABEL - TYPE - EAN13'";
+            return Commands["ScanItem1"] + ItemBarcode + Commands["ScanItem2"];
         }
 
         private void runCommand(String command)
@@ -42,8 +52,8 @@ namespace WindowsFormsApp1
         private void button1_Click(object sender, EventArgs e)
         {
 
-            if (tempList.ContainsKey(listBox1.SelectedItem.ToString()))
-                runCommand(scanItem(tempList[listBox1.SelectedItem.ToString()]));
+            if (Items.ContainsKey(listBox1.SelectedItem.ToString()))
+                runCommand(scanItem(Items[listBox1.SelectedItem.ToString()]));
             else
                 MessageBox.Show("Item not found!");
 
@@ -51,12 +61,12 @@ namespace WindowsFormsApp1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            runCommand("/C adb shell am broadcast -a 'com.symbol.intent.device.UNDOCKED'");
+            runCommand(Commands["Undocked"]);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            runCommand("/C adb logcat -c & adb logcat -c & EXIT");
+            runCommand(Commands["ClearLogcat"]);
             MessageBox.Show("Cleared!", "Clear logcat");
         }
 
@@ -91,7 +101,7 @@ namespace WindowsFormsApp1
 
         private void button6_Click(object sender, EventArgs e)
         {
-            runCommand("/C adb reboot");
+            runCommand(Commands["Reboot"]);
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -101,7 +111,7 @@ namespace WindowsFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            runCommand(scanItem(listBox2.SelectedItem.ToString()));
+            runCommand(scanItem(EOTBarcodes[listBox2.SelectedItem.ToString()]));
         }
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -116,20 +126,18 @@ namespace WindowsFormsApp1
 
         private void button7_Click(object sender, EventArgs e)
         {
-            String _intent = "/C adb shell am broadcast -a 'com.mdcinternational.selfscanner.sendselfscannerconfig' --es 'storenumber' '"
+            String _intent = Commands["Intent1"]
                 + textBox2.Text
-                + "' --es 'soapendpoint' '"
-                + listBox3.SelectedItem.ToString()
-                + "' --es 'terminalid' '"
-                + textBox3.Text
-                + "'";
-                
+                + Commands["Intent2"]
+                + URIs[listBox3.SelectedItem.ToString()]
+                + Commands["Intent3"]
+                + textBox3.Text+ "'";
+
             runCommand(_intent);
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show(Path.Combine(Environment.CurrentDirectory, "CloseCurrentApp.bat"));
             System.Diagnostics.Process.Start(Path.Combine(Environment.CurrentDirectory, "CloseCurrentApp.bat"));
 
         }
@@ -148,5 +156,6 @@ namespace WindowsFormsApp1
             Clipboard.SetText(DeviceDetails);
 
         }
+
     }
 }

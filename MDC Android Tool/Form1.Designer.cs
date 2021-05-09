@@ -1,4 +1,7 @@
-﻿namespace WindowsFormsApp1
+﻿using System.Windows.Forms;
+using System.Xml.Linq;
+
+namespace WindowsFormsApp1
 {
     partial class Form1
     {
@@ -64,7 +67,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(145, 15);
+            this.button1.Location = new System.Drawing.Point(177, 15);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 50);
             this.button1.TabIndex = 0;
@@ -106,16 +109,16 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 15;
-            this.listBox1.Items.AddRange(new object[] {
-            "Regular_Item",
-            "​Promotion_Item",
-            "Age_Restriction_21",
-            "LidItemMessage_Item",
-            "Liquidation_Discount",
-            "Forbidden_Item"});
+
+            foreach (var temp in Items)
+                this.listBox1.Items.Add(temp.Key);
+            //this.listBox1.Items.AddRange(new object[] {
+            //"Test1",
+            //"Test2"});
+
             this.listBox1.Location = new System.Drawing.Point(13, 15);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(126, 154);
+            this.listBox1.Size = new System.Drawing.Size(158, 319);
             this.listBox1.TabIndex = 1;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -168,7 +171,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(24, 200);
+            this.button8.Location = new System.Drawing.Point(130, 19);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(100, 50);
             this.button8.TabIndex = 5;
@@ -182,7 +185,7 @@
             this.groupBox2.Controls.Add(this.textBox3);
             this.groupBox2.Controls.Add(this.textBox2);
             this.groupBox2.Controls.Add(this.groupBox1);
-            this.groupBox2.Location = new System.Drawing.Point(411, 80);
+            this.groupBox2.Location = new System.Drawing.Point(492, 87);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(291, 153);
             this.groupBox2.TabIndex = 4;
@@ -230,9 +233,13 @@
             // 
             this.listBox3.FormattingEnabled = true;
             this.listBox3.ItemHeight = 15;
-            this.listBox3.Items.AddRange(new object[] {
-            "http://172.16.48.40:8291/SelfScanEnginePlugin",
-            "http://172.16.48.111:8291/SelfScanEnginePlugin"});
+
+            foreach (var temp in URIs)
+                this.listBox3.Items.Add(temp.Key);
+            //this.listBox3.Items.AddRange(new object[] {
+            //"http://172.16.48.40:8291/SelfScanEnginePlugin",
+            //"http://172.16.48.111:8291/SelfScanEnginePlugin"});
+
             this.listBox3.Location = new System.Drawing.Point(6, 22);
             this.listBox3.Name = "listBox3";
             this.listBox3.Size = new System.Drawing.Size(265, 34);
@@ -240,7 +247,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(149, 87);
+            this.button2.Location = new System.Drawing.Point(173, 87);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 50);
             this.button2.TabIndex = 1;
@@ -252,12 +259,16 @@
             // 
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 15;
-            this.listBox2.Items.AddRange(new object[] {
-            "0290999999915",
-            "2700100009993"});
+            
+            foreach (var temp in EOTBarcodes)
+                this.listBox2.Items.Add(temp.Key);
+            //this.listBox2.Items.AddRange(new object[] {
+            //"0290999999915",
+            //"2700100009993"});
+
             this.listBox2.Location = new System.Drawing.Point(23, 87);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(120, 94);
+            this.listBox2.Size = new System.Drawing.Size(144, 259);
             this.listBox2.TabIndex = 2;
             this.listBox2.Tag = "";
             this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
@@ -317,7 +328,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
-            this.Opacity = 0.9D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MDC Android Tool";
             this.tabControl1.ResumeLayout(false);
