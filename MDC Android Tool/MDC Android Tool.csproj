@@ -6,6 +6,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <AssemblyName>MDC Android Tool</AssemblyName>
     <ApplicationIcon>16549840331600005546-48.ico</ApplicationIcon>
+    <RootNamespace>MDC_Android_Tool</RootNamespace>
   </PropertyGroup>
 
 </Project>

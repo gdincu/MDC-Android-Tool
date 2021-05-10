@@ -59,4 +59,4 @@ E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.cs
 E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.dll
 E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.pdb
 E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.genruntimeconfig.cache
-D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.Properties.Resources.resources
+D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC_Android_Tool.Properties.Resources.resources

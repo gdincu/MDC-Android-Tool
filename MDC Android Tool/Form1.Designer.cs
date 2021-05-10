@@ -55,10 +55,10 @@ namespace WindowsFormsApp1
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.button9 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.listBox4 = new System.Windows.Forms.ListBox();
             this.button10 = new System.Windows.Forms.Button();
+            this.listBox4 = new System.Windows.Forms.ListBox();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -66,8 +66,8 @@ namespace WindowsFormsApp1
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -115,11 +115,6 @@ namespace WindowsFormsApp1
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 15;
-            foreach (var temp in Items)
-                this.listBox1.Items.Add(temp.Key);
-            //this.listBox1.Items.AddRange(new object[] {
-            //"Test1",
-            //"Test2"});
             this.listBox1.Location = new System.Drawing.Point(13, 15);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(158, 319);
@@ -237,11 +232,6 @@ namespace WindowsFormsApp1
             // 
             this.listBox3.FormattingEnabled = true;
             this.listBox3.ItemHeight = 15;
-            foreach (var temp in URIs)
-                this.listBox3.Items.Add(temp.Key);
-            //this.listBox3.Items.AddRange(new object[] {
-            //"http://172.16.48.40:8291/SelfScanEnginePlugin",
-            //"http://172.16.48.111:8291/SelfScanEnginePlugin"});
             this.listBox3.Location = new System.Drawing.Point(6, 22);
             this.listBox3.Name = "listBox3";
             this.listBox3.Size = new System.Drawing.Size(265, 34);
@@ -261,11 +251,6 @@ namespace WindowsFormsApp1
             // 
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 15;
-            foreach (var temp in EOTBarcodes)
-                this.listBox2.Items.Add(temp.Key);
-            //this.listBox2.Items.AddRange(new object[] {
-            //"0290999999915",
-            //"2700100009993"});
             this.listBox2.Location = new System.Drawing.Point(23, 87);
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(144, 259);
@@ -328,23 +313,6 @@ namespace WindowsFormsApp1
             this.tabPage5.Text = "Others";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // listBox4
-            // 
-            this.listBox4.FormattingEnabled = true;
-            this.listBox4.ItemHeight = 15;
-            this.listBox4.Location = new System.Drawing.Point(29, 18);
-            this.listBox4.Name = "listBox4";
-            this.listBox4.Size = new System.Drawing.Size(180, 274);
-            this.listBox4.TabIndex = 0;
-            
-            ////////WIP
-            //Regex rg = new Regex(@"[^12]");
-            foreach (var temp in Commands)
-              //  if (rg.IsMatch(temp.Key.ToString()))
-                    this.listBox4.Items.Add(temp.Key);
-
-            this.listBox4.SelectedIndexChanged += new System.EventHandler(this.listBox4_SelectedIndexChanged);
-            // 
             // button10
             // 
             this.button10.Location = new System.Drawing.Point(215, 18);
@@ -354,6 +322,16 @@ namespace WindowsFormsApp1
             this.button10.Text = "Run";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // listBox4
+            // 
+            this.listBox4.FormattingEnabled = true;
+            this.listBox4.ItemHeight = 15;
+            this.listBox4.Location = new System.Drawing.Point(29, 18);
+            this.listBox4.Name = "listBox4";
+            this.listBox4.Size = new System.Drawing.Size(180, 274);
+            this.listBox4.TabIndex = 0;
+            this.listBox4.SelectedIndexChanged += new System.EventHandler(this.listBox4_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -369,6 +347,7 @@ namespace WindowsFormsApp1
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MDC Android Tool";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
@@ -377,8 +356,8 @@ namespace WindowsFormsApp1
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.tabPage5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }

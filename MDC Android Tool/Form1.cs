@@ -24,11 +24,7 @@ namespace WindowsFormsApp1
             
         public Form1()
         {
-            ReadValues(Items, "Items");
-            ReadValues(Commands, "Commands");
-            ReadValues(EOTBarcodes, "EOTBarcodes");
-            ReadValues(URIs, "URIs");
-            InitializeComponent();            
+            InitializeComponent();
         }
 
         private void ReadValues (IDictionary<string, string> Dictionary, string TagName)
@@ -164,6 +160,26 @@ namespace WindowsFormsApp1
         private void button10_Click(object sender, EventArgs e)
         {
             runCommand(Commands[listBox4.SelectedItem.ToString()]);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            ReadValues(Items, "Items");
+            foreach (var temp in Items)
+                this.listBox1.Items.Add(temp.Key);
+
+            ReadValues(EOTBarcodes, "EOTBarcodes");
+            foreach (var temp in EOTBarcodes)
+                this.listBox2.Items.Add(temp.Key);
+
+            ReadValues(URIs, "URIs");
+            foreach (var temp in URIs)
+                this.listBox3.Items.Add(temp.Key);
+
+            ReadValues(Commands, "Commands");
+            foreach (var temp in Commands)
+                //  if (rg.IsMatch(temp.Key.ToString()))
+                this.listBox4.Items.Add(temp.Key);
         }
     }
 }
