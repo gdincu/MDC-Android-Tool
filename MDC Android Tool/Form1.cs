@@ -72,9 +72,8 @@ namespace WindowsFormsApp1
 
         private void button5_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("File saved to ....", "Save logcat");
-            //System.Diagnostics.Process.Start("CMD.exe", "adb logcat -d > logcat.log");
-
+            System.Diagnostics.Process.Start("CMD.exe", "/C adb logcat -d > logcat.log");
+            MessageBox.Show("File saved to " + Path.Combine(Environment.CurrentDirectory, "logcat.log"), "Save logcat");
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
