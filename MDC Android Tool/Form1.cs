@@ -68,8 +68,18 @@ namespace WindowsFormsApp1
 
         private void button5_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("CMD.exe", "/C adb logcat -d > logcat.log");
-            MessageBox.Show("File saved to " + Path.Combine(Environment.CurrentDirectory, "logcat.log"), "Save logcat");
+            //https://www.c-sharpcorner.com/UploadFile/mahesh/savefiledialog-in-C-Sharp/
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.InitialDirectory = @Environment.CurrentDirectory;      
+            saveFileDialog1.Title = "Save logcat";
+            //saveFileDialog1.CheckFileExists = true;
+            //saveFileDialog1.CheckPathExists = true;
+            saveFileDialog1.DefaultExt = "log";
+            saveFileDialog1.Filter = "Logcat (*.log)|*.log|All files (*.*)|*.*";
+            saveFileDialog1.FilterIndex = 1;
+            saveFileDialog1.RestoreDirectory = true;
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                System.Diagnostics.Process.Start("CMD.exe", @$"/C adb logcat -d > ""{saveFileDialog1.FileName}"" ");
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
