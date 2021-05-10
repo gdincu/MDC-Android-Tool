@@ -164,7 +164,7 @@ namespace WindowsFormsApp1
 
         private void button10_Click(object sender, EventArgs e)
         {
-            runCommand(scanItem(Commands[listBox4.SelectedItem.ToString()]));
+            runCommand(Commands[listBox4.SelectedItem.ToString()]);
         }
     }
 }
