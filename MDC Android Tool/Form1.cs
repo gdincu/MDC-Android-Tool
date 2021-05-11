@@ -29,13 +29,32 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            ReadValues(Items, "Items");
+            ReadValues(EOTBarcodes, "EOTBarcodes");
+            ReadValues(URIs, "URIs");
+            ReadValues(Commands, "Commands");
+            ReadValues(HandheldDevices, "HandheldDevices");
+
+            Items.ToList().ForEach(x => this.listBox1.Items.Add(x.Key));
+            EOTBarcodes.ToList().ForEach(x => this.listBox2.Items.Add(x.Key));
+            URIs.ToList().ForEach(x => this.listBox3.Items.Add(x.Key));
+            Commands.ToList().ForEach(x => this.listBox4.Items.Add(x.Key));
+            
+        }
+
         private void ReadValues (IDictionary<string, string> Dictionary, string TagName)
         {
-            Dictionary.Clear();
             //https://docs.microsoft.com/en-us/dotnet/standard/linq/retrieve-value-element
-            foreach (XElement level1Element in XElement.Load(Settings).Elements(TagName))
-                foreach (XElement level2Element in level1Element.Elements(TagName[..^1]))
-                    Dictionary.Add(level2Element.Attribute("name").Value, level2Element.Value);
+            //foreach (XElement level1Element in XElement.Load(Settings).Elements(TagName))
+            //    foreach (XElement level2Element in level1Element.Elements(TagName[..^1]))
+            //        Dictionary.Add(level2Element.Attribute("name").Value, level2Element.Value);
+
+            List<XElement> XMLSettings = XElement.Load(Settings).Elements(TagName).ToList();
+            XMLSettings.ForEach(x => 
+                x.Elements(TagName[..^1]).ToList().ForEach(y => 
+                    Dictionary.Add(y.Attribute("name").Value, y.Value)));
         }
 
         private String scanItem(String ItemBarcode)
@@ -45,14 +64,21 @@ namespace WindowsFormsApp1
 
         private void runCommand(String command)
         {
-            System.Diagnostics.Process.Start("CMD.exe", "/C " + command);
+            //https://stackoverflow.com/questions/19257041/run-cmd-command-without-displaying-it
+            myProcess.StartInfo.FileName = "CMD.exe";
+            myProcess.StartInfo.Arguments = "/C " + command;
+            myProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            myProcess.Start();
+            myProcess.WaitForExit();
+            //Initial version
+            //System.Diagnostics.Process.Start("CMD.exe", "/C " + command);
         }
 
         private void startProcess(String filename)
         {
             myProcess.StartInfo.UseShellExecute = false;
-            myProcess.StartInfo.FileName = Path.Combine(Environment.CurrentDirectory, filename);
             myProcess.StartInfo.CreateNoWindow = true;
+            myProcess.StartInfo.FileName = Path.Combine(Environment.CurrentDirectory, filename);
             myProcess.StartInfo.RedirectStandardOutput = true;
             myProcess.Start();
         }
@@ -113,13 +139,6 @@ namespace WindowsFormsApp1
         {
 
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            //string anyCommand = "/C adb devices -l | find 'model: '";
-            //textBox1.Text += System.Diagnostics.Process.Start("CMD.exe", anyCommand).StandardOutput.ReadToEnd();
-        }
-
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -192,28 +211,6 @@ namespace WindowsFormsApp1
             runCommand(Commands[listBox4.SelectedItem.ToString()]);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            ReadValues(Items, "Items");
-            foreach (var temp in Items)
-                this.listBox1.Items.Add(temp.Key);
-
-            ReadValues(EOTBarcodes, "EOTBarcodes");
-            foreach (var temp in EOTBarcodes)
-                this.listBox2.Items.Add(temp.Key);
-
-            ReadValues(URIs, "URIs");
-            foreach (var temp in URIs)
-                this.listBox3.Items.Add(temp.Key);
-
-            ReadValues(Commands, "Commands");
-            foreach (var temp in Commands)
-                //  if (rg.IsMatch(temp.Key.ToString()))
-                this.listBox4.Items.Add(temp.Key);
-
-            ReadValues(HandheldDevices, "HandheldDevices");
-        }
-
         private void button11_Click(object sender, EventArgs e)
         {
             startProcess("DeviceDetails.bat");
@@ -232,12 +229,8 @@ namespace WindowsFormsApp1
             saveFileDialog1.RestoreDirectory = true;
             saveFileDialog1.FileName = DeviceDetails.Trim() + "_";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                System.Diagnostics.Process.Start("CMD.exe", @$"/C adb logcat -d > ""{saveFileDialog1.FileName}"" ");
-
-            //Checks whether the device details include any of the handheld names recorded in the MDCAndroidTool.xml file
-            //Downloads the entire /sdcard/mdc/myscan40 folder to the specified path and renames it using the device details
-            if (HandheldDevices.Any(y => DeviceDetails.Contains(y.Key)))
-                runCommand(Commands["PullFolder"] + Path.GetDirectoryName(saveFileDialog1.FileName) + @"\" + DeviceDetails);
+                //https://stackoverflow.com/questions/27766712/using-adb-to-capture-the-screen
+                runCommand(Commands["ScreenCap"] + saveFileDialog1.FileName + ".png");
         }
     }
 }
