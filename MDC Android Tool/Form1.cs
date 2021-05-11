@@ -23,6 +23,7 @@ namespace WindowsFormsApp1
         public IDictionary<string, string> HandheldDevices = new Dictionary<string, string>();
         String Settings = Path.Combine(Environment.CurrentDirectory, "MDCAndroidTool.xml");
         Process myProcess = new Process();
+        bool SaveMyScan40Folder = false;
 
         public Form1()
         {
@@ -99,8 +100,9 @@ namespace WindowsFormsApp1
                 System.Diagnostics.Process.Start("CMD.exe", @$"/C adb logcat -d > ""{saveFileDialog1.FileName}"" ");
 
             //Checks whether the device details include any of the handheld names recorded in the MDCAndroidTool.xml file
+            //Also checks whether the user ticked the SaveMyScan40Folder checkbox
             //Downloads the entire /sdcard/mdc/myscan40 folder to the specified path and renames it using the device details
-            if (HandheldDevices.Any(y => DeviceDetails.Contains(y.Key)))
+            if (HandheldDevices.Any(y => DeviceDetails.Contains(y.Key)) && SaveMyScan40Folder)
                 runCommand(Commands["PullFolder"] + Path.GetDirectoryName(saveFileDialog1.FileName) + @"\" + DeviceDetails);
         }
 
@@ -212,6 +214,11 @@ namespace WindowsFormsApp1
                 this.listBox4.Items.Add(temp.Key);
 
             ReadValues(HandheldDevices, "HandheldDevices");
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            SaveMyScan40Folder = checkBox1.Checked;
         }
     }
 }
