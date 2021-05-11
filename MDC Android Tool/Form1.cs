@@ -20,6 +20,7 @@ namespace WindowsFormsApp1
         public IDictionary<string, string> Commands = new Dictionary<string, string>();
         public IDictionary<string, string> EOTBarcodes = new Dictionary<string, string>();
         public IDictionary<string, string> URIs = new Dictionary<string, string>();
+        public IDictionary<string, string> HandheldDevices = new Dictionary<string, string>();
         String Settings = Path.Combine(Environment.CurrentDirectory, "MDCAndroidTool.xml");
         Process myProcess = new Process();
 
@@ -44,7 +45,7 @@ namespace WindowsFormsApp1
 
         private void runCommand(String command)
         {
-            System.Diagnostics.Process.Start("CMD.exe", "/C" + command);
+            System.Diagnostics.Process.Start("CMD.exe", "/C " + command);
         }
 
         private void startProcess(String filename)
@@ -85,7 +86,7 @@ namespace WindowsFormsApp1
 
             //https://www.c-sharpcorner.com/UploadFile/mahesh/savefiledialog-in-C-Sharp/
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.InitialDirectory = @Environment.CurrentDirectory;      
+            saveFileDialog1.InitialDirectory = @Environment.CurrentDirectory;
             saveFileDialog1.Title = "Save logcat";
             //saveFileDialog1.CheckFileExists = true;
             //saveFileDialog1.CheckPathExists = true;
@@ -96,6 +97,11 @@ namespace WindowsFormsApp1
             saveFileDialog1.FileName = DeviceDetails.Trim() + "_";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 System.Diagnostics.Process.Start("CMD.exe", @$"/C adb logcat -d > ""{saveFileDialog1.FileName}"" ");
+
+            //Checks whether the device details include any of the handheld names recorded in the MDCAndroidTool.xml file
+            //Downloads the entire /sdcard/mdc/myscan40 folder to the specified path and renames it using the device details
+            if (HandheldDevices.Any(y => DeviceDetails.Contains(y.Key)))
+                runCommand(Commands["PullFolder"] + Path.GetDirectoryName(saveFileDialog1.FileName) + @"\" + DeviceDetails);
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -204,6 +210,8 @@ namespace WindowsFormsApp1
             foreach (var temp in Commands)
                 //  if (rg.IsMatch(temp.Key.ToString()))
                 this.listBox4.Items.Add(temp.Key);
+
+            ReadValues(HandheldDevices, "HandheldDevices");
         }
     }
 }

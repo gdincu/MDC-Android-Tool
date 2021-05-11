@@ -30,6 +30,7 @@
 <Command name="Mute">adb shell input keyevent 164</Command>  <!--91-->
 <Command name="PowerButton">adb shell input keyevent 26</Command>
 <Command name="ScreenRecord">adb shell screenrecord /sdcard/video.mp4</Command>
+<Command name="PullFolder">adb pull /sdcard/mdc/myscan40/ </Command>
 </Commands>
 
 <EOTBarcodes>
@@ -41,5 +42,10 @@
 <URI name="VMT-22">http://172.16.48.40:8291/SelfScanEnginePlugin</URI>
 <URI name="VMT-07">http://172.16.48.111:8291/SelfScanEnginePlugin</URI>
 </URIs>
+
+<HandheldDevices>
+<HandheldDevice name="PS20">PS20J</HandheldDevice>
+<HandheldDevice name="MC18">MC18</HandheldDevice>
+</HandheldDevices>
 
 </root>
