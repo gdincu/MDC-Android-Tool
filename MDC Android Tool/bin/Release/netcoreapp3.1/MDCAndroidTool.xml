@@ -2,47 +2,44 @@
 <root>
 
 <Items>
-    <Item name="Regular_Item" value="16000275270"></Item>
-	<Item name="Promotion_Item" value="70847811299"></Item>
-	<Item name="Age_Restriction_21" value="80660957159"></Item>
-	<Item name="LidItemMessage_Item" value="7000570550014"></Item>
-    <Item name="Liquidation_Discount" value="8000570550020"></Item>
-	<Item name="Forbidden_Item" value="8000570550181"></Item>	
-	<Item name="Test3" value="16000275270"></Item>
-	<Item name="Test4" value="16000275270"></Item>
-	<Item name="Test5" value="16000275270"></Item>
+    <Item name="Regular_Item">16000275270</Item>
+	<Item name="Promotion_Item">70847811299</Item>
+	<Item name="Age_Restriction_21">80660957159</Item>
+	<Item name="LidItemMessage_Item">7000570550014</Item>
+    <Item name="Liquidation_Discount">8000570550020</Item>
+	<Item name="Forbidden_Item">8000570550181</Item>	
 </Items>
 
 <Commands>
-<Command name="Reboot" value="/C adb reboot"></Command>
-<Command name="IP" value="/C adb shell ip route"></Command>
-<Command name="Undocked" value="/C adb shell am broadcast -a 'com.symbol.intent.device.UNDOCKED'"></Command>
-<Command name="ClearLogcat" value="/C adb logcat -c &amp; adb logcat -c &amp; EXIT"></Command>
-<Command name="ScanItem1" value="/C adb shell am broadcast -a 'barcodescanner.RECVR' --es 'com.motorolasolutions.emdk.datawedge.data_string' '"></Command>
-<Command name="ScanItem2" value="' --es 'com.motorolasolutions.emdk.datawedge.source' 'scanner' --es 'com.motorolasolutions.emdk.datawedge.label_type' 'LABEL - TYPE - EAN13'"></Command>
-<Command name="Intent1" value="/C adb shell am broadcast -a 'com.mdcinternational.selfscanner.sendselfscannerconfig' --es 'storenumber' '"></Command>
-<Command name="Intent2" value="' --es 'soapendpoint' '"></Command>
-<Command name="Intent3" value="' --es 'terminalid' '"></Command>
-<Command name="APP_SWITCH" value="/C adb shell input keyevent KEYCODE_APP_SWITCH"></Command>
-<Command name="SettingsMenu" value="/C adb shell am start -a android.settings.SETTINGS"></Command>
-<Command name="WifiMenu" value="/C adb shell am start -a android.settings.WIRELESS_SETTINGS "></Command>
-<Command name="Back" value="/C adb shell input keyevent 4"></Command>
-<Command name="HomeScreen" value="/C adb shell input keyevent 3"></Command>
-<Command name="VolumeUp" value="/C adb shell input keyevent 24"></Command>
-<Command name="VolumeDown" value="/C adb shell input keyevent 25"></Command>
-<Command name="Mute" value="/C adb shell input keyevent 164"></Command>  <!--91-->
-<Command name="PowerButton" value="/C adb shell input keyevent 26"></Command>
-<Command name="ScreenRecord" value="/C adb shell screenrecord /sdcard/video.mp4"></Command>
+<Command name="Reboot">adb reboot</Command>
+<Command name="IP">adb shell ip route</Command>
+<Command name="Undocked">adb shell am broadcast -a 'com.symbol.intent.device.UNDOCKED'</Command>
+<Command name="ClearLogcat">adb logcat -c &amp; adb logcat -c &amp; EXIT"</Command>
+<Command name="ScanItem1">adb shell am broadcast -a 'barcodescanner.RECVR' --es 'com.motorolasolutions.emdk.datawedge.data_string' '</Command>
+<Command name="ScanItem2">' --es 'com.motorolasolutions.emdk.datawedge.source' 'scanner' --es 'com.motorolasolutions.emdk.datawedge.label_type' 'LABEL - TYPE - EAN13'</Command>
+<Command name="Intent1">adb shell am broadcast -a 'com.mdcinternational.selfscanner.sendselfscannerconfig' --es 'storenumber' '</Command>
+<Command name="Intent2">' --es 'soapendpoint' '</Command>
+<Command name="Intent3">' --es 'terminalid' '</Command>
+<Command name="APP_SWITCH">adb shell input keyevent KEYCODE_APP_SWITCH"</Command>
+<Command name="SettingsMenu">adb shell am start -a android.settings.SETTINGS</Command>
+<Command name="WifiMenu">adb shell am start -a android.settings.WIRELESS_SETTINGS</Command>
+<Command name="Back">adb shell input keyevent 4</Command>
+<Command name="HomeScreen">adb shell input keyevent 3</Command>
+<Command name="VolumeUp">adb shell input keyevent 24</Command>
+<Command name="VolumeDown">adb shell input keyevent 25</Command>
+<Command name="Mute">adb shell input keyevent 164</Command>  <!--91-->
+<Command name="PowerButton">adb shell input keyevent 26</Command>
+<Command name="ScreenRecord">adb shell screenrecord /sdcard/video.mp4</Command>
 </Commands>
 
 <EOTBarcodes>
-<EOTBarcode name="VMT-22" value="2700100009993"></EOTBarcode>
-<EOTBarcode name="VMT-07" value="0290999999915"></EOTBarcode>
+<EOTBarcode name="VMT-22">2700100009993</EOTBarcode>
+<EOTBarcode name="VMT-07">0290999999915</EOTBarcode>
 </EOTBarcodes>
 
 <URIs>
-<URI name="VMT-22" value="http://172.16.48.40:8291/SelfScanEnginePlugin"></URI>
-<URI name="VMT-07" value="http://172.16.48.111:8291/SelfScanEnginePlugin"></URI>
+<URI name="VMT-22">http://172.16.48.40:8291/SelfScanEnginePlugin</URI>
+<URI name="VMT-07">http://172.16.48.111:8291/SelfScanEnginePlugin</URI>
 </URIs>
 
 </root>

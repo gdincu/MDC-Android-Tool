@@ -31,9 +31,10 @@ namespace WindowsFormsApp1
         private void ReadValues (IDictionary<string, string> Dictionary, string TagName)
         {
             Dictionary.Clear();
+            //https://docs.microsoft.com/en-us/dotnet/standard/linq/retrieve-value-element
             foreach (XElement level1Element in XElement.Load(Settings).Elements(TagName))
                 foreach (XElement level2Element in level1Element.Elements(TagName[..^1]))
-                    Dictionary.Add(level2Element.Attribute("name").Value, level2Element.Attribute("value").Value);
+                    Dictionary.Add(level2Element.Attribute("name").Value, level2Element.Value);
         }
 
         private String scanItem(String ItemBarcode)
@@ -43,7 +44,7 @@ namespace WindowsFormsApp1
 
         private void runCommand(String command)
         {
-            System.Diagnostics.Process.Start("CMD.exe", command);
+            System.Diagnostics.Process.Start("CMD.exe", "/C" + command);
         }
 
         private void startProcess(String filename)
