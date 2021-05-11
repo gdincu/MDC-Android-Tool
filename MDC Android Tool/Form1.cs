@@ -20,8 +20,9 @@ namespace WindowsFormsApp1
         public IDictionary<string, string> Commands = new Dictionary<string, string>();
         public IDictionary<string, string> EOTBarcodes = new Dictionary<string, string>();
         public IDictionary<string, string> URIs = new Dictionary<string, string>();
-        String Settings = Path.Combine(Environment.CurrentDirectory, "MDCAndroidTool.xml");        
-            
+        String Settings = Path.Combine(Environment.CurrentDirectory, "MDCAndroidTool.xml");
+        Process myProcess = new Process();
+
         public Form1()
         {
             InitializeComponent();
@@ -43,6 +44,15 @@ namespace WindowsFormsApp1
         private void runCommand(String command)
         {
             System.Diagnostics.Process.Start("CMD.exe", command);
+        }
+
+        private void startProcess(String filename)
+        {
+            myProcess.StartInfo.UseShellExecute = false;
+            myProcess.StartInfo.FileName = Path.Combine(Environment.CurrentDirectory, filename);
+            myProcess.StartInfo.CreateNoWindow = true;
+            myProcess.StartInfo.RedirectStandardOutput = true;
+            myProcess.Start();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -68,6 +78,10 @@ namespace WindowsFormsApp1
 
         private void button5_Click(object sender, EventArgs e)
         {
+            startProcess("DeviceDetails.bat");
+            String DeviceDetails = myProcess.StandardOutput.ReadToEnd();
+            myProcess.Close();
+
             //https://www.c-sharpcorner.com/UploadFile/mahesh/savefiledialog-in-C-Sharp/
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.InitialDirectory = @Environment.CurrentDirectory;      
@@ -78,6 +92,7 @@ namespace WindowsFormsApp1
             saveFileDialog1.Filter = "Logcat (*.log)|*.log|All files (*.*)|*.*";
             saveFileDialog1.FilterIndex = 1;
             saveFileDialog1.RestoreDirectory = true;
+            saveFileDialog1.FileName = DeviceDetails + "_";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 System.Diagnostics.Process.Start("CMD.exe", @$"/C adb logcat -d > ""{saveFileDialog1.FileName}"" ");
         }
@@ -143,20 +158,18 @@ namespace WindowsFormsApp1
 
         private void button8_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(Path.Combine(Environment.CurrentDirectory, "CloseCurrentApp.bat"));
+            //System.Diagnostics.Process.Start(Path.Combine(Environment.CurrentDirectory, "CloseCurrentApp.bat"));
+            startProcess("CloseCurrentApp.bat");
+            myProcess.Close();
 
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
 
-            Process myProcess = new Process();
-            myProcess.StartInfo.UseShellExecute = false;
-            myProcess.StartInfo.FileName = Path.Combine(Environment.CurrentDirectory, "DeviceDetails.bat");
-            myProcess.StartInfo.CreateNoWindow = true;
-            myProcess.StartInfo.RedirectStandardOutput = true;
-            myProcess.Start();
+            startProcess("DeviceDetails.bat");
             String DeviceDetails = myProcess.StandardOutput.ReadToEnd();
+            myProcess.Close();
             MessageBox.Show(DeviceDetails,"Paste these details where needed!");
             Clipboard.SetText(DeviceDetails);
 
