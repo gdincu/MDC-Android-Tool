@@ -213,5 +213,31 @@ namespace WindowsFormsApp1
 
             ReadValues(HandheldDevices, "HandheldDevices");
         }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            startProcess("DeviceDetails.bat");
+            String DeviceDetails = myProcess.StandardOutput.ReadToEnd();
+            myProcess.Close();
+
+            //https://www.c-sharpcorner.com/UploadFile/mahesh/savefiledialog-in-C-Sharp/
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.InitialDirectory = @Environment.CurrentDirectory;
+            saveFileDialog1.Title = "Save screenshot";
+            //saveFileDialog1.CheckFileExists = true;
+            //saveFileDialog1.CheckPathExists = true;
+            saveFileDialog1.DefaultExt = "png";
+            saveFileDialog1.Filter = "PNG (*.png)|*.png|All files (*.*)|*.*";
+            saveFileDialog1.FilterIndex = 1;
+            saveFileDialog1.RestoreDirectory = true;
+            saveFileDialog1.FileName = DeviceDetails.Trim() + "_";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                System.Diagnostics.Process.Start("CMD.exe", @$"/C adb logcat -d > ""{saveFileDialog1.FileName}"" ");
+
+            //Checks whether the device details include any of the handheld names recorded in the MDCAndroidTool.xml file
+            //Downloads the entire /sdcard/mdc/myscan40 folder to the specified path and renames it using the device details
+            if (HandheldDevices.Any(y => DeviceDetails.Contains(y.Key)))
+                runCommand(Commands["PullFolder"] + Path.GetDirectoryName(saveFileDialog1.FileName) + @"\" + DeviceDetails);
+        }
     }
 }

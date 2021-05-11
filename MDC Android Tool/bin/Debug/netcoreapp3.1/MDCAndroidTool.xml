@@ -31,6 +31,9 @@
 <Command name="PowerButton">adb shell input keyevent 26</Command>
 <Command name="ScreenRecord">adb shell screenrecord /sdcard/video.mp4</Command>
 <Command name="PullFolder">adb pull /sdcard/mdc/myscan40/ </Command>
+<Command name="ScreenCap1">adb shell screencap </Command>
+<Command name="ScreenCap2">adb pull </Command>
+<Command name="ScreenCap3">adb shell rm -f </Command>
 </Commands>
 
 <EOTBarcodes>
