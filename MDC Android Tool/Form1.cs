@@ -93,7 +93,7 @@ namespace WindowsFormsApp1
             saveFileDialog1.Filter = "Logcat (*.log)|*.log|All files (*.*)|*.*";
             saveFileDialog1.FilterIndex = 1;
             saveFileDialog1.RestoreDirectory = true;
-            saveFileDialog1.FileName = DeviceDetails + "_";
+            saveFileDialog1.FileName = DeviceDetails.Trim() + "_";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 System.Diagnostics.Process.Start("CMD.exe", @$"/C adb logcat -d > ""{saveFileDialog1.FileName}"" ");
         }
