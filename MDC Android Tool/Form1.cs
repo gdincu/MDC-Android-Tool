@@ -255,11 +255,12 @@ namespace WindowsFormsApp1
             String AppDetails = myProcess.StandardOutput.ReadToEnd();
             //https://www.c-sharpcorner.com/article/c-sharp-regex-examples/
             //Might need replacing
-            string CleanedString = Regex.Replace(AppDetails.Split(" ")[7], "\\=+", " ").Split(" ")[1];
+            string PackageName = Regex.Replace(AppDetails.Split(" ")[7], "\\=+", " ").Split(" ")[1];
             myProcess.Close();
             //Wait 2 seconds
             System.Threading.Thread.Sleep(2000);
-            runCommand(Commands["StartApp"] + CleanedString + " 1");
+            //The below is a short version of adb shell monkey -p com.package.name -c android.intent.category.LAUNCHER 1
+            runCommand(Commands["StartApp"] + PackageName + " 1");
             myProcess.Close();
 
         }
