@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using System.Xml.Linq;
+using System.Text.RegularExpressions;
 
 namespace WindowsFormsApp1
 {
@@ -252,10 +253,14 @@ namespace WindowsFormsApp1
 
             runCommand(Commands["GetCurrentApp"]);
             String AppDetails = myProcess.StandardOutput.ReadToEnd();
-            MessageBox.Show(AppDetails);
+            //https://www.c-sharpcorner.com/article/c-sharp-regex-examples/
+            //Might need replacing
+            string CleanedString = Regex.Replace(AppDetails.Split(" ")[7], "\\=+", " ").Split(" ")[1];
             myProcess.Close();
-            //runCommand(Commands["StartApp"] + AppDetails + " 1");
-
+            //Wait 2 seconds
+            System.Threading.Thread.Sleep(2000);
+            runCommand(Commands["StartApp"] + CleanedString + " 1");
+            myProcess.Close();
 
         }
     }
