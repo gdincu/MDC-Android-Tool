@@ -71,8 +71,7 @@ namespace WindowsFormsApp1
             myProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             myProcess.Start();
             myProcess.WaitForExit();
-            //Initial version
-            //System.Diagnostics.Process.Start("CMD.exe", "/C " + command);
+            //Initial version -- System.Diagnostics.Process.Start("CMD.exe", "/C " + command);
         }
 
         private void startProcess(String filename)
@@ -128,8 +127,12 @@ namespace WindowsFormsApp1
             //Checks whether the device details include any of the handheld names recorded in the MDCAndroidTool.xml file
             //Also checks whether the user ticked the SaveMyScan40Folder checkbox
             //Downloads the entire /sdcard/mdc/myscan40 folder to the specified path and renames it using the device details
-            if (HandheldDevices.Any(y => DeviceDetails.Contains(y.Key)) && SaveMyScan40Folder)
-                runCommand(Commands["PullFolder"] + Path.GetDirectoryName(saveFileDialog1.FileName) + @"\" + DeviceDetails);
+            if (HandheldDevices.Any(y => DeviceDetails.Contains(y.Key)) && SaveMyScan40Folder) { 
+                //Checks whether the folder already exists and creates it if needed
+                System.IO.Directory.CreateDirectory(Path.GetDirectoryName(saveFileDialog1.FileName) + DeviceDetails.Trim());
+                //Saves the entire myscan40 folder to the above folder
+                runCommand(Commands["PullFolder"] + Path.GetDirectoryName(saveFileDialog1.FileName) + DeviceDetails.Trim());
+            }
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -210,7 +213,7 @@ namespace WindowsFormsApp1
 
         private void button10_Click(object sender, EventArgs e)
         {
-            runCommand(Commands[listBox4.SelectedItem.ToString()]);
+            runCommand(scanItem(Commands[listBox4.SelectedItem.ToString()]));
         }
 
         private void button11_Click(object sender, EventArgs e)

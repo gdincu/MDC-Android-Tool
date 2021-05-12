@@ -54,13 +54,13 @@ namespace WindowsFormsApp1
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.button3 = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.button11 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.button10 = new System.Windows.Forms.Button();
             this.listBox4 = new System.Windows.Forms.ListBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.button11 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -295,6 +295,16 @@ namespace WindowsFormsApp1
             this.tabPage4.Text = "Device";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(134, 20);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(100, 50);
+            this.button11.TabIndex = 2;
+            this.button11.Text = "ScreenCap";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
             // button9
             // 
             this.button9.FlatAppearance.BorderSize = 0;
@@ -347,16 +357,6 @@ namespace WindowsFormsApp1
             this.listBox4.Size = new System.Drawing.Size(180, 274);
             this.listBox4.TabIndex = 0;
             this.listBox4.SelectedIndexChanged += new System.EventHandler(this.listBox4_SelectedIndexChanged);
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(134, 20);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(100, 50);
-            this.button11.TabIndex = 2;
-            this.button11.Text = "ScreenCap";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // Form1
             // 
