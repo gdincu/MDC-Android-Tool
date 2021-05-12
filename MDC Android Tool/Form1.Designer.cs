@@ -60,6 +60,7 @@ namespace WindowsFormsApp1
             this.button10 = new System.Windows.Forms.Button();
             this.listBox4 = new System.Windows.Forms.ListBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.button11 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -283,6 +284,7 @@ namespace WindowsFormsApp1
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.button11);
             this.tabPage4.Controls.Add(this.button9);
             this.tabPage4.Controls.Add(this.button6);
             this.tabPage4.Location = new System.Drawing.Point(4, 27);
@@ -346,6 +348,16 @@ namespace WindowsFormsApp1
             this.listBox4.TabIndex = 0;
             this.listBox4.SelectedIndexChanged += new System.EventHandler(this.listBox4_SelectedIndexChanged);
             // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(134, 20);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(100, 50);
+            this.button11.TabIndex = 2;
+            this.button11.Text = "ScreenCap";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
             // Form1
             // 
             this.AllowDrop = true;
@@ -405,6 +417,7 @@ namespace WindowsFormsApp1
         private Button button10;
         private ListBox listBox4;
         private CheckBox checkBox1;
+        private Button button11;
     }
 }
 
