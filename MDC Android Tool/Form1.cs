@@ -68,9 +68,10 @@ namespace WindowsFormsApp1
             //https://stackoverflow.com/questions/19257041/run-cmd-command-without-displaying-it
             myProcess.StartInfo.FileName = "CMD.exe";
             myProcess.StartInfo.Arguments = "/C " + command;
+            myProcess.StartInfo.RedirectStandardOutput = true;
             myProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             myProcess.Start();
-            myProcess.WaitForExit();
+            //myProcess.WaitForExit();
             //Initial version -- System.Diagnostics.Process.Start("CMD.exe", "/C " + command);
         }
 
@@ -241,6 +242,21 @@ namespace WindowsFormsApp1
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             SaveMyScan40Folder = checkBox1.Checked;
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //Close the current app
+            startProcess("CloseCurrentApp.bat");
+            myProcess.Close();
+
+            runCommand(Commands["GetCurrentApp"]);
+            String AppDetails = myProcess.StandardOutput.ReadToEnd();
+            MessageBox.Show(AppDetails);
+            myProcess.Close();
+            //runCommand(Commands["StartApp"] + AppDetails + " 1");
+
+
         }
     }
 }

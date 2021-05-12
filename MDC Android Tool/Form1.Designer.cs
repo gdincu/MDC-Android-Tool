@@ -43,6 +43,7 @@ namespace WindowsFormsApp1
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.button12 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button7 = new System.Windows.Forms.Button();
@@ -169,6 +170,7 @@ namespace WindowsFormsApp1
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.button12);
             this.tabPage3.Controls.Add(this.button8);
             this.tabPage3.Controls.Add(this.groupBox2);
             this.tabPage3.Controls.Add(this.button2);
@@ -181,6 +183,16 @@ namespace WindowsFormsApp1
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "TripStart & EOT";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(237, 19);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(100, 50);
+            this.button12.TabIndex = 6;
+            this.button12.Text = "Restart App";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // button8
             // 
@@ -418,6 +430,7 @@ namespace WindowsFormsApp1
         private ListBox listBox4;
         private CheckBox checkBox1;
         private Button button11;
+        private Button button12;
     }
 }
 
