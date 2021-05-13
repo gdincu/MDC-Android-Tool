@@ -39,11 +39,15 @@ namespace WindowsFormsApp1
             ReadValues(Commands, "Commands");
             ReadValues(HandheldDevices, "HandheldDevices");
 
+            //If numberOfDevices = 0 the application is closed. Otherwise, the popup keeps getting displayed until at least one device gets connected 
+            while (numberOfDevicesConnected() <= 2)
+                if (MessageBox.Show("Please connect a device to continue!", "Connect a device!", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+                    Environment.Exit(0);
+
             Items.ToList().ForEach(x => this.listBox1.Items.Add(x.Key));
             EOTBarcodes.ToList().ForEach(x => this.listBox2.Items.Add(x.Key));
             URIs.ToList().ForEach(x => this.listBox3.Items.Add(x.Key));
-            Commands.ToList().ForEach(x => this.listBox4.Items.Add(x.Key));
-            
+            Commands.ToList().ForEach(x => this.listBox4.Items.Add(x.Key));  
         }
 
         private void ReadValues (IDictionary<string, string> Dictionary, string TagName)
@@ -73,7 +77,6 @@ namespace WindowsFormsApp1
             myProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             myProcess.Start();
             //myProcess.WaitForExit();
-            //Initial version -- System.Diagnostics.Process.Start("CMD.exe", "/C " + command);
         }
 
         private void startProcess(String filename)
@@ -83,6 +86,14 @@ namespace WindowsFormsApp1
             myProcess.StartInfo.FileName = Path.Combine(Environment.CurrentDirectory, filename);
             myProcess.StartInfo.RedirectStandardOutput = true;
             myProcess.Start();
+        }
+
+        private int numberOfDevicesConnected()
+        {
+            runCommand(Commands["NrOfDevices"]);
+            int res = Int32.Parse(myProcess.StandardOutput.ReadToEnd());
+            myProcess.Close();
+            return res;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -199,13 +210,11 @@ namespace WindowsFormsApp1
 
         private void button9_Click(object sender, EventArgs e)
         {
-
             startProcess("DeviceDetails.bat");
             String DeviceDetails = myProcess.StandardOutput.ReadToEnd();
             myProcess.Close();
             MessageBox.Show(DeviceDetails,"Paste these details where needed!");
             Clipboard.SetText(DeviceDetails);
-
         }
 
         private void listBox4_SelectedIndexChanged(object sender, EventArgs e)

@@ -37,6 +37,7 @@
 <Command name="Tcpip">adb tcpip 5555</Command>
 <Command name="Disconnect">adb disconnect</Command>
 <Command name="Connect">adb connect </Command>
+<Command name="NrOfDevices">adb devices | find /c /v ""</Command>
 </Commands>
 
 <EOTBarcodes>
