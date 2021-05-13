@@ -264,5 +264,40 @@ namespace WindowsFormsApp1
             myProcess.Close();
 
         }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Is the device connected via USB?", "Device connected?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                //Tcpip 5555 command
+                runCommand(Commands["Tcpip"]);
+                myProcess.Close();
+
+                //Wait 1 second -- needs to be here as otherwise the StandardOutput.ReadToEnd() functionality does not seem to work
+                System.Threading.Thread.Sleep(1000);
+
+                //IP route command
+                runCommand(Commands["Ip"]);
+                string[] tempResult = myProcess.StandardOutput.ReadToEnd().Split(" ");
+                string IpAddress = (tempResult.Length >= 11) ? tempResult[11] : tempResult.ToString();
+                myProcess.Close();
+
+                if (MessageBox.Show("Please disconnect the device from the USB port and tap OK when ready!", "Disconnect the device!", MessageBoxButtons.OKCancel) == DialogResult.OK) {
+                    //Disconnects all devices
+                    runCommand(Commands["Disconnect"]);
+                    myProcess.Close();
+                    
+                    //Wait 1 second 
+                    System.Threading.Thread.Sleep(1000);
+
+                    //Connects over IP to the selected device
+                    runCommand(Commands["Connect"] + IpAddress);
+                    MessageBox.Show("Connected to "+ IpAddress);
+                    myProcess.Close();
+                }
+            }
+
+            
+        }
     }
 }

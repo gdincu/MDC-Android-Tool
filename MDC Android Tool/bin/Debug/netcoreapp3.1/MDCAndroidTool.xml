@@ -12,7 +12,7 @@
 
 <Commands>
 <Command name="Reboot">adb reboot</Command>
-<Command name="IP">adb shell ip route</Command>
+<Command name="Ip">adb shell ip route</Command>
 <Command name="Undocked">adb shell am broadcast -a 'com.symbol.intent.device.UNDOCKED'</Command>
 <Command name="ClearLogcat">adb logcat -c &amp; adb logcat -c &amp; EXIT"</Command>
 <Command name="ScanItem1">adb shell am broadcast -a 'barcodescanner.RECVR' --es 'com.motorolasolutions.emdk.datawedge.data_string' '</Command>
@@ -34,6 +34,9 @@
 <Command name="ScreenCap">adb exec-out screencap -p > </Command>
 <Command name="GetCurrentApp">adb shell dumpsys activity recents | find "Recent #0"</Command>
 <Command name="StartApp">adb shell monkey -p </Command>
+<Command name="Tcpip">adb tcpip 5555</Command>
+<Command name="Disconnect">adb disconnect</Command>
+<Command name="Connect">adb connect </Command>
 </Commands>
 
 <EOTBarcodes>

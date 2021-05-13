@@ -55,6 +55,7 @@ namespace WindowsFormsApp1
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.button3 = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.button13 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
@@ -296,6 +297,7 @@ namespace WindowsFormsApp1
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.button13);
             this.tabPage4.Controls.Add(this.button11);
             this.tabPage4.Controls.Add(this.button9);
             this.tabPage4.Controls.Add(this.button6);
@@ -306,6 +308,16 @@ namespace WindowsFormsApp1
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Device";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(28, 134);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(100, 50);
+            this.button13.TabIndex = 3;
+            this.button13.Text = "Connect over IP";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // button11
             // 
@@ -431,6 +443,7 @@ namespace WindowsFormsApp1
         private CheckBox checkBox1;
         private Button button11;
         private Button button12;
+        private Button button13;
     }
 }
 
