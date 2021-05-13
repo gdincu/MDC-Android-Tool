@@ -2,12 +2,12 @@
 <root>
 
 <Items>
-    <Item name="Regular_Item">16000275270</Item>
-	<Item name="Promotion_Item">70847811299</Item>
-	<Item name="Age_Restriction_21">80660957159</Item>
-	<Item name="LidItemMessage_Item">7000570550014</Item>
-    <Item name="Liquidation_Discount">8000570550020</Item>
-	<Item name="Forbidden_Item">8000570550181</Item>	
+<Item name="Regular_Item">16000275270</Item>
+<Item name="Promotion_Item">70847811299</Item>
+<Item name="Age_Restriction_21">80660957159</Item>
+<Item name="LidItemMessage_Item">7000570550014</Item>
+<Item name="Liquidation_Discount">8000570550020</Item>
+<Item name="Forbidden_Item">8000570550181</Item>	
 </Items>
 
 <Commands>
