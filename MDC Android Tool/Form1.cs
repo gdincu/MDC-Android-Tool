@@ -17,13 +17,15 @@ namespace WindowsFormsApp1
     public partial class Form1 : Form
     {
 
-        public IDictionary<string, string> Items = new Dictionary<string, string>();
-        public IDictionary<string, string> Commands = new Dictionary<string, string>();
-        public IDictionary<string, string> EOTBarcodes = new Dictionary<string, string>();
-        public IDictionary<string, string> URIs = new Dictionary<string, string>();
-        public IDictionary<string, string> HandheldDevices = new Dictionary<string, string>();
+        IDictionary<string, string> Items = new Dictionary<string, string>();
+        IDictionary<string, string> Commands = new Dictionary<string, string>();
+        IDictionary<string, string> EOTBarcodes = new Dictionary<string, string>();
+        IDictionary<string, string> URIs = new Dictionary<string, string>();
+        IDictionary<string, string> HandheldDevices = new Dictionary<string, string>();
+        //Path to the settings file
         String Settings = Path.Combine(Environment.CurrentDirectory, "MDCAndroidTool.xml");
         Process myProcess = new Process();
+        //Check used to see whether the handheld filelogs are to be saved
         bool SaveMyScan40Folder = false;
 
         public Form1()
@@ -35,9 +37,10 @@ namespace WindowsFormsApp1
         {
             ReadValues(Commands, "Commands");
 
-            //numberOfDevices = 0 or > 1 causes a MessageBox to be displayed
+            // CheckHowManyDevicesAreCurrentlyConnected            
             int nrOfDevices = numberOfDevicesConnected();
-            while (nrOfDevices <= 2 || nrOfDevices > 3) {
+            
+            while (nrOfDevices != 3) {
 
                 if(nrOfDevices <= 2)
                     if (MessageBox.Show("Please connect a device to continue!", "Connect a device!", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
@@ -54,10 +57,14 @@ namespace WindowsFormsApp1
                 nrOfDevices = numberOfDevicesConnected();
             }
 
+            //Workaround - to be investigated
+            runCommand("");
+
             ReadValues(Items, "Items");
             ReadValues(EOTBarcodes, "EOTBarcodes");
             ReadValues(URIs, "URIs");
             ReadValues(HandheldDevices, "HandheldDevices");
+
             Items.ToList().ForEach(x => this.listBox1.Items.Add(x.Key));
             EOTBarcodes.ToList().ForEach(x => this.listBox2.Items.Add(x.Key));
             URIs.ToList().ForEach(x => this.listBox3.Items.Add(x.Key));
@@ -67,14 +74,14 @@ namespace WindowsFormsApp1
         private void ReadValues (IDictionary<string, string> Dictionary, string TagName)
         {
             //https://docs.microsoft.com/en-us/dotnet/standard/linq/retrieve-value-element
-            //foreach (XElement level1Element in XElement.Load(Settings).Elements(TagName))
-            //    foreach (XElement level2Element in level1Element.Elements(TagName[..^1]))
-            //        Dictionary.Add(level2Element.Attribute("name").Value, level2Element.Value);
+            foreach (XElement level1Element in XElement.Load(Settings).Elements(TagName))
+                foreach (XElement level2Element in level1Element.Elements(TagName[..^1]))
+                    Dictionary.Add(level2Element.Attribute("name").Value, level2Element.Value);
 
-            List<XElement> XMLSettings = XElement.Load(Settings).Elements(TagName).ToList();
-            XMLSettings.ForEach(x => 
-                x.Elements(TagName[..^1]).ToList().ForEach(y => 
-                    Dictionary.Add(y.Attribute("name").Value, y.Value)));
+            //List<XElement> XMLSettings = XElement.Load(Settings).Elements(TagName).ToList();
+            //XMLSettings.ForEach(x => 
+            //    x.Elements(TagName[..^1]).ToList().ForEach(y => 
+            //        Dictionary.Add(y.Attribute("name").Value, y.Value)));
         }
 
         private String scanItem(String ItemBarcode)
@@ -82,6 +89,7 @@ namespace WindowsFormsApp1
             return Commands["ScanItem1"] + ItemBarcode + Commands["ScanItem2"];
         }
 
+        //Used to run cmd commands
         private void runCommand(String command)
         {
             //https://stackoverflow.com/questions/19257041/run-cmd-command-without-displaying-it
@@ -93,6 +101,7 @@ namespace WindowsFormsApp1
             //myProcess.WaitForExit();
         }
 
+        //Used to run an external cmd script
         private void startProcess(String filename)
         {
             myProcess.StartInfo.UseShellExecute = false;
@@ -102,6 +111,7 @@ namespace WindowsFormsApp1
             myProcess.Start();
         }
 
+        //Returns the number of connected devices
         private int numberOfDevicesConnected()
         {
             runCommand(Commands["NrOfDevices"]);
