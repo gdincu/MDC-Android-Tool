@@ -33,17 +33,31 @@ namespace WindowsFormsApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            ReadValues(Commands, "Commands");
+
+            //numberOfDevices = 0 or > 1 causes a MessageBox to be displayed
+            int nrOfDevices = numberOfDevicesConnected();
+            while (nrOfDevices <= 2 || nrOfDevices > 3) {
+
+                if(nrOfDevices <= 2)
+                    if (MessageBox.Show("Please connect a device to continue!", "Connect a device!", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+                        Environment.Exit(0);
+
+                if (nrOfDevices > 3)
+                    if (MessageBox.Show("Please ensure that only one device is connected!", "Check number of connected devices!", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+                        Environment.Exit(0);
+
+                if (nrOfDevices == 3)
+                    break;
+
+                //Updates the nrOfDevices value
+                nrOfDevices = numberOfDevicesConnected();
+            }
+
             ReadValues(Items, "Items");
             ReadValues(EOTBarcodes, "EOTBarcodes");
             ReadValues(URIs, "URIs");
-            ReadValues(Commands, "Commands");
             ReadValues(HandheldDevices, "HandheldDevices");
-
-            //If numberOfDevices = 0 the application is closed. Otherwise, the popup keeps getting displayed until at least one device gets connected 
-            while (numberOfDevicesConnected() <= 2)
-                if (MessageBox.Show("Please connect a device to continue!", "Connect a device!", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
-                    Environment.Exit(0);
-
             Items.ToList().ForEach(x => this.listBox1.Items.Add(x.Key));
             EOTBarcodes.ToList().ForEach(x => this.listBox2.Items.Add(x.Key));
             URIs.ToList().ForEach(x => this.listBox3.Items.Add(x.Key));
