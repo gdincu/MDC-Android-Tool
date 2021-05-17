@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Xml.Linq;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WindowsFormsApp1
 {
@@ -33,16 +34,17 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
             ReadValues(Commands, "Commands");
 
             // CheckHowManyDevicesAreCurrentlyConnected            
-            int nrOfDevices = numberOfDevicesConnected();
-            
-            while (nrOfDevices != 3) {
+            int nrOfDevices = await numberOfDevicesConnected();
 
-                if(nrOfDevices <= 2)
+            while (nrOfDevices != 3)
+            {
+
+                if (nrOfDevices <= 2)
                     if (MessageBox.Show("Please connect a device to continue!", "Connect a device!", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
                         Environment.Exit(0);
 
@@ -54,11 +56,11 @@ namespace WindowsFormsApp1
                     break;
 
                 //Updates the nrOfDevices value
-                nrOfDevices = numberOfDevicesConnected();
+                nrOfDevices = await numberOfDevicesConnected();
             }
 
-            //Workaround - to be investigated
-            runCommand("");
+            ////Workaround - to be investigated
+            //runCommand("");
 
             ReadValues(Items, "Items");
             ReadValues(EOTBarcodes, "EOTBarcodes");
@@ -84,13 +86,13 @@ namespace WindowsFormsApp1
             //        Dictionary.Add(y.Attribute("name").Value, y.Value)));
         }
 
-        private String scanItem(String ItemBarcode)
+        private async Task<String> scanItem(String ItemBarcode)
         {
             return Commands["ScanItem1"] + ItemBarcode + Commands["ScanItem2"];
         }
 
         //Used to run cmd commands
-        private void runCommand(String command)
+        private async void runCommand(String command)
         {
             //https://stackoverflow.com/questions/19257041/run-cmd-command-without-displaying-it
             myProcess.StartInfo.FileName = "CMD.exe";
@@ -102,7 +104,7 @@ namespace WindowsFormsApp1
         }
 
         //Used to run an external cmd script
-        private void startProcess(String filename)
+        private async void startProcess(String filename)
         {
             myProcess.StartInfo.UseShellExecute = false;
             myProcess.StartInfo.CreateNoWindow = true;
@@ -112,7 +114,7 @@ namespace WindowsFormsApp1
         }
 
         //Returns the number of connected devices
-        private int numberOfDevicesConnected()
+        private async Task<int> numberOfDevicesConnected()
         {
             runCommand(Commands["NrOfDevices"]);
             int res = Int32.Parse(myProcess.StandardOutput.ReadToEnd());
@@ -120,11 +122,11 @@ namespace WindowsFormsApp1
             return res;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
 
             if (Items.ContainsKey(listBox1.SelectedItem.ToString()))
-                runCommand(scanItem(Items[listBox1.SelectedItem.ToString()]));
+                runCommand(scanItem(Items[listBox1.SelectedItem.ToString()]).Result);
             else
                 MessageBox.Show("Item not found!");
 
@@ -199,7 +201,7 @@ namespace WindowsFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            runCommand(scanItem(EOTBarcodes[listBox2.SelectedItem.ToString()]));
+            runCommand(scanItem(EOTBarcodes[listBox2.SelectedItem.ToString()]).Result);
         }
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -313,6 +315,7 @@ namespace WindowsFormsApp1
                 runCommand(Commands["Ip"]);
                 string[] tempResult = myProcess.StandardOutput.ReadToEnd().Split(" ");
                 string IpAddress = (tempResult.Length >= 11) ? tempResult[11] : tempResult.ToString();
+                MessageBox.Show(IpAddress);
                 myProcess.Close();
 
                 if (MessageBox.Show("Please disconnect the device from the USB port and tap OK when ready!", "Disconnect the device!", MessageBoxButtons.OKCancel) == DialogResult.OK) {

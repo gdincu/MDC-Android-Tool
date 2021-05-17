@@ -39,7 +39,6 @@ D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\WindowsFormsA
 D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.csproj.GenerateResource.cache
 D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.AssemblyInfoInputs.cache
 D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.AssemblyInfo.cs
-D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.csproj.CoreCompileInputs.cache
 D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.dll
 D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.pdb
 D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.genruntimeconfig.cache
@@ -60,3 +59,34 @@ E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.dl
 E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.pdb
 E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.genruntimeconfig.cache
 D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC_Android_Tool.Properties.Resources.resources
+D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.csproj.CoreCompileInputs.cache
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Abstractions.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Core.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authorization.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authorization.Policy.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Hosting.Abstractions.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Abstractions.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Extensions.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Features.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.Abstractions.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.Core.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.ResponseCaching.Abstractions.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Routing.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Routing.Abstractions.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.WebUtilities.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Hosting.Abstractions.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.Extensions.ObjectPool.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.Net.Http.Headers.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.csproj.CopyComplete
