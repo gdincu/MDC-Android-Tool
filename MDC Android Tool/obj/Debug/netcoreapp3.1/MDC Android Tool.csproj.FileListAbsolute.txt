@@ -120,3 +120,9 @@ E:\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.Extension
 E:\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.Net.Http.Headers.dll
 E:\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.csproj.CopyComplete
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
