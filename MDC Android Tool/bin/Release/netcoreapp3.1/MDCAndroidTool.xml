@@ -11,33 +11,34 @@
 </Items>
 
 <Commands>
-<Command name="Reboot">adb reboot</Command>
-<Command name="Ip">adb shell ip route</Command>
-<Command name="Undocked">adb shell am broadcast -a 'com.symbol.intent.device.UNDOCKED'</Command>
-<Command name="ClearLogcat">adb logcat -c &amp; adb logcat -c &amp; EXIT"</Command>
-<Command name="ScanItem1">adb shell am broadcast -a 'barcodescanner.RECVR' --es 'com.motorolasolutions.emdk.datawedge.data_string' '</Command>
+<Command name="AndroidVersion">getprop ro.build.version.release</Command>
+<Command name="Reboot">reboot</Command>
+<Command name="Ip">ip route</Command>
+<Command name="Undocked">am broadcast -a 'com.symbol.intent.device.UNDOCKED'</Command>
+<Command name="ClearLogcat">logcat -c</Command>
+<Command name="ScanItem1">am broadcast -a 'barcodescanner.RECVR' --es 'com.motorolasolutions.emdk.datawedge.data_string' '</Command>
 <Command name="ScanItem2">' --es 'com.motorolasolutions.emdk.datawedge.source' 'scanner' --es 'com.motorolasolutions.emdk.datawedge.label_type' 'LABEL - TYPE - EAN13'</Command>
-<Command name="Intent1">adb shell am broadcast -a 'com.mdcinternational.selfscanner.sendselfscannerconfig' --es 'storenumber' '</Command>
+<Command name="Intent1">am broadcast -a 'com.mdcinternational.selfscanner.sendselfscannerconfig' --es 'storenumber' '</Command>
 <Command name="Intent2">' --es 'soapendpoint' '</Command>
 <Command name="Intent3">' --es 'terminalid' '</Command>
-<Command name="APP_SWITCH">adb shell input keyevent KEYCODE_APP_SWITCH"</Command>
-<Command name="SettingsMenu">adb shell am start -a android.settings.SETTINGS</Command>
-<Command name="WifiMenu">adb shell am start -a android.settings.WIRELESS_SETTINGS</Command>
-<Command name="Back">adb shell input keyevent 4</Command>
-<Command name="HomeScreen">adb shell input keyevent 3</Command>
-<Command name="VolumeUp">adb shell input keyevent 24</Command>
-<Command name="VolumeDown">adb shell input keyevent 25</Command>
-<Command name="Mute">adb shell input keyevent 164</Command>  <!--91-->
-<Command name="PowerButton">adb shell input keyevent 26</Command>
-<Command name="ScreenRecord">adb shell screenrecord /sdcard/video.mp4</Command>
-<Command name="PullFolder">adb pull /sdcard/mdc/myscan40/ </Command>
-<Command name="ScreenCap">adb exec-out screencap -p > </Command>
-<Command name="GetCurrentApp">adb shell dumpsys activity recents | find "Recent #0"</Command>
-<Command name="StartApp">adb shell monkey -p </Command>
-<Command name="Tcpip">adb tcpip 5555</Command>
-<Command name="Disconnect">adb disconnect</Command>
-<Command name="Connect">adb connect </Command>
-<Command name="NrOfDevices">adb devices | find /c /v ""</Command>
+<Command name="APP_SWITCH">input keyevent KEYCODE_APP_SWITCH</Command>
+<Command name="SettingsMenu">am start -a android.settings.SETTINGS</Command>
+<Command name="WifiMenu">am start -a android.settings.WIRELESS_SETTINGS</Command>
+<Command name="Back">input keyevent 4</Command>
+<Command name="HomeScreen">input keyevent 3</Command>
+<Command name="VolumeUp">input keyevent 24</Command>
+<Command name="VolumeDown">input keyevent 25</Command>
+<Command name="Mute">input keyevent 164</Command>  <!--91-->
+<Command name="PowerButton">input keyevent 26</Command>
+<Command name="ScreenRecord">screenrecord /sdcard/video.mp4</Command>
+<Command name="PullFolder">pull /sdcard/mdc/myscan40/ </Command>
+<Command name="ScreenCap">exec-out screencap -p> </Command>
+<Command name="GetCurrentApp">dumpsys activity recents | find "Recent #0"</Command>
+<Command name="StartApp">monkey -p </Command>
+<Command name="Tcpip">tcpip 5555</Command>
+<Command name="Disconnect">disconnect</Command>
+<Command name="Connect">connect </Command>
+<Command name="NrOfDevices">devices | find /c /v ""</Command>
 </Commands>
 
 <EOTBarcodes>

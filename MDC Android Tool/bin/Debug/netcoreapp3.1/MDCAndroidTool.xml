@@ -21,7 +21,7 @@
 <Command name="Intent1">am broadcast -a 'com.mdcinternational.selfscanner.sendselfscannerconfig' --es 'storenumber' '</Command>
 <Command name="Intent2">' --es 'soapendpoint' '</Command>
 <Command name="Intent3">' --es 'terminalid' '</Command>
-<Command name="APP_SWITCH">input keyevent KEYCODE_APP_SWITCH"</Command>
+<Command name="APP_SWITCH">input keyevent KEYCODE_APP_SWITCH</Command>
 <Command name="SettingsMenu">am start -a android.settings.SETTINGS</Command>
 <Command name="WifiMenu">am start -a android.settings.WIRELESS_SETTINGS</Command>
 <Command name="Back">input keyevent 4</Command>
@@ -32,7 +32,7 @@
 <Command name="PowerButton">input keyevent 26</Command>
 <Command name="ScreenRecord">screenrecord /sdcard/video.mp4</Command>
 <Command name="PullFolder">pull /sdcard/mdc/myscan40/ </Command>
-<Command name="ScreenCap">exec-out screencap -p> </Command>
+<Command name="ScreenCap">exec-out screencap -p</Command>
 <Command name="GetCurrentApp">dumpsys activity recents | find "Recent #0"</Command>
 <Command name="StartApp">monkey -p </Command>
 <Command name="Tcpip">tcpip 5555</Command>

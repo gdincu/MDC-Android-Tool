@@ -127,3 +127,10 @@ D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\unix
 D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\SharpAdbClient.dll
 D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.csproj.CoreCompileInputs.cache
+E:\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\SharpAdbClient.dll
+E:\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+E:\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+E:\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+E:\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+E:\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+E:\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll

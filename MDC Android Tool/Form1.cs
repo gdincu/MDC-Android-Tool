@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using System.Xml.Linq;
-using System.Text.RegularExpressions;
-using Microsoft.AspNetCore.Mvc;
-using System.Data.SqlClient;
 using SharpAdbClient;
 
 namespace WindowsFormsApp1
@@ -44,7 +37,8 @@ namespace WindowsFormsApp1
             await ReadValues(Commands, "Commands");
 
             AdbServer server = new AdbServer();
-            var result = server.StartServer(@"C:\Users\i.g.dincu\Downloads\platform-tools_r30.0.4-windows\platform-tools\adb.exe", restartServerIfNewer: false);
+            //var result = server.StartServer(@"C:\Users\i.g.dincu\Downloads\platform-tools_r30.0.4-windows\platform-tools\adb.exe", restartServerIfNewer: false);
+            var result = server.StartServer(@"E:\platform-tools\adb.exe", restartServerIfNewer: false);
 
             // CheckHowManyDevicesAreCurrentlyConnected            
             int nrOfDevices = await NumberOfDevicesConnected();
@@ -104,8 +98,7 @@ namespace WindowsFormsApp1
         private void RunCommand(String command)
         {
             var device = AdbClient.Instance.GetDevices().First();
-            var receiver = new ConsoleOutputReceiver();
-            AdbClient.Instance.ExecuteRemoteCommand(command, device, receiver);
+            AdbClient.Instance.ExecuteRemoteCommand(command, device, null);
         }
 
         //Used to run cmd commands
@@ -117,36 +110,24 @@ namespace WindowsFormsApp1
             return receiver.ToString();
         }
 
-        //Used to run an external cmd script
-        private void StartProcess(String filename)
-        {
-            _myProcess.StartInfo = new System.Diagnostics.ProcessStartInfo()
-            {
-                UseShellExecute = false,
-                CreateNoWindow = true,
-                WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden,
-                FileName = Path.Combine(Environment.CurrentDirectory, filename),
-                
-                RedirectStandardError = true,
-                RedirectStandardOutput = true
-            };
-
-            _myProcess.Start();
-        }
-
         //Returns the number of connected devices
         private async Task<int> NumberOfDevicesConnected()
         {
             return AdbClient.Instance.GetDevices().Count();
         }
 
+        //Returns the package name for the current app
+        private async Task<string> CurrentPackageName()
+        {
+            string resultTemp = GetOutputFromCommand("dumpsys activity recents").Result;
+            resultTemp = resultTemp.Substring(resultTemp.IndexOf('#'));
+            return resultTemp.Substring(0, resultTemp.IndexOf('\r')).Split(" ")[3].Substring(2);
+        }
+
         private async void button1_Click(object sender, EventArgs e)
         {
-
-            if (Items.ContainsKey(listBox1.SelectedItem.ToString()))
-                RunCommand(scanItem(Items[listBox1.SelectedItem.ToString()]).Result);
-            else
-                MessageBox.Show("Item not found!");
+            
+            RunCommand(scanItem(Items[listBox1.SelectedItem.ToString()]).Result);
 
         }
 
@@ -164,9 +145,7 @@ namespace WindowsFormsApp1
 
         private async void button5_Click(object sender, EventArgs e)
         {
-            StartProcess("DeviceDetails.bat");
-            String DeviceDetails = _myProcess.StandardOutput.ReadToEnd();
-            _myProcess.Close();
+            String DeviceDetails = AdbClient.Instance.GetDevices().First().Model + "_Android_" + await GetOutputFromCommand(Commands["AndroidVersion"]);
 
             //https://www.c-sharpcorner.com/UploadFile/mahesh/savefiledialog-in-C-Sharp/
             SaveFileDialog saveFileDialog1 = new SaveFileDialog
@@ -182,7 +161,8 @@ namespace WindowsFormsApp1
                 FileName = DeviceDetails.Trim() + "_"
             };
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                System.Diagnostics.Process.Start("CMD.exe", @$"/C adb logcat -d > ""{saveFileDialog1.FileName}"" ");
+                await File.WriteAllTextAsync(saveFileDialog1.FileName, await GetOutputFromCommand("logcat -d"));
+            //System.Diagnostics.Process.Start("CMD.exe", @$"/C adb logcat -d > ""{saveFileDialog1.FileName}"" ");
 
             //Checks whether the device details include any of the handheld names recorded in the MDCAndroidTool.xml file
             //Also checks whether the user ticked the SaveMyScan40Folder checkbox
@@ -221,8 +201,7 @@ namespace WindowsFormsApp1
 
         private async void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Do asynchronous work.
-            await Task.Delay(100);
+
         }
 
         private async void button2_Click(object sender, EventArgs e)
@@ -256,11 +235,8 @@ namespace WindowsFormsApp1
 
         private async void button8_Click(object sender, EventArgs e)
         {
-            //System.Diagnostics.Process.Start(Path.Combine(Environment.CurrentDirectory, "CloseCurrentApp.bat"));
-            var resultTemp = GetOutputFromCommand(@"dumpsys activity recents | find ""Recent #0""");
-            MessageBox.Show(resultTemp.Result);
-            //StartProcess("CloseCurrentApp.bat");
-            //_myProcess.Close();
+            
+            RunCommand("am force-stop " + await CurrentPackageName());
 
         }
 
@@ -275,13 +251,14 @@ namespace WindowsFormsApp1
 
         private async void listBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Do asynchronous work.
-            await Task.Delay(100);
+       
         }
 
         private async void button10_Click(object sender, EventArgs e)
         {
-             RunCommand (Commands[listBox4.SelectedItem.ToString()]);
+
+             RunCommand(Commands[listBox4.SelectedItem.ToString()]);
+
         }
 
         private async void button11_Click(object sender, EventArgs e)
@@ -303,7 +280,7 @@ namespace WindowsFormsApp1
             };
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 //https://stackoverflow.com/questions/27766712/using-adb-to-capture-the-screen
-                 RunCommand (Commands["ScreenCap"] + saveFileDialog1.FileName + ".png");
+                Clipboard.SetText(Commands["ScreenCap"] + @" > " + saveFileDialog1.FileName);
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -313,21 +290,10 @@ namespace WindowsFormsApp1
 
         private async void button12_Click(object sender, EventArgs e)
         {
-            //Close the current app
-            StartProcess ("CloseCurrentApp.bat");
-            _myProcess.Close();
 
-             RunCommand (Commands["GetCurrentApp"]);
-            String AppDetails = _myProcess.StandardOutput.ReadToEnd();
-            //https://www.c-sharpcorner.com/article/c-sharp-regex-examples/
-            //Might need replacing
-            string PackageName = Regex.Replace(AppDetails.Split(" ")[7], "\\=+", " ").Split(" ")[1];
-            _myProcess.Close();
-            //Wait 2 seconds
-            System.Threading.Thread.Sleep(2000);
-            //The below is a short version of adb shell monkey -p com.package.name -c android.intent.category.LAUNCHER 1
-             RunCommand (Commands["StartApp"] + PackageName + " 1");
-            _myProcess.Close();
+            string currentApp = await CurrentPackageName();
+            RunCommand("am force-stop " + currentApp);
+            RunCommand(Commands["StartApp"] + currentApp + " 1");
 
         }
 
@@ -336,31 +302,26 @@ namespace WindowsFormsApp1
             if (MessageBox.Show("Is the device connected via USB?", "Device connected?", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 //Tcpip 5555 command
-                 RunCommand (Commands["Tcpip"]);
-                _myProcess.Close();
+                 RunCommand(Commands["Tcpip"]);
 
                 //Wait 1 second -- needs to be here as otherwise the StandardOutput.ReadToEnd() functionality does not seem to work
                 System.Threading.Thread.Sleep(1000);
 
                 //IP route command
-                 RunCommand (Commands["Ip"]);
-                string[] tempResult = _myProcess.StandardOutput.ReadToEnd().Split(" ");
-                string IpAddress = (tempResult.Length >= 11) ? tempResult[11] : tempResult.ToString();
+                string[] tempResult = GetOutputFromCommand(Commands["Ip"]).Result.Split(" ");
+                string IpAddress = (tempResult.Length >= 26) ? tempResult[26] : tempResult.ToString();
                 MessageBox.Show(IpAddress);
-                _myProcess.Close();
 
                 if (MessageBox.Show("Please disconnect the device from the USB port and tap OK when ready!", "Disconnect the device!", MessageBoxButtons.OKCancel) == DialogResult.OK) {
                     //Disconnects all devices
-                     RunCommand (Commands["Disconnect"]);
-                    _myProcess.Close();
+                    System.Diagnostics.Process.Start("CMD.exe", "adb " + Commands["Disconnect"]);
                     
                     //Wait 1 second 
                     System.Threading.Thread.Sleep(1000);
 
                     //Connects over IP to the selected device
-                     RunCommand (Commands["Connect"] + IpAddress);
+                    System.Diagnostics.Process.Start("CMD.exe", "adb " + Commands["Connect"] + IpAddress);                    
                     MessageBox.Show("Connected to "+ IpAddress);
-                    _myProcess.Close();
                 }
             }
 
