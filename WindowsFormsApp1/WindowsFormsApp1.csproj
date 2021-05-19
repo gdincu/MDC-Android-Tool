@@ -6,4 +6,8 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="SharpAdbClient" Version="2.3.11" />
+  </ItemGroup>
+
 </Project>

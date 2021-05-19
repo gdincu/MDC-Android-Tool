@@ -13,6 +13,7 @@ using System.Xml.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
+using SharpAdbClient;
 
 namespace WindowsFormsApp1
 {
@@ -42,21 +43,24 @@ namespace WindowsFormsApp1
 
             await ReadValues(Commands, "Commands");
 
+            AdbServer server = new AdbServer();
+            var result = server.StartServer(@"C:\Users\i.g.dincu\Downloads\platform-tools_r30.0.4-windows\platform-tools\adb.exe", restartServerIfNewer: false);
+
             // CheckHowManyDevicesAreCurrentlyConnected            
             int nrOfDevices = await NumberOfDevicesConnected();
 
-            while (nrOfDevices != 3)
+            while (nrOfDevices != 1)
             {
 
-                if (nrOfDevices <= 2)
+                if (nrOfDevices == 0)
                     if (MessageBox.Show("Please connect a device to continue!", "Connect a device!", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
                         Environment.Exit(0);
 
-                if (nrOfDevices > 4)
+                if (nrOfDevices > 1)
                     if (MessageBox.Show("Please ensure that only one device is connected!", "Check number of connected devices!", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
                         Environment.Exit(0);
 
-                if (nrOfDevices == 3)
+                if (nrOfDevices == 1)
                     break;
 
                 //Updates the nrOfDevices value
@@ -85,9 +89,6 @@ namespace WindowsFormsApp1
                 foreach (XElement level2Element in level1Element.Elements(TagName[..^1]))
                     Dictionary.Add(level2Element.Attribute("name").Value, level2Element.Value);
 
-            // Do asynchronous work.
-            await Task.Delay(100);
-
             //List<XElement> XMLSettings = XElement.Load(Settings).Elements(TagName).ToList();
             //XMLSettings.ForEach(x => 
             //    x.Elements(TagName[..^1]).ToList().ForEach(y => 
@@ -96,27 +97,24 @@ namespace WindowsFormsApp1
 
         private async Task<String> scanItem(String ItemBarcode)
         {
-            // Do asynchronous work.
-            await Task.Delay(100);
             return Commands["ScanItem1"] + ItemBarcode + Commands["ScanItem2"];
         }
 
         //Used to run cmd commands
         private void RunCommand(String command)
         {
-            //https://stackoverflow.com/questions/19257041/run-cmd-command-without-displaying-it
-            _myProcess.StartInfo = new System.Diagnostics.ProcessStartInfo()
-            {
-                UseShellExecute = false,
-                CreateNoWindow = true,
-                WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden,
-                FileName = "cmd.exe",
-                Arguments = "/C " + command,
-                RedirectStandardError = true,
-                RedirectStandardOutput = true
-            };
-  
-            _myProcess.Start();
+            var device = AdbClient.Instance.GetDevices().First();
+            var receiver = new ConsoleOutputReceiver();
+            AdbClient.Instance.ExecuteRemoteCommand(command, device, receiver);
+        }
+
+        //Used to run cmd commands
+        private async Task<String> GetOutputFromCommand(String command)
+        {
+            var device = AdbClient.Instance.GetDevices().First();
+            var receiver = new ConsoleOutputReceiver();
+            AdbClient.Instance.ExecuteRemoteCommand(command, device, receiver);
+            return receiver.ToString();
         }
 
         //Used to run an external cmd script
@@ -139,18 +137,14 @@ namespace WindowsFormsApp1
         //Returns the number of connected devices
         private async Task<int> NumberOfDevicesConnected()
         {
-             RunCommand(Commands["NrOfDevices"]);
-            int res = Int32.Parse(_myProcess.StandardOutput.ReadToEnd());
-            _myProcess.WaitForExit();
-            _myProcess.Close();
-            return res;
+            return AdbClient.Instance.GetDevices().Count();
         }
 
         private async void button1_Click(object sender, EventArgs e)
         {
 
             if (Items.ContainsKey(listBox1.SelectedItem.ToString()))
-                 RunCommand(scanItem(Items[listBox1.SelectedItem.ToString()]).Result);
+                RunCommand(scanItem(Items[listBox1.SelectedItem.ToString()]).Result);
             else
                 MessageBox.Show("Item not found!");
 
@@ -164,9 +158,8 @@ namespace WindowsFormsApp1
 
         private async void button4_Click(object sender, EventArgs e)
         {
-             RunCommand(Commands["ClearLogcat"]);
+            RunCommand(Commands["ClearLogcat"]);
             MessageBox.Show("Cleared!", "Clear logcat");
-           
         }
 
         private async void button5_Click(object sender, EventArgs e)
@@ -264,18 +257,20 @@ namespace WindowsFormsApp1
         private async void button8_Click(object sender, EventArgs e)
         {
             //System.Diagnostics.Process.Start(Path.Combine(Environment.CurrentDirectory, "CloseCurrentApp.bat"));
-            StartProcess("CloseCurrentApp.bat");
-            _myProcess.Close();
+            var resultTemp = GetOutputFromCommand(@"dumpsys activity recents | find ""Recent #0""");
+            MessageBox.Show(resultTemp.Result);
+            //StartProcess("CloseCurrentApp.bat");
+            //_myProcess.Close();
 
         }
 
         private async void button9_Click(object sender, EventArgs e)
         {
-            StartProcess("DeviceDetails.bat");
-            String DeviceDetails = _myProcess.StandardOutput.ReadToEnd();
-            _myProcess.Close();         
+            
+            String DeviceDetails = AdbClient.Instance.GetDevices().First().Model + "_Android_" + await GetOutputFromCommand(Commands["AndroidVersion"]);
             MessageBox.Show(DeviceDetails, "Paste these details where needed!");
             Clipboard.SetText(DeviceDetails);
+
         }
 
         private async void listBox4_SelectedIndexChanged(object sender, EventArgs e)
@@ -291,9 +286,7 @@ namespace WindowsFormsApp1
 
         private async void button11_Click(object sender, EventArgs e)
         {
-            StartProcess("DeviceDetails.bat");
-            String DeviceDetails = _myProcess.StandardOutput.ReadToEnd();
-            _myProcess.Close();
+            String DeviceDetails = AdbClient.Instance.GetDevices().First().Model + "_Android_" + await GetOutputFromCommand(Commands["AndroidVersion"]);
 
             //https://www.c-sharpcorner.com/UploadFile/mahesh/savefiledialog-in-C-Sharp/
             SaveFileDialog saveFileDialog1 = new SaveFileDialog

@@ -59,7 +59,6 @@ E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.dl
 E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.pdb
 E:\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.genruntimeconfig.cache
 D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC_Android_Tool.Properties.Resources.resources
-D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.csproj.CoreCompileInputs.cache
 D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Abstractions.dll
 D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Core.dll
 D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authorization.dll
@@ -126,3 +125,5 @@ D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\win-
 D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
 D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\SharpAdbClient.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.csproj.CoreCompileInputs.cache

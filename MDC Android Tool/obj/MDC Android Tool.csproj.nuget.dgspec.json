@@ -46,6 +46,10 @@
               "target": "Package",
               "version": "[2.2.5, )"
             },
+            "SharpAdbClient": {
+              "target": "Package",
+              "version": "[2.3.11, )"
+            },
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.2, )"

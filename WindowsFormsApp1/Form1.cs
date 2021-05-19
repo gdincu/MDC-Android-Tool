@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharpAdbClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -39,6 +40,19 @@ namespace WindowsFormsApp1
             });
 
             MessageBox.Show("Operatia s-a terminat");
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            AdbServer server = new AdbServer();
+            var result = server.StartServer(@"C:\Users\i.g.dincu\Downloads\platform-tools_r30.0.4-windows\platform-tools\adb.exe", restartServerIfNewer: false);
+
+            var device = AdbClient.Instance.GetDevices().First();
+            var receiver = new ConsoleOutputReceiver();
+
+            AdbClient.Instance.ExecuteRemoteCommand("ip route", device, receiver);
+
+            MessageBox.Show(receiver.ToString());
         }
     }
 }
