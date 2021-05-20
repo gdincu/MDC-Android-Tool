@@ -4412,24 +4412,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Pavilion\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\i.g.dincu\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj",
+      "projectUniqueName": "D:\\repos\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj",
       "projectName": "MDC Android Tool",
-      "projectPath": "E:\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj",
-      "packagesPath": "C:\\Users\\Pavilion\\.nuget\\packages\\",
-      "outputPath": "E:\\MDC-Android-Tool\\MDC Android Tool\\obj\\",
+      "projectPath": "D:\\repos\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj",
+      "packagesPath": "C:\\Users\\i.g.dincu\\.nuget\\packages\\",
+      "outputPath": "D:\\repos\\MDC-Android-Tool\\MDC Android Tool\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\Pavilion\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\i.g.dincu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -4440,7 +4441,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "projectReferences": {}
         }
       },
@@ -4452,7 +4452,6 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
-        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.Core": {
             "target": "Package",
@@ -4485,7 +4484,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300-preview.21180.15\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

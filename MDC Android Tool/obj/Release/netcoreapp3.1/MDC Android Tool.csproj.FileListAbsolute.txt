@@ -104,3 +104,11 @@ D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Release\netcoreapp3.1\Microsoft.E
 D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Release\netcoreapp3.1\Microsoft.Net.Http.Headers.dll
 D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Release\netcoreapp3.1\Newtonsoft.Json.dll
 D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Release\netcoreapp3.1\MDC Android Tool.csproj.CopyComplete
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Release\netcoreapp3.1\SharpAdbClient.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Release\netcoreapp3.1\System.Data.SqlClient.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Release\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Release\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Release\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Release\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\repos\MDC-Android-Tool\MDC Android Tool\obj\Release\netcoreapp3.1\MDC Android Tool.csproj.CoreCompileInputs.cache

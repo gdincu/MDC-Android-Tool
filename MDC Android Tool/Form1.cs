@@ -7,6 +7,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Xml.Linq;
 using SharpAdbClient;
+using System.Net;
+using System.Threading;
 
 namespace WindowsFormsApp1
 {
@@ -37,8 +39,8 @@ namespace WindowsFormsApp1
             await ReadValues(Commands, "Commands");
 
             AdbServer server = new AdbServer();
-            //var result = server.StartServer(@"C:\Users\i.g.dincu\Downloads\platform-tools_r30.0.4-windows\platform-tools\adb.exe", restartServerIfNewer: false);
-            var result = server.StartServer(@"E:\platform-tools\adb.exe", restartServerIfNewer: false);
+            var result = server.StartServer(@"C:\Users\i.g.dincu\Downloads\platform-tools_r30.0.4-windows\platform-tools\adb.exe", restartServerIfNewer: false);
+            //var result = server.StartServer(@"E:\platform-tools\adb.exe", restartServerIfNewer: false);
 
             // CheckHowManyDevicesAreCurrentlyConnected            
             int nrOfDevices = await NumberOfDevicesConnected();
@@ -124,6 +126,18 @@ namespace WindowsFormsApp1
             return resultTemp.Substring(0, resultTemp.IndexOf('\r')).Split(" ")[3].Substring(2);
         }
 
+        //Downloads an entire folder
+        void DownloadFolder(string devicePath, string localPath)
+        {
+            var device = AdbClient.Instance.GetDevices().First();
+
+            using (SyncService service = new SyncService(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort)), device))
+            using (Stream stream = File.OpenWrite(localPath))
+            {
+                service.Pull(devicePath, stream, null, CancellationToken.None);
+            }
+        }
+
         private async void button1_Click(object sender, EventArgs e)
         {
             
@@ -146,6 +160,7 @@ namespace WindowsFormsApp1
         private async void button5_Click(object sender, EventArgs e)
         {
             String DeviceDetails = AdbClient.Instance.GetDevices().First().Model + "_Android_" + await GetOutputFromCommand(Commands["AndroidVersion"]);
+            DeviceDetails = DeviceDetails.Trim();
 
             //https://www.c-sharpcorner.com/UploadFile/mahesh/savefiledialog-in-C-Sharp/
             SaveFileDialog saveFileDialog1 = new SaveFileDialog
@@ -158,7 +173,7 @@ namespace WindowsFormsApp1
                 Filter = "Logcat (*.log)|*.log|All files (*.*)|*.*",
                 FilterIndex = 1,
                 RestoreDirectory = true,
-                FileName = DeviceDetails.Trim() + "_"
+                FileName = DeviceDetails + "_"
             };
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 await File.WriteAllTextAsync(saveFileDialog1.FileName, await GetOutputFromCommand("logcat -d"));
@@ -167,11 +182,13 @@ namespace WindowsFormsApp1
             //Checks whether the device details include any of the handheld names recorded in the MDCAndroidTool.xml file
             //Also checks whether the user ticked the SaveMyScan40Folder checkbox
             //Downloads the entire /sdcard/mdc/myscan40 folder to the specified path and renames it using the device details
-            if (HandheldDevices.Any(y => DeviceDetails.Contains(y.Key)) && SaveMyScan40Folder) { 
+            if (HandheldDevices.Any(y => DeviceDetails.Contains(y.Key)) && SaveMyScan40Folder) {
+                string tempDirectoryPath = Path.Combine(Path.GetDirectoryName(saveFileDialog1.FileName), DeviceDetails);
                 //Checks whether the folder already exists and creates it if needed
-                System.IO.Directory.CreateDirectory(Path.GetDirectoryName(saveFileDialog1.FileName) + DeviceDetails.Trim());
-                //Saves the entire myscan40 folder to the above folder
-                 RunCommand(Commands["PullFolder"] + Path.GetDirectoryName(saveFileDialog1.FileName) + DeviceDetails.Trim());
+                System.IO.Directory.CreateDirectory(tempDirectoryPath);
+                //Saves the entire myscan40 folder to the above folder - to be updated - only saves one file
+                DownloadFolder("/sdcard/mdc/myscan40/filelog.log", tempDirectoryPath + @"\filelog.log");
+                //RunCommand(Commands["PullFolder"] + tempDirectoryPath);
             }
 
         }
