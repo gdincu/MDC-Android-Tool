@@ -31,13 +31,13 @@
 <Command name="Mute">input keyevent 164</Command>  <!--91-->
 <Command name="PowerButton">input keyevent 26</Command>
 <Command name="ScreenRecord">screenrecord /sdcard/video.mp4</Command>
-<Command name="PullFolder">pull /sdcard/mdc/myscan40/ </Command>
-<Command name="ScreenCap">exec-out screencap -p</Command>
+<Command name="PullFolder">adb pull /sdcard/mdc/myscan40/ </Command>
+<Command name="ScreenCap">adb exec-out screencap -p > </Command>
 <Command name="GetCurrentApp">dumpsys activity recents | find "Recent #0"</Command>
 <Command name="StartApp">monkey -p </Command>
-<Command name="Tcpip">tcpip 5555</Command>
-<Command name="Disconnect">disconnect</Command>
-<Command name="Connect">connect </Command>
+<Command name="Tcpip">adb tcpip 5555</Command>
+<Command name="Disconnect">adb disconnect</Command>
+<Command name="Connect">adb connect </Command>
 <Command name="NrOfDevices">devices | find /c /v ""</Command>
 </Commands>
 

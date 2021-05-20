@@ -37,9 +37,10 @@ namespace WindowsFormsApp1
         private async void Form1_Load(object sender, EventArgs e)
         {
             
-
+            //Retrieve commands from the settings.xml file
             await ReadValues(Commands, "Commands");
 
+            //Starts the AdbServer
             AdbServer server = new AdbServer();
             var result = server.StartServer(@"C:\Users\i.g.dincu\Downloads\platform-tools_r30.0.4-windows\platform-tools\adb.exe", restartServerIfNewer: false);
             //var result = server.StartServer(@"E:\platform-tools\adb.exe", restartServerIfNewer: false);
@@ -49,7 +50,6 @@ namespace WindowsFormsApp1
 
             while (nrOfDevices != 1)
             {
-
                 if (nrOfDevices == 0)
                     if (MessageBox.Show("Please connect a device to continue!", "Connect a device!", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
                         Environment.Exit(0);
@@ -58,10 +58,6 @@ namespace WindowsFormsApp1
                     if (MessageBox.Show("Please ensure that only one device is connected!", "Check number of connected devices!", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
                         Environment.Exit(0);
 
-                if (nrOfDevices == 1)
-                    break;
-
-                //Updates the nrOfDevices value
                 nrOfDevices = await NumberOfDevicesConnected();
             }
 
@@ -194,6 +190,7 @@ namespace WindowsFormsApp1
             };
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 await File.WriteAllTextAsync(saveFileDialog1.FileName, await GetOutputFromCommand("logcat -d"));
+           
             //System.Diagnostics.Process.Start("CMD.exe", @$"/C adb logcat -d > ""{saveFileDialog1.FileName}"" ");
 
             /*
@@ -206,9 +203,14 @@ namespace WindowsFormsApp1
                 string tempDirectoryPath = Path.Combine(Path.GetDirectoryName(saveFileDialog1.FileName), DeviceDetails);
                 //Checks whether the folder already exists and creates it if needed
                 System.IO.Directory.CreateDirectory(tempDirectoryPath);
+                //Saves the entire myscan40 folder to the above folder
+                RunExternalCMDCommand(Commands["PullFolder"] + tempDirectoryPath);
+
+
+                //To be discussed
                 //Saves the entire myscan40 folder to the above folder - to be updated - only saves one file
-                DownloadFolder("/sdcard/mdc/myscan40/filelog.log", tempDirectoryPath + @"\filelog.log");
-                //RunCommand(Commands["PullFolder"] + tempDirectoryPath);
+                //DownloadFolder("/sdcard/mdc/myscan40/filelog.log", tempDirectoryPath + @"\filelog.log");
+
             }
 
         }
@@ -314,8 +316,7 @@ namespace WindowsFormsApp1
             };
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 //https://stackoverflow.com/questions/27766712/using-adb-to-capture-the-screen
-                //Does not work - to be reviewed
-                Clipboard.SetText(Commands["ScreenCap"] + @" > " + saveFileDialog1.FileName);
+                RunExternalCMDCommand(Commands["ScreenCap"] + saveFileDialog1.FileName);
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -337,7 +338,7 @@ namespace WindowsFormsApp1
             if (MessageBox.Show("Is the device connected via USB?", "Device connected?", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 //Tcpip 5555 command
-                 RunCommand(Commands["Tcpip"]);
+                RunExternalCMDCommand(Commands["Tcpip"]);
 
                 //Wait 1 second -- needs to be here as otherwise the StandardOutput.ReadToEnd() functionality does not seem to work
                 System.Threading.Thread.Sleep(1000);
@@ -345,17 +346,18 @@ namespace WindowsFormsApp1
                 //IP route command
                 string[] tempResult = GetOutputFromCommand(Commands["Ip"]).Result.Split(" ");
                 string IpAddress = (tempResult.Length >= 11) ? tempResult[11].Trim() : tempResult.ToString();
+                MessageBox.Show(IpAddress);
 
                 if (MessageBox.Show("Please disconnect the device from the USB port and tap OK when ready!", "Disconnect the device!", MessageBoxButtons.OKCancel) == DialogResult.OK) {
                     //Disconnects all devices
-                    RunExternalCMDCommand("adb " + Commands["Disconnect"]);
+                    RunExternalCMDCommand(Commands["Disconnect"]);
                     
                     //Wait 1 second 
                     System.Threading.Thread.Sleep(1000);
 
                     //Connects over IP to the selected device
-                    RunExternalCMDCommand("adb " + Commands["Connect"] + IpAddress);
-                    MessageBox.Show("adb " + Commands["Connect"] + IpAddress);
+                    RunExternalCMDCommand(Commands["Connect"] + IpAddress);
+                    MessageBox.Show("Connected to " + IpAddress);
                 }
             }
 
