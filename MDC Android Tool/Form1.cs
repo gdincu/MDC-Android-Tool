@@ -20,18 +20,20 @@ namespace WindowsFormsApp1
         IDictionary<string, string> EOTBarcodes = new Dictionary<string, string>();
         IDictionary<string, string> URIs = new Dictionary<string, string>();
         IDictionary<string, string> HandheldDevices = new Dictionary<string, string>();
+        
         //Path to the settings file
         String Settings = Path.Combine(Environment.CurrentDirectory, "MDCAndroidTool.xml");
-        Process _myProcess = new Process();
+        
         //Check used to see whether the handheld filelogs are to be saved
         bool SaveMyScan40Folder = false;
+
+        
 
         public Form1()
         {
             InitializeComponent();
         }
 
-        //https://docs.microsoft.com/en-us/archive/msdn-magazine/2013/march/async-await-best-practices-in-asynchronous-programming
         private async void Form1_Load(object sender, EventArgs e)
         {
             
@@ -80,30 +82,27 @@ namespace WindowsFormsApp1
 
         private async Task ReadValues (IDictionary<string, string> Dictionary, string TagName)
         {
+
             //https://docs.microsoft.com/en-us/dotnet/standard/linq/retrieve-value-element
             foreach (XElement level1Element in XElement.Load(Settings).Elements(TagName))
                 foreach (XElement level2Element in level1Element.Elements(TagName[..^1]))
                     Dictionary.Add(level2Element.Attribute("name").Value, level2Element.Value);
 
-            //List<XElement> XMLSettings = XElement.Load(Settings).Elements(TagName).ToList();
-            //XMLSettings.ForEach(x => 
-            //    x.Elements(TagName[..^1]).ToList().ForEach(y => 
-            //        Dictionary.Add(y.Attribute("name").Value, y.Value)));
         }
 
-        private async Task<String> scanItem(String ItemBarcode)
+        private async Task<String> ReturnScanItemCommand(String ItemBarcode)
         {
             return Commands["ScanItem1"] + ItemBarcode + Commands["ScanItem2"];
         }
 
         //Used to run cmd commands
-        private void RunCommand(String command)
+        private async void RunCommand(String command)
         {
             var device = AdbClient.Instance.GetDevices().First();
             AdbClient.Instance.ExecuteRemoteCommand(command, device, null);
         }
 
-        //Used to run cmd commands
+        //Used to run cmd commands and retrieve output
         private async Task<String> GetOutputFromCommand(String command)
         {
             var device = AdbClient.Instance.GetDevices().First();
@@ -138,10 +137,28 @@ namespace WindowsFormsApp1
             }
         }
 
+        private void RunExternalCMDCommand(String command)
+        {
+            //https://stackoverflow.com/questions/19257041/run-cmd-command-without-displaying-it
+            Process _myProcess = new Process();
+            _myProcess.StartInfo = new System.Diagnostics.ProcessStartInfo()
+            {
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden,
+                FileName = "cmd.exe",
+                Arguments = "/C " + command,
+                RedirectStandardError = true,
+                RedirectStandardOutput = true
+            };
+            _myProcess.Start();
+            _myProcess.WaitForExit();
+        }
+
         private async void button1_Click(object sender, EventArgs e)
         {
             
-            RunCommand(scanItem(Items[listBox1.SelectedItem.ToString()]).Result);
+            RunCommand(ReturnScanItemCommand(Items[listBox1.SelectedItem.ToString()]).Result);
 
         }
 
@@ -179,10 +196,13 @@ namespace WindowsFormsApp1
                 await File.WriteAllTextAsync(saveFileDialog1.FileName, await GetOutputFromCommand("logcat -d"));
             //System.Diagnostics.Process.Start("CMD.exe", @$"/C adb logcat -d > ""{saveFileDialog1.FileName}"" ");
 
-            //Checks whether the device details include any of the handheld names recorded in the MDCAndroidTool.xml file
-            //Also checks whether the user ticked the SaveMyScan40Folder checkbox
-            //Downloads the entire /sdcard/mdc/myscan40 folder to the specified path and renames it using the device details
+            /*
+             * Checks whether the device details include any of the handheld names recorded in the MDCAndroidTool.xml file
+             * Also checks whether the user ticked the SaveMyScan40Folder checkbox
+             * Downloads the entire /sdcard/mdc/myscan40 folder to the specified path and renames it using the device details
+             */
             if (HandheldDevices.Any(y => DeviceDetails.Contains(y.Key)) && SaveMyScan40Folder) {
+                //Builds a directory path based on the dialog box selection & the device details
                 string tempDirectoryPath = Path.Combine(Path.GetDirectoryName(saveFileDialog1.FileName), DeviceDetails);
                 //Checks whether the folder already exists and creates it if needed
                 System.IO.Directory.CreateDirectory(tempDirectoryPath);
@@ -195,46 +215,43 @@ namespace WindowsFormsApp1
 
         private async void groupBox1_Enter(object sender, EventArgs e)
         {
-            // Do asynchronous work.
             await Task.Delay(100);
         }
 
         private async void tabPage1_Click(object sender, EventArgs e)
         {
-            // Do asynchronous work.
             await Task.Delay(100);
         }
 
         private async void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Do asynchronous work.
             await Task.Delay(100);
         }
 
         private async void button6_Click(object sender, EventArgs e)
         {
              RunCommand(Commands["Reboot"]);
+            await Task.Delay(100);
         }
 
         private async void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            await Task.Delay(100);
         }
 
         private async void button2_Click(object sender, EventArgs e)
         {
-             RunCommand(scanItem(EOTBarcodes[listBox2.SelectedItem.ToString()]).Result);
+            RunCommand(ReturnScanItemCommand(EOTBarcodes[listBox2.SelectedItem.ToString()]).Result);
+            await Task.Delay(100);
         }
 
         private async void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Do asynchronous work.
             await Task.Delay(100);
         }
 
         private async void groupBox1_Enter_1(object sender, EventArgs e)
         {
-            // Do asynchronous work.
             await Task.Delay(100);
         }
 
@@ -297,6 +314,7 @@ namespace WindowsFormsApp1
             };
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 //https://stackoverflow.com/questions/27766712/using-adb-to-capture-the-screen
+                //Does not work - to be reviewed
                 Clipboard.SetText(Commands["ScreenCap"] + @" > " + saveFileDialog1.FileName);
         }
 
@@ -326,19 +344,18 @@ namespace WindowsFormsApp1
 
                 //IP route command
                 string[] tempResult = GetOutputFromCommand(Commands["Ip"]).Result.Split(" ");
-                string IpAddress = (tempResult.Length >= 26) ? tempResult[26] : tempResult.ToString();
-                MessageBox.Show(IpAddress);
+                string IpAddress = (tempResult.Length >= 11) ? tempResult[11].Trim() : tempResult.ToString();
 
                 if (MessageBox.Show("Please disconnect the device from the USB port and tap OK when ready!", "Disconnect the device!", MessageBoxButtons.OKCancel) == DialogResult.OK) {
                     //Disconnects all devices
-                    System.Diagnostics.Process.Start("CMD.exe", "adb " + Commands["Disconnect"]);
+                    RunExternalCMDCommand("adb " + Commands["Disconnect"]);
                     
                     //Wait 1 second 
                     System.Threading.Thread.Sleep(1000);
 
                     //Connects over IP to the selected device
-                    System.Diagnostics.Process.Start("CMD.exe", "adb " + Commands["Connect"] + IpAddress);                    
-                    MessageBox.Show("Connected to "+ IpAddress);
+                    RunExternalCMDCommand("adb " + Commands["Connect"] + IpAddress);
+                    MessageBox.Show("adb " + Commands["Connect"] + IpAddress);
                 }
             }
 
