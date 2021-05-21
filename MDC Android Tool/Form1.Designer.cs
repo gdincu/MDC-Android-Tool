@@ -60,6 +60,9 @@ namespace WindowsFormsApp1
             this.button9 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button14 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.button10 = new System.Windows.Forms.Button();
             this.listBox4 = new System.Windows.Forms.ListBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
@@ -71,6 +74,7 @@ namespace WindowsFormsApp1
             this.groupBox1.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -354,6 +358,7 @@ namespace WindowsFormsApp1
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.groupBox3);
             this.tabPage5.Controls.Add(this.button10);
             this.tabPage5.Controls.Add(this.listBox4);
             this.tabPage5.Location = new System.Drawing.Point(4, 27);
@@ -363,6 +368,37 @@ namespace WindowsFormsApp1
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Others";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.button14);
+            this.groupBox3.Controls.Add(this.textBox1);
+            this.groupBox3.Location = new System.Drawing.Point(369, 108);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(399, 116);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "ADB Command";
+            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
+            // 
+            // button14
+            // 
+            this.button14.Location = new System.Drawing.Point(7, 52);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(100, 50);
+            this.button14.TabIndex = 1;
+            this.button14.Text = "Send";
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(7, 23);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.PlaceholderText = "Type your ADB command here (eg. adb disconnect)";
+            this.textBox1.Size = new System.Drawing.Size(386, 23);
+            this.textBox1.TabIndex = 0;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // button10
             // 
@@ -409,6 +445,8 @@ namespace WindowsFormsApp1
             this.groupBox1.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 
@@ -446,6 +484,9 @@ namespace WindowsFormsApp1
         private Button button11;
         private Button button12;
         private Button button13;
+        private GroupBox groupBox3;
+        private Button button14;
+        private TextBox textBox1;
     }
 }
 

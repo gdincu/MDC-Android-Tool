@@ -358,5 +358,20 @@ namespace WindowsFormsApp1
                 e.Handled = true;
             }
         }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            RunExternalCMDCommand(textBox1.Text);
+        }
     }
 }
