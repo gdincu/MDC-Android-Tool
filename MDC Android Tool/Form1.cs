@@ -86,14 +86,16 @@ namespace WindowsFormsApp1
 
         private async Task<String> ReturnScanItemCommand(String ItemBarcode)
         {
-            return Commands["ScanItem1"] + ItemBarcode + Commands["ScanItem2"];
+            return NumberOfDevicesConnected().Result.Equals(1) ? Commands["ScanItem1"] + ItemBarcode + Commands["ScanItem2"] : "";
         }
 
         //Used to run cmd commands
         private async void RunCommand(String command)
         {
-            var device = AdbClient.Instance.GetDevices().First();
-            AdbClient.Instance.ExecuteRemoteCommand(command, device, null);
+            if(NumberOfDevicesConnected().Result.Equals(1)) { 
+                var device = AdbClient.Instance.GetDevices().First();
+                AdbClient.Instance.ExecuteRemoteCommand(command, device, null);
+            }
         }
 
         //Used to run cmd commands and retrieve output
@@ -101,7 +103,8 @@ namespace WindowsFormsApp1
         {
             var device = AdbClient.Instance.GetDevices().First();
             var receiver = new ConsoleOutputReceiver();
-            AdbClient.Instance.ExecuteRemoteCommand(command, device, receiver);
+            if (NumberOfDevicesConnected().Result.Equals(1))
+                AdbClient.Instance.ExecuteRemoteCommand(command, device, receiver);
             return receiver.ToString();
         }
 
@@ -114,9 +117,12 @@ namespace WindowsFormsApp1
         //Returns the package name for the current app
         private async Task<string> CurrentPackageName()
         {
-            string resultTemp = GetOutputFromCommand("dumpsys activity recents").Result;
+            string resultTemp = "";
+            if (NumberOfDevicesConnected().Result.Equals(1)) { 
+            resultTemp = GetOutputFromCommand("dumpsys activity recents").Result;
             resultTemp = resultTemp.Substring(resultTemp.IndexOf('#'));
-            return resultTemp.Substring(0, resultTemp.IndexOf('\r')).Split(" ")[3].Substring(2);
+            }
+            return NumberOfDevicesConnected().Result.Equals(1) ? resultTemp.Substring(0, resultTemp.IndexOf('\r')).Split(" ")[3].Substring(2) : "";
         }
 
         //Downloads an entire folder
@@ -145,27 +151,32 @@ namespace WindowsFormsApp1
                 RedirectStandardError = true,
                 RedirectStandardOutput = true
             };
-            _myProcess.Start();
-            _myProcess.WaitForExit();
+
+            if (NumberOfDevicesConnected().Result.Equals(1)) { 
+                _myProcess.Start();
+                _myProcess.WaitForExit();
+            }
         }
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            
-            RunCommand(ReturnScanItemCommand(Items[listBox1.SelectedItem.ToString()]).Result);
+            if (NumberOfDevicesConnected().Result.Equals(1))
+                RunCommand(ReturnScanItemCommand(Items[listBox1.SelectedItem.ToString()]).Result);
 
         }
 
         private async void button3_Click(object sender, EventArgs e)
         {
-             RunCommand(Commands["Undocked"]);
-            
+            if (NumberOfDevicesConnected().Result.Equals(1))
+                RunCommand(Commands["Undocked"]);
         }
 
         private async void button4_Click(object sender, EventArgs e)
         {
-            RunCommand(Commands["ClearLogcat"]);
-            MessageBox.Show("Cleared!", "Clear logcat");
+            if (NumberOfDevicesConnected().Result.Equals(1)) { 
+                RunCommand(Commands["ClearLogcat"]);
+                MessageBox.Show("Cleared!", "Clear logcat");
+            }
         }
 
         private async void button5_Click(object sender, EventArgs e)
@@ -215,44 +226,44 @@ namespace WindowsFormsApp1
 
         private async void groupBox1_Enter(object sender, EventArgs e)
         {
-            await Task.Delay(100);
+            
         }
 
         private async void tabPage1_Click(object sender, EventArgs e)
         {
-            await Task.Delay(100);
+            
         }
 
         private async void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            await Task.Delay(100);
+            
         }
 
         private async void button6_Click(object sender, EventArgs e)
         {
-             RunCommand(Commands["Reboot"]);
-            await Task.Delay(100);
+            if (NumberOfDevicesConnected().Result.Equals(1))
+                RunCommand(Commands["Reboot"]);
         }
 
         private async void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            await Task.Delay(100);
+
         }
 
         private async void button2_Click(object sender, EventArgs e)
         {
-            RunCommand(ReturnScanItemCommand(EOTBarcodes[listBox2.SelectedItem.ToString()]).Result);
-            await Task.Delay(100);
+            if (NumberOfDevicesConnected().Result.Equals(1))
+                RunCommand(ReturnScanItemCommand(EOTBarcodes[listBox2.SelectedItem.ToString()]).Result);
         }
 
         private async void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            await Task.Delay(100);
+
         }
 
         private async void groupBox1_Enter_1(object sender, EventArgs e)
         {
-            await Task.Delay(100);
+
         }
 
         private async void button7_Click(object sender, EventArgs e)
@@ -264,7 +275,8 @@ namespace WindowsFormsApp1
                 + Commands["Intent3"]
                 + textBox3.Text+ "'";
 
-             RunCommand(_intent);
+            if (NumberOfDevicesConnected().Result.Equals(1))
+                RunCommand(_intent);
         }
 
         private async void button8_Click(object sender, EventArgs e)
@@ -276,10 +288,11 @@ namespace WindowsFormsApp1
 
         private async void button9_Click(object sender, EventArgs e)
         {
-            
-            String DeviceDetails = AdbClient.Instance.GetDevices().First().Model + "_Android_" + await GetOutputFromCommand(Commands["AndroidVersion"]);
-            MessageBox.Show(DeviceDetails, "Paste these details where needed!");
-            Clipboard.SetText(DeviceDetails);
+            if(NumberOfDevicesConnected().Result.Equals(1)) { 
+                String DeviceDetails = AdbClient.Instance.GetDevices().First().Model + "_Android_" + await GetOutputFromCommand(Commands["AndroidVersion"]);
+                MessageBox.Show(DeviceDetails, "Paste these details where needed!");
+                Clipboard.SetText(DeviceDetails);
+            }
 
         }
 
