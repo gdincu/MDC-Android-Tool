@@ -333,7 +333,32 @@ namespace WindowsFormsApp1
 
         private async void button13_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Is the device connected via USB?", "Device connected?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                //Tcpip 5555 command
+                RunExternalCMDCommand(Commands["Tcpip"]);
 
+                //Wait 1 second -- needs to be here as otherwise the StandardOutput.ReadToEnd() functionality does not seem to work
+                System.Threading.Thread.Sleep(1000);
+
+                //IP route command
+                string[] tempResult = GetOutputFromCommand(Commands["Ip"]).Result.Split(" ");
+                string IpAddress = (tempResult.Length >= 11) ? tempResult[11].Trim() : tempResult.ToString();
+                MessageBox.Show(IpAddress);
+
+                if (MessageBox.Show("Please disconnect the device from the USB port and tap OK when ready!", "Disconnect the device!", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    //Disconnects all devices
+                    RunExternalCMDCommand(Commands["Disconnect"]);
+
+                    //Wait 1 second 
+                    System.Threading.Thread.Sleep(1000);
+
+                    //Connects over IP to the selected device
+                    RunExternalCMDCommand(Commands["Connect"] + IpAddress);
+                    MessageBox.Show("Connected to " + IpAddress);
+                }
+            }
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
