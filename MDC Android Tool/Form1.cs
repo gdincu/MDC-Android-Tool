@@ -34,11 +34,10 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-        private async void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            
             //Retrieve commands from the settings.xml file
-            await ReadValues(Commands, "Commands");
+            ReadValues(Commands, "Commands");
 
             //Starts the AdbServer
             AdbServer server = new AdbServer();
@@ -46,7 +45,7 @@ namespace WindowsFormsApp1
             //var result = server.StartServer(@"E:\platform-tools\adb.exe", restartServerIfNewer: false);
 
             // CheckHowManyDevicesAreCurrentlyConnected            
-            int nrOfDevices = await NumberOfDevicesConnected();
+            int nrOfDevices = NumberOfDevicesConnected().Result;
 
             while (nrOfDevices != 1)
             {
@@ -58,25 +57,24 @@ namespace WindowsFormsApp1
                     if (MessageBox.Show("Please ensure that only one device is connected!", "Check number of connected devices!", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
                         Environment.Exit(0);
 
-                nrOfDevices = await NumberOfDevicesConnected();
+                nrOfDevices = NumberOfDevicesConnected().Result;
             }
 
             ////Workaround - to be investigated
             //RunCommand("");
 
-            await ReadValues(Items, "Items");
-            await ReadValues(EOTBarcodes, "EOTBarcodes");
-            await ReadValues(URIs, "URIs");
-            await ReadValues(HandheldDevices, "HandheldDevices");
+            ReadValues(Items, "Items");
+            ReadValues(EOTBarcodes, "EOTBarcodes");
+            ReadValues(URIs, "URIs");
+            ReadValues(HandheldDevices, "HandheldDevices");
 
             Items.ToList().ForEach(x => this.listBox1.Items.Add(x.Key));
             EOTBarcodes.ToList().ForEach(x => this.listBox2.Items.Add(x.Key));
             URIs.ToList().ForEach(x => this.listBox3.Items.Add(x.Key));
             Commands.ToList().ForEach(x => this.listBox4.Items.Add(x.Key));
-
         }
 
-        private async Task ReadValues (IDictionary<string, string> Dictionary, string TagName)
+        private void ReadValues (IDictionary<string, string> Dictionary, string TagName)
         {
 
             //https://docs.microsoft.com/en-us/dotnet/standard/linq/retrieve-value-element
@@ -335,33 +333,30 @@ namespace WindowsFormsApp1
 
         private async void button13_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Is the device connected via USB?", "Device connected?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+       (e.KeyChar != '.'))
             {
-                //Tcpip 5555 command
-                RunExternalCMDCommand(Commands["Tcpip"]);
-
-                //Wait 1 second -- needs to be here as otherwise the StandardOutput.ReadToEnd() functionality does not seem to work
-                System.Threading.Thread.Sleep(1000);
-
-                //IP route command
-                string[] tempResult = GetOutputFromCommand(Commands["Ip"]).Result.Split(" ");
-                string IpAddress = (tempResult.Length >= 11) ? tempResult[11].Trim() : tempResult.ToString();
-                MessageBox.Show(IpAddress);
-
-                if (MessageBox.Show("Please disconnect the device from the USB port and tap OK when ready!", "Disconnect the device!", MessageBoxButtons.OKCancel) == DialogResult.OK) {
-                    //Disconnects all devices
-                    RunExternalCMDCommand(Commands["Disconnect"]);
-                    
-                    //Wait 1 second 
-                    System.Threading.Thread.Sleep(1000);
-
-                    //Connects over IP to the selected device
-                    RunExternalCMDCommand(Commands["Connect"] + IpAddress);
-                    MessageBox.Show("Connected to " + IpAddress);
-                }
+                e.Handled = true;
             }
+        }
 
-            
+        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                   (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

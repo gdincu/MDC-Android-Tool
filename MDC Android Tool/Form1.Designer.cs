@@ -235,6 +235,7 @@ namespace WindowsFormsApp1
             this.textBox3.PlaceholderText = "terminalid";
             this.textBox3.Size = new System.Drawing.Size(100, 23);
             this.textBox3.TabIndex = 5;
+            this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox3_KeyPress);
             // 
             // textBox2
             // 
@@ -243,6 +244,7 @@ namespace WindowsFormsApp1
             this.textBox2.PlaceholderText = "storenumber";
             this.textBox2.Size = new System.Drawing.Size(100, 23);
             this.textBox2.TabIndex = 4;
+            this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
             // groupBox1
             // 
