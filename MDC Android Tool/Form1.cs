@@ -14,19 +14,16 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-
         //Used to store values from the XML settings file
-        IDictionary<string, string> Items = new Dictionary<string, string>();
-        IDictionary<string, string> Commands = new Dictionary<string, string>();
-        IDictionary<string, string> EOTBarcodes = new Dictionary<string, string>();
-        IDictionary<string, string> URIs = new Dictionary<string, string>();
-        IDictionary<string, string> HandheldDevices = new Dictionary<string, string>();
+        readonly IDictionary<string, string> Items = new Dictionary<string, string>();
+        readonly IDictionary<string, string> Commands = new Dictionary<string, string>();
+        readonly IDictionary<string, string> EOTBarcodes = new Dictionary<string, string>();
+        readonly IDictionary<string, string> URIs = new Dictionary<string, string>();
+        readonly IDictionary<string, string> HandheldDevices = new Dictionary<string, string>();
         //Path to the settings file
-        static String Settings = Path.Combine(Environment.CurrentDirectory, "MDCAndroidTool.xml");
-        //Extracts the ADB path
-        string ADBPath = XElement.Load(Settings).Element("ADBPath").Value;
+        readonly string Settings = Path.Combine(Environment.CurrentDirectory, "MDCAndroidTool.xml");
         //Used to see whether the handheld filelogs are to be saved
-        bool SaveMyScan40Folder = false;
+        bool SaveMyScan40Folder;
 
         public Form1()
         {
@@ -36,91 +33,107 @@ namespace WindowsFormsApp1
         private void Form1_Load(object sender, EventArgs e)
         {
             //Retrieve commands from the settings.xml file
-            ReadValues(Commands, "Commands");
+            ReadValuesAsync(Commands, "Commands");
 
             //Starts the AdbServer
             AdbServer server = new AdbServer();
-            var result = server.StartServer(ADBPath, restartServerIfNewer: false);
+            //Extracts the ADB path from the settings file
+            string ADBPath = XElement.Load(Settings).Element("ADBPath").Value;
+            server.StartServer(ADBPath, restartServerIfNewer: false);
 
-            // CheckHowManyDevicesAreCurrentlyConnected            
-            int nrOfDevices = NumberOfDevicesConnected().Result;
-
-            while (nrOfDevices != 1)
+            // ChecksHowManyDevicesAreCurrentlyConnected            
+            while (!NumberOfDevicesConnectedEqualsOne())
             {
-                if (nrOfDevices == 0)
+                if (ReturnNumberOfDevicesConnected().Equals(0))
                     if (MessageBox.Show("Please connect a device to continue!", "Connect a device!", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
                         Environment.Exit(0);
 
-                if (nrOfDevices > 1)
+                if (ReturnNumberOfDevicesConnected() > 1)
                     if (MessageBox.Show("Please ensure that only one device is connected!", "Check number of connected devices!", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
                         Environment.Exit(0);
-
-                nrOfDevices = NumberOfDevicesConnected().Result;
             }
 
-            ReadValues(Items, "Items");
-            ReadValues(EOTBarcodes, "EOTBarcodes");
-            ReadValues(URIs, "URIs");
-            ReadValues(HandheldDevices, "HandheldDevices");
+            ReadValuesAsync(Items, "Items");
+            ReadValuesAsync(EOTBarcodes, "EOTBarcodes");
+            ReadValuesAsync(URIs, "URIs");
+            ReadValuesAsync(HandheldDevices, "HandheldDevices");
 
-            Items.ToList().ForEach(x => this.listBox1.Items.Add(x.Key));
-            EOTBarcodes.ToList().ForEach(x => this.listBox2.Items.Add(x.Key));
-            URIs.ToList().ForEach(x => this.listBox3.Items.Add(x.Key));
-            Commands.ToList().ForEach(x => this.listBox4.Items.Add(x.Key));
+            PopulateListBox(listBox1, Items);             
+            PopulateListBox(listBox2, EOTBarcodes);
+            PopulateListBox(listBox3, URIs);
+            PopulateListBox(listBox4, Commands);
         }
 
         //Used to read data from the Settings xml file
-        private void ReadValues (IDictionary<string, string> Dictionary, string TagName)
+        private async void ReadValuesAsync (IDictionary<string, string> Dictionary, string TagName)
         {
-
-            //https://docs.microsoft.com/en-us/dotnet/standard/linq/retrieve-value-element
-            foreach (XElement level1Element in XElement.Load(Settings).Elements(TagName))
-                foreach (XElement level2Element in level1Element.Elements(TagName[..^1]))
-                    Dictionary.Add(level2Element.Attribute("name").Value, level2Element.Value);
+            await Task.Run(() =>
+            {
+                //https://docs.microsoft.com/en-us/dotnet/standard/linq/retrieve-value-element
+                foreach (XElement level1Element in XElement.Load(Settings).Elements(TagName))
+                    foreach (XElement level2Element in level1Element.Elements(TagName[..^1]))
+                        Dictionary.Add(level2Element.Attribute("name").Value, level2Element.Value);
+            });
 
         }
 
+        //Used to populate listbox values based on a dictionary
+        private void PopulateListBox(ListBox listbox, IDictionary<string, string> dictionary)
+        {
+            foreach (KeyValuePair<string, string> x in dictionary)
+                listbox.Items.Add(x.Key);
+        }   
+
         //Used to return the scan item command
-        private async Task<String> ReturnScanItemCommand(String ItemBarcode)
+        private string ReturnScanItemCommand(String ItemBarcode)
         {
             //Checks whether there is only one device connected and if that is the case returns the scan item command
-            return NumberOfDevicesConnected().Result.Equals(1) ? Commands["ScanItem1"] + ItemBarcode + Commands["ScanItem2"] : "";
+            return ReturnNumberOfDevicesConnected().Equals(1) ? Commands["ScanItem1"] + ItemBarcode + Commands["ScanItem2"] : "";
         }
 
         //Used to run cmd commands (using the AdbClient)
-        private async void RunCommand(String command)
+        private void RunCommand(String command)
         {
-            if(NumberOfDevicesConnected().Result.Equals(1)) { 
+            if(NumberOfDevicesConnectedEqualsOne()) { 
                 var device = AdbClient.Instance.GetDevices().First();
                 AdbClient.Instance.ExecuteRemoteCommand(command, device, null);
             }
         }
 
         //Used to run cmd commands and retrieve output (using the AdbClient)
-        private async Task<String> GetOutputFromCommand(String command)
+        private string GetOutputFromCommand(String command)
         {
             var device = AdbClient.Instance.GetDevices().First();
             var receiver = new ConsoleOutputReceiver();
-            if (NumberOfDevicesConnected().Result.Equals(1))
+            
+            if (NumberOfDevicesConnectedEqualsOne())
                 AdbClient.Instance.ExecuteRemoteCommand(command, device, receiver);
+
             return receiver.ToString();
         }
 
         //Returns the number of connected devices
-        private async Task<int> NumberOfDevicesConnected()
+        private int ReturnNumberOfDevicesConnected()
         {
             return AdbClient.Instance.GetDevices().Count();
         }
 
+        //Returns true when the number of connected devices equals one
+        private bool NumberOfDevicesConnectedEqualsOne() {
+            return ReturnNumberOfDevicesConnected().Equals(1);
+        }
+
         //Returns the package name for the current app
-        private async Task<string> CurrentPackageName()
+        private string CurrentPackageName()
         {
             string resultTemp = "";
-            if (NumberOfDevicesConnected().Result.Equals(1)) { 
-            resultTemp = GetOutputFromCommand("dumpsys activity recents").Result;
+
+            if (NumberOfDevicesConnectedEqualsOne()) { 
+                resultTemp = GetOutputFromCommand("dumpsys activity recents");
             resultTemp = resultTemp.Substring(resultTemp.IndexOf('#'));
             }
-            return NumberOfDevicesConnected().Result.Equals(1) ? resultTemp.Substring(0, resultTemp.IndexOf('\r')).Split(" ")[3].Substring(2) : "";
+
+            return ReturnNumberOfDevicesConnected().Equals(1) ? resultTemp.Substring(0, resultTemp.IndexOf('\r')).Split(" ")[3].Substring(2) : "";
         }
 
         //Downloads a file from the device (using the AdbClient)
@@ -128,11 +141,9 @@ namespace WindowsFormsApp1
         {
             var device = AdbClient.Instance.GetDevices().First();
 
-            using (SyncService service = new SyncService(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort)), device))
-            using (Stream stream = File.OpenWrite(localPath))
-            {
-                service.Pull(devicePath, stream, null, CancellationToken.None);
-            }
+            using SyncService service = new SyncService(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort)), device);
+            using Stream stream = File.OpenWrite(localPath);
+            service.Pull(devicePath, stream, null, CancellationToken.None);
         }
 
         //Returns the selected filename
@@ -157,40 +168,44 @@ namespace WindowsFormsApp1
         private void RunExternalCMDCommand(String command)
         {
             //https://stackoverflow.com/questions/19257041/run-cmd-command-without-displaying-it
-            Process _myProcess = new Process();
-            _myProcess.StartInfo = new System.Diagnostics.ProcessStartInfo()
+            Process _myProcess = new Process
             {
-                UseShellExecute = false,
-                CreateNoWindow = true,
-                WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden,
-                FileName = "cmd.exe",
-                Arguments = "/C " + command,
-                RedirectStandardError = true,
-                RedirectStandardOutput = true
+                StartInfo = new System.Diagnostics.ProcessStartInfo()
+                {
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden,
+                    FileName = "cmd.exe",
+                    Arguments = "/C " + command,
+                    RedirectStandardError = true,
+                    RedirectStandardOutput = true
+                }
             };
 
-            if (NumberOfDevicesConnected().Result.Equals(1)) { 
+            if (NumberOfDevicesConnectedEqualsOne())
+            {
                 _myProcess.Start();
                 _myProcess.WaitForExit();
             }
         }
 
-        private async void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            if (NumberOfDevicesConnected().Result.Equals(1))
-                RunCommand(ReturnScanItemCommand(Items[listBox1.SelectedItem.ToString()]).Result);
+            if (NumberOfDevicesConnectedEqualsOne())
+                RunCommand(ReturnScanItemCommand(Items[listBox1.SelectedItem.ToString()]));
 
         }
 
-        private async void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
-            if (NumberOfDevicesConnected().Result.Equals(1))
+            if (NumberOfDevicesConnectedEqualsOne())
                 RunCommand(Commands["Undocked"]);
         }
 
-        private async void button4_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
-            if (NumberOfDevicesConnected().Result.Equals(1)) { 
+            if (NumberOfDevicesConnectedEqualsOne())
+            { 
                 RunCommand(Commands["ClearLogcat"]);
                 MessageBox.Show("Cleared!", "Clear logcat");
             }
@@ -198,13 +213,13 @@ namespace WindowsFormsApp1
 
         private async void button5_Click(object sender, EventArgs e)
         {
-            if (NumberOfDevicesConnected().Result.Equals(1))
+            if (NumberOfDevicesConnectedEqualsOne())
             {
-                String DeviceDetails = AdbClient.Instance.GetDevices().First().Model + "_Android_" + await GetOutputFromCommand(Commands["AndroidVersion"]);
+                String DeviceDetails = AdbClient.Instance.GetDevices().First().Model + "_Android_" + GetOutputFromCommand(Commands["AndroidVersion"]);
                 DeviceDetails = DeviceDetails.Trim();
 
                 string tempFilename = SaveFileDialogFilename("Save logcat", "log", "Logcat (*.log)|*.log|All files (*.*)|*.*", DeviceDetails + "_");
-                await File.WriteAllTextAsync(tempFilename, await GetOutputFromCommand("logcat -d"));
+                await File.WriteAllTextAsync(tempFilename, GetOutputFromCommand("logcat -d"));
                 //System.Diagnostics.Process.Start("CMD.exe", @$"/C adb logcat -d > ""{saveFileDialog1.FileName}"" ");
 
                 /*
@@ -229,52 +244,52 @@ namespace WindowsFormsApp1
 
         }
 
-        private async void groupBox1_Enter(object sender, EventArgs e)
+        private void groupBox1_Enter(object sender, EventArgs e)
         {
             
         }
 
-        private async void tabPage1_Click(object sender, EventArgs e)
+        private void tabPage1_Click(object sender, EventArgs e)
         {
             
         }
 
-        private async void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             
         }
 
-        private async void button6_Click(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e)
         {
-            if (NumberOfDevicesConnected().Result.Equals(1))
+            if (NumberOfDevicesConnectedEqualsOne())
                 RunCommand(Commands["Reboot"]);
         }
 
-        private async void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        private async void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            if (NumberOfDevicesConnected().Result.Equals(1))
-                RunCommand(ReturnScanItemCommand(EOTBarcodes[listBox2.SelectedItem.ToString()]).Result);
+            if (NumberOfDevicesConnectedEqualsOne())
+                RunCommand(ReturnScanItemCommand(EOTBarcodes[listBox2.SelectedItem.ToString()]));
         }
 
-        private async void listBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private async void groupBox1_Enter_1(object sender, EventArgs e)
+        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        private async void button7_Click(object sender, EventArgs e)
+        private void groupBox1_Enter_1(object sender, EventArgs e)
         {
-            if (NumberOfDevicesConnected().Result.Equals(1)) { 
 
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (NumberOfDevicesConnectedEqualsOne())
+            { 
                 String _intent = Commands["Intent1"]
                 + textBox2.Text
                 + Commands["Intent2"]
@@ -286,41 +301,42 @@ namespace WindowsFormsApp1
             }
         }
 
-        private async void button8_Click(object sender, EventArgs e)
+        private void button8_Click(object sender, EventArgs e)
         {
-            if (NumberOfDevicesConnected().Result.Equals(1))
-                RunCommand("am force-stop " + await CurrentPackageName());
+            if (NumberOfDevicesConnectedEqualsOne())
+                RunCommand("am force-stop " + CurrentPackageName());
 
         }
 
-        private async void button9_Click(object sender, EventArgs e)
+        private void button9_Click(object sender, EventArgs e)
         {
-            if(NumberOfDevicesConnected().Result.Equals(1)) { 
-                String DeviceDetails = AdbClient.Instance.GetDevices().First().Model + "_Android_" + await GetOutputFromCommand(Commands["AndroidVersion"]);
+            if (NumberOfDevicesConnectedEqualsOne())
+            { 
+                String DeviceDetails = AdbClient.Instance.GetDevices().First().Model + "_Android_" + GetOutputFromCommand(Commands["AndroidVersion"]);
                 MessageBox.Show(DeviceDetails, "Paste these details where needed!");
                 Clipboard.SetText(DeviceDetails);
             }
 
         }
 
-        private async void listBox4_SelectedIndexChanged(object sender, EventArgs e)
+        private void listBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
        
         }
 
-        private async void button10_Click(object sender, EventArgs e)
+        private void button10_Click(object sender, EventArgs e)
         {
-            if (NumberOfDevicesConnected().Result.Equals(1))
+            if (NumberOfDevicesConnectedEqualsOne())
                 RunCommand(Commands[listBox4.SelectedItem.ToString()]);
 
         }
 
-        private async void button11_Click(object sender, EventArgs e)
+        private void button11_Click(object sender, EventArgs e)
         {
-            if (NumberOfDevicesConnected().Result.Equals(1))
+            if (NumberOfDevicesConnectedEqualsOne())
             {
                 //https://stackoverflow.com/questions/27766712/using-adb-to-capture-the-screen
-                String DeviceDetails = AdbClient.Instance.GetDevices().First().Model + "_Android_" + await GetOutputFromCommand(Commands["AndroidVersion"]);
+                String DeviceDetails = AdbClient.Instance.GetDevices().First().Model + "_Android_" + GetOutputFromCommand(Commands["AndroidVersion"]);
                 string tempFilename = SaveFileDialogFilename("Save screenshot", "png", "PNG (*.png)|*.png|All files (*.*)|*.*", DeviceDetails.Trim() + "_");
                 RunExternalCMDCommand(Commands["ScreenCap"] + tempFilename);
             }
@@ -331,20 +347,19 @@ namespace WindowsFormsApp1
             SaveMyScan40Folder = checkBox1.Checked;
         }
 
-        private async void button12_Click(object sender, EventArgs e)
+        private void button12_Click(object sender, EventArgs e)
         {
-            if (NumberOfDevicesConnected().Result.Equals(1))
+            if (NumberOfDevicesConnectedEqualsOne())
             {
-                string currentApp = await CurrentPackageName();
+                string currentApp = CurrentPackageName();
                 RunCommand("am force-stop " + currentApp);
                 RunCommand(Commands["StartApp"] + currentApp + " 1");
             }
-
         }
 
-        private async void button13_Click(object sender, EventArgs e)
+        private void button13_Click(object sender, EventArgs e)
         {
-            if (NumberOfDevicesConnected().Result.Equals(1))
+            if (NumberOfDevicesConnectedEqualsOne())
             {
                 if (MessageBox.Show("Is the device connected via USB?", "Device connected?", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
@@ -355,7 +370,7 @@ namespace WindowsFormsApp1
                     System.Threading.Thread.Sleep(1000);
 
                     //IP route command
-                    string[] tempResult = GetOutputFromCommand(Commands["Ip"]).Result.Split(" ");
+                    string[] tempResult = GetOutputFromCommand(Commands["Ip"]).Split(" ");
                     string IpAddress = (tempResult.Length >= 11) ? tempResult[11].Trim() : tempResult.ToString();
                     MessageBox.Show(IpAddress);
 
@@ -412,13 +427,13 @@ namespace WindowsFormsApp1
 
         private void button14_Click(object sender, EventArgs e)
         {
-            if (NumberOfDevicesConnected().Result.Equals(1))
+            if (NumberOfDevicesConnectedEqualsOne())
                 RunExternalCMDCommand(textBox1.Text);
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-            if (NumberOfDevicesConnected().Result.Equals(1))
+            if (NumberOfDevicesConnectedEqualsOne())
             {
                 //Removes any previous video from the set path on the device
                 RunCommand("rm -f /sdcard/video.mp4");
@@ -426,7 +441,7 @@ namespace WindowsFormsApp1
                 var device = AdbClient.Instance.GetDevices().First();
                 var cancellationTokenSource = new CancellationTokenSource();
                 var receiver = new ConsoleOutputReceiver();
-                var task = AdbClient.Instance.ExecuteRemoteCommandAsync(Commands["RecordScreen"], device, receiver, cancellationTokenSource.Token, int.MaxValue);
+                AdbClient.Instance.ExecuteRemoteCommandAsync(Commands["RecordScreen"], device, receiver, cancellationTokenSource.Token, int.MaxValue);
 
                 // Your code is now executing. You can now:
                 // - Read the output using the receiver
