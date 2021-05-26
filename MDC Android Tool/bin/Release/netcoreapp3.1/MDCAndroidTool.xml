@@ -39,6 +39,7 @@
 <Command name="Disconnect">adb disconnect</Command>
 <Command name="Connect">adb connect </Command>
 <Command name="NrOfDevices">devices | find /c /v ""</Command>
+<Command name="RecordScreen">screenrecord /sdcard/video.mp4</Command>
 </Commands>
 
 <EOTBarcodes>

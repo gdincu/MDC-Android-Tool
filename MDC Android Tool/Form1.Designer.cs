@@ -55,6 +55,7 @@ namespace WindowsFormsApp1
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.button3 = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.button15 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
@@ -303,6 +304,7 @@ namespace WindowsFormsApp1
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.button15);
             this.tabPage4.Controls.Add(this.button13);
             this.tabPage4.Controls.Add(this.button11);
             this.tabPage4.Controls.Add(this.button9);
@@ -314,6 +316,16 @@ namespace WindowsFormsApp1
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Device";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // button15
+            // 
+            this.button15.Location = new System.Drawing.Point(135, 77);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(100, 50);
+            this.button15.TabIndex = 4;
+            this.button15.Text = "Record";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // button13
             // 
@@ -487,6 +499,7 @@ namespace WindowsFormsApp1
         private GroupBox groupBox3;
         private Button button14;
         private TextBox textBox1;
+        private Button button15;
     }
 }
 

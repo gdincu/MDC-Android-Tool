@@ -15,20 +15,18 @@ namespace WindowsFormsApp1
     public partial class Form1 : Form
     {
 
+        //Used to store values from the XML settings file
         IDictionary<string, string> Items = new Dictionary<string, string>();
         IDictionary<string, string> Commands = new Dictionary<string, string>();
         IDictionary<string, string> EOTBarcodes = new Dictionary<string, string>();
         IDictionary<string, string> URIs = new Dictionary<string, string>();
         IDictionary<string, string> HandheldDevices = new Dictionary<string, string>();
-        
         //Path to the settings file
         static String Settings = Path.Combine(Environment.CurrentDirectory, "MDCAndroidTool.xml");
+        //Extracts the ADB path
         string ADBPath = XElement.Load(Settings).Element("ADBPath").Value;
-
-        //Check used to see whether the handheld filelogs are to be saved
+        //Used to see whether the handheld filelogs are to be saved
         bool SaveMyScan40Folder = false;
-
-        
 
         public Form1()
         {
@@ -59,9 +57,6 @@ namespace WindowsFormsApp1
 
                 nrOfDevices = NumberOfDevicesConnected().Result;
             }
-
-            ////Workaround - to be investigated
-            //RunCommand("");
 
             ReadValues(Items, "Items");
             ReadValues(EOTBarcodes, "EOTBarcodes");
@@ -126,7 +121,7 @@ namespace WindowsFormsApp1
         }
 
         //Downloads an entire folder
-        void DownloadFolder(string devicePath, string localPath)
+        void DownloadFile(string devicePath, string localPath)
         {
             var device = AdbClient.Instance.GetDevices().First();
 
@@ -410,6 +405,47 @@ namespace WindowsFormsApp1
         private void button14_Click(object sender, EventArgs e)
         {
             RunExternalCMDCommand(textBox1.Text);
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            //Removes any previous video from the set path on the device
+            RunCommand("rm -f /sdcard/video.mp4");
+
+            var device = AdbClient.Instance.GetDevices().First();
+            var cancellationTokenSource = new CancellationTokenSource();
+            var receiver = new ConsoleOutputReceiver();
+            var task = AdbClient.Instance.ExecuteRemoteCommandAsync(Commands["RecordScreen"], device, receiver, cancellationTokenSource.Token, int.MaxValue);
+
+            // Your code is now executing. You can now:
+            // - Read the output using the receiver
+            // - Cancel the task like shown below:
+
+            if (MessageBox.Show("Click to stop recording!", "Recording...", MessageBoxButtons.OK) == DialogResult.OK) {
+                //Stops recording
+                cancellationTokenSource.Cancel();
+                //Pulls the video from the device
+                //RunExternalCMDCommand("adb pull/sdcard/video.mp4");
+
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog
+                {
+                    InitialDirectory = @Environment.CurrentDirectory,
+                    Title = "Save recording",
+                    //saveFileDialog1.CheckFileExists = true;
+                    //saveFileDialog1.CheckPathExists = true;
+                    DefaultExt = "mp4",
+                    Filter = "Logcat (*.mp4)|*.mp4|All files (*.*)|*.*",
+                    FilterIndex = 1,
+                    RestoreDirectory = true,
+                    FileName = "video"
+                };
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                    DownloadFile("/sdcard/video.mp4", saveFileDialog1.FileName);
+
+                //Removes the video on the device
+                RunCommand("rm -f /sdcard/video.mp4");
+            }
+
         }
     }
 }
