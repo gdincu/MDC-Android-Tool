@@ -69,6 +69,7 @@ namespace WindowsFormsApp1
             Commands.ToList().ForEach(x => this.listBox4.Items.Add(x.Key));
         }
 
+        //Used to read data from the Settings xml file
         private void ReadValues (IDictionary<string, string> Dictionary, string TagName)
         {
 
@@ -79,12 +80,14 @@ namespace WindowsFormsApp1
 
         }
 
+        //Used to return the scan item command
         private async Task<String> ReturnScanItemCommand(String ItemBarcode)
         {
+            //Checks whether there is only one device connected and if that is the case returns the scan item command
             return NumberOfDevicesConnected().Result.Equals(1) ? Commands["ScanItem1"] + ItemBarcode + Commands["ScanItem2"] : "";
         }
 
-        //Used to run cmd commands
+        //Used to run cmd commands (using the AdbClient)
         private async void RunCommand(String command)
         {
             if(NumberOfDevicesConnected().Result.Equals(1)) { 
@@ -93,7 +96,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        //Used to run cmd commands and retrieve output
+        //Used to run cmd commands and retrieve output (using the AdbClient)
         private async Task<String> GetOutputFromCommand(String command)
         {
             var device = AdbClient.Instance.GetDevices().First();
@@ -120,7 +123,7 @@ namespace WindowsFormsApp1
             return NumberOfDevicesConnected().Result.Equals(1) ? resultTemp.Substring(0, resultTemp.IndexOf('\r')).Split(" ")[3].Substring(2) : "";
         }
 
-        //Downloads an entire folder
+        //Downloads a file from the device (using the AdbClient)
         void DownloadFile(string devicePath, string localPath)
         {
             var device = AdbClient.Instance.GetDevices().First();
@@ -132,6 +135,25 @@ namespace WindowsFormsApp1
             }
         }
 
+        //Returns the selected filename
+        private string SaveFileDialogFilename(string Title, string DefaultExt,string Filter,string FileName) {
+
+            //https://www.c-sharpcorner.com/UploadFile/mahesh/savefiledialog-in-C-Sharp/
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog
+            {
+                InitialDirectory = @Environment.CurrentDirectory,
+                Title = Title,
+                DefaultExt = DefaultExt,
+                Filter = Filter,
+                FilterIndex = 1,
+                RestoreDirectory = true,
+                FileName = FileName
+            };
+
+            return saveFileDialog1.ShowDialog() == DialogResult.OK ? saveFileDialog1.FileName : "";
+        }
+
+        //Runs an external command without using AdbClient (eg. adb disconnect while all adb shell ... commands would use the RunCommand method)
         private void RunExternalCMDCommand(String command)
         {
             //https://stackoverflow.com/questions/19257041/run-cmd-command-without-displaying-it
@@ -176,45 +198,33 @@ namespace WindowsFormsApp1
 
         private async void button5_Click(object sender, EventArgs e)
         {
-            String DeviceDetails = AdbClient.Instance.GetDevices().First().Model + "_Android_" + await GetOutputFromCommand(Commands["AndroidVersion"]);
-            DeviceDetails = DeviceDetails.Trim();
-
-            //https://www.c-sharpcorner.com/UploadFile/mahesh/savefiledialog-in-C-Sharp/
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog
+            if (NumberOfDevicesConnected().Result.Equals(1))
             {
-                InitialDirectory = @Environment.CurrentDirectory,
-                Title = "Save logcat",
-                //saveFileDialog1.CheckFileExists = true;
-                //saveFileDialog1.CheckPathExists = true;
-                DefaultExt = "log",
-                Filter = "Logcat (*.log)|*.log|All files (*.*)|*.*",
-                FilterIndex = 1,
-                RestoreDirectory = true,
-                FileName = DeviceDetails + "_"
-            };
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                await File.WriteAllTextAsync(saveFileDialog1.FileName, await GetOutputFromCommand("logcat -d"));
-           
-            //System.Diagnostics.Process.Start("CMD.exe", @$"/C adb logcat -d > ""{saveFileDialog1.FileName}"" ");
+                String DeviceDetails = AdbClient.Instance.GetDevices().First().Model + "_Android_" + await GetOutputFromCommand(Commands["AndroidVersion"]);
+                DeviceDetails = DeviceDetails.Trim();
 
-            /*
-             * Checks whether the device details include any of the handheld names recorded in the MDCAndroidTool.xml file
-             * Also checks whether the user ticked the SaveMyScan40Folder checkbox
-             * Downloads the entire /sdcard/mdc/myscan40 folder to the specified path and renames it using the device details
-             */
-            if (HandheldDevices.Any(y => DeviceDetails.Contains(y.Key)) && SaveMyScan40Folder) {
-                //Builds a directory path based on the dialog box selection & the device details
-                string tempDirectoryPath = Path.Combine(Path.GetDirectoryName(saveFileDialog1.FileName), DeviceDetails);
-                //Checks whether the folder already exists and creates it if needed
-                System.IO.Directory.CreateDirectory(tempDirectoryPath);
-                //Saves the entire myscan40 folder to the above folder
-                RunExternalCMDCommand(Commands["PullFolder"] + tempDirectoryPath);
+                string tempFilename = SaveFileDialogFilename("Save logcat", "log", "Logcat (*.log)|*.log|All files (*.*)|*.*", DeviceDetails + "_");
+                await File.WriteAllTextAsync(tempFilename, await GetOutputFromCommand("logcat -d"));
+                //System.Diagnostics.Process.Start("CMD.exe", @$"/C adb logcat -d > ""{saveFileDialog1.FileName}"" ");
+
+                /*
+                 * Checks whether the device details include any of the handheld names recorded in the MDCAndroidTool.xml file
+                 * Also checks whether the user ticked the SaveMyScan40Folder checkbox
+                 * Downloads the entire /sdcard/mdc/myscan40 folder to the specified path and renames it using the device details
+                 */
+                if (HandheldDevices.Any(y => DeviceDetails.Contains(y.Key)) && SaveMyScan40Folder)
+                {
+                    //Builds a directory path based on the dialog box selection & the device details
+                    string tempDirectoryPath = Path.Combine(Path.GetDirectoryName(tempFilename), DeviceDetails);
+                    //Checks whether the folder already exists and creates it if needed
+                    System.IO.Directory.CreateDirectory(tempDirectoryPath);
+                    //Saves the entire myscan40 folder to the above folder
+                    RunExternalCMDCommand(Commands["PullFolder"] + tempDirectoryPath);
 
 
-                //To be discussed
-                //Saves the entire myscan40 folder to the above folder - to be updated - only saves one file
-                //DownloadFolder("/sdcard/mdc/myscan40/filelog.log", tempDirectoryPath + @"\filelog.log");
-
+                    //To be discussed
+                    //Would need to only include filelog files
+                }
             }
 
         }
@@ -263,21 +273,23 @@ namespace WindowsFormsApp1
 
         private async void button7_Click(object sender, EventArgs e)
         {
-            String _intent = Commands["Intent1"]
+            if (NumberOfDevicesConnected().Result.Equals(1)) { 
+
+                String _intent = Commands["Intent1"]
                 + textBox2.Text
                 + Commands["Intent2"]
                 + URIs[listBox3.SelectedItem.ToString()]
                 + Commands["Intent3"]
                 + textBox3.Text+ "'";
-
-            if (NumberOfDevicesConnected().Result.Equals(1))
+            
                 RunCommand(_intent);
+            }
         }
 
         private async void button8_Click(object sender, EventArgs e)
         {
-            
-            RunCommand("am force-stop " + await CurrentPackageName());
+            if (NumberOfDevicesConnected().Result.Equals(1))
+                RunCommand("am force-stop " + await CurrentPackageName());
 
         }
 
@@ -298,31 +310,20 @@ namespace WindowsFormsApp1
 
         private async void button10_Click(object sender, EventArgs e)
         {
-
-             RunCommand(Commands[listBox4.SelectedItem.ToString()]);
+            if (NumberOfDevicesConnected().Result.Equals(1))
+                RunCommand(Commands[listBox4.SelectedItem.ToString()]);
 
         }
 
         private async void button11_Click(object sender, EventArgs e)
         {
-            String DeviceDetails = AdbClient.Instance.GetDevices().First().Model + "_Android_" + await GetOutputFromCommand(Commands["AndroidVersion"]);
-
-            //https://www.c-sharpcorner.com/UploadFile/mahesh/savefiledialog-in-C-Sharp/
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog
+            if (NumberOfDevicesConnected().Result.Equals(1))
             {
-                InitialDirectory = @Environment.CurrentDirectory,
-                Title = "Save screenshot",
-                //saveFileDialog1.CheckFileExists = true;
-                //saveFileDialog1.CheckPathExists = true;
-                DefaultExt = "png",
-                Filter = "PNG (*.png)|*.png|All files (*.*)|*.*",
-                FilterIndex = 1,
-                RestoreDirectory = true,
-                FileName = DeviceDetails.Trim() + "_"
-            };
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 //https://stackoverflow.com/questions/27766712/using-adb-to-capture-the-screen
-                RunExternalCMDCommand(Commands["ScreenCap"] + saveFileDialog1.FileName);
+                String DeviceDetails = AdbClient.Instance.GetDevices().First().Model + "_Android_" + await GetOutputFromCommand(Commands["AndroidVersion"]);
+                string tempFilename = SaveFileDialogFilename("Save screenshot", "png", "PNG (*.png)|*.png|All files (*.*)|*.*", DeviceDetails.Trim() + "_");
+                RunExternalCMDCommand(Commands["ScreenCap"] + tempFilename);
+            }
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -332,39 +333,44 @@ namespace WindowsFormsApp1
 
         private async void button12_Click(object sender, EventArgs e)
         {
-
-            string currentApp = await CurrentPackageName();
-            RunCommand("am force-stop " + currentApp);
-            RunCommand(Commands["StartApp"] + currentApp + " 1");
+            if (NumberOfDevicesConnected().Result.Equals(1))
+            {
+                string currentApp = await CurrentPackageName();
+                RunCommand("am force-stop " + currentApp);
+                RunCommand(Commands["StartApp"] + currentApp + " 1");
+            }
 
         }
 
         private async void button13_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Is the device connected via USB?", "Device connected?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (NumberOfDevicesConnected().Result.Equals(1))
             {
-                //Tcpip 5555 command
-                RunExternalCMDCommand(Commands["Tcpip"]);
-
-                //Wait 1 second -- needs to be here as otherwise the StandardOutput.ReadToEnd() functionality does not seem to work
-                System.Threading.Thread.Sleep(1000);
-
-                //IP route command
-                string[] tempResult = GetOutputFromCommand(Commands["Ip"]).Result.Split(" ");
-                string IpAddress = (tempResult.Length >= 11) ? tempResult[11].Trim() : tempResult.ToString();
-                MessageBox.Show(IpAddress);
-
-                if (MessageBox.Show("Please disconnect the device from the USB port and tap OK when ready!", "Disconnect the device!", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                if (MessageBox.Show("Is the device connected via USB?", "Device connected?", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    //Disconnects all devices
-                    RunExternalCMDCommand(Commands["Disconnect"]);
+                    //Tcpip 5555 command
+                    RunExternalCMDCommand(Commands["Tcpip"]);
 
-                    //Wait 1 second 
+                    //Wait 1 second -- needs to be here as otherwise the StandardOutput.ReadToEnd() functionality does not seem to work
                     System.Threading.Thread.Sleep(1000);
 
-                    //Connects over IP to the selected device
-                    RunExternalCMDCommand(Commands["Connect"] + IpAddress);
-                    MessageBox.Show("Connected to " + IpAddress);
+                    //IP route command
+                    string[] tempResult = GetOutputFromCommand(Commands["Ip"]).Result.Split(" ");
+                    string IpAddress = (tempResult.Length >= 11) ? tempResult[11].Trim() : tempResult.ToString();
+                    MessageBox.Show(IpAddress);
+
+                    if (MessageBox.Show("Please disconnect the device from the USB port and tap OK when ready!", "Disconnect the device!", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    {
+                        //Disconnects all devices
+                        RunExternalCMDCommand(Commands["Disconnect"]);
+
+                        //Wait 1 second 
+                        System.Threading.Thread.Sleep(1000);
+
+                        //Connects over IP to the selected device
+                        RunExternalCMDCommand(Commands["Connect"] + IpAddress);
+                        MessageBox.Show("Connected to " + IpAddress);
+                    }
                 }
             }
         }
@@ -376,20 +382,22 @@ namespace WindowsFormsApp1
 
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-       (e.KeyChar != '.'))
-            {
+            if (
+                !char.IsControl(e.KeyChar) && 
+                !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.')
+                )
                 e.Handled = true;
-            }
         }
 
         private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                   (e.KeyChar != '.'))
-            {
+            if (
+                !char.IsControl(e.KeyChar) && 
+                !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.')
+                )
                 e.Handled = true;
-            }
         }
 
         private void groupBox3_Enter(object sender, EventArgs e)
@@ -404,46 +412,36 @@ namespace WindowsFormsApp1
 
         private void button14_Click(object sender, EventArgs e)
         {
-            RunExternalCMDCommand(textBox1.Text);
+            if (NumberOfDevicesConnected().Result.Equals(1))
+                RunExternalCMDCommand(textBox1.Text);
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-            //Removes any previous video from the set path on the device
-            RunCommand("rm -f /sdcard/video.mp4");
-
-            var device = AdbClient.Instance.GetDevices().First();
-            var cancellationTokenSource = new CancellationTokenSource();
-            var receiver = new ConsoleOutputReceiver();
-            var task = AdbClient.Instance.ExecuteRemoteCommandAsync(Commands["RecordScreen"], device, receiver, cancellationTokenSource.Token, int.MaxValue);
-
-            // Your code is now executing. You can now:
-            // - Read the output using the receiver
-            // - Cancel the task like shown below:
-
-            if (MessageBox.Show("Click to stop recording!", "Recording...", MessageBoxButtons.OK) == DialogResult.OK) {
-                //Stops recording
-                cancellationTokenSource.Cancel();
-                //Pulls the video from the device
-                //RunExternalCMDCommand("adb pull/sdcard/video.mp4");
-
-                SaveFileDialog saveFileDialog1 = new SaveFileDialog
-                {
-                    InitialDirectory = @Environment.CurrentDirectory,
-                    Title = "Save recording",
-                    //saveFileDialog1.CheckFileExists = true;
-                    //saveFileDialog1.CheckPathExists = true;
-                    DefaultExt = "mp4",
-                    Filter = "Logcat (*.mp4)|*.mp4|All files (*.*)|*.*",
-                    FilterIndex = 1,
-                    RestoreDirectory = true,
-                    FileName = "video"
-                };
-                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                    DownloadFile("/sdcard/video.mp4", saveFileDialog1.FileName);
-
-                //Removes the video on the device
+            if (NumberOfDevicesConnected().Result.Equals(1))
+            {
+                //Removes any previous video from the set path on the device
                 RunCommand("rm -f /sdcard/video.mp4");
+
+                var device = AdbClient.Instance.GetDevices().First();
+                var cancellationTokenSource = new CancellationTokenSource();
+                var receiver = new ConsoleOutputReceiver();
+                var task = AdbClient.Instance.ExecuteRemoteCommandAsync(Commands["RecordScreen"], device, receiver, cancellationTokenSource.Token, int.MaxValue);
+
+                // Your code is now executing. You can now:
+                // - Read the output using the receiver
+                // - Cancel the task like shown below:
+
+                if (MessageBox.Show("Click to stop recording!", "Recording...", MessageBoxButtons.OK) == DialogResult.OK)
+                {
+                    //Stops recording
+                    cancellationTokenSource.Cancel();
+                    //Pulls the video from the device
+                    string tempFilename = SaveFileDialogFilename("Save recording", "mp4", "Video (*.mp4)|*.mp4|All files (*.*)|*.*", "video");
+                    DownloadFile("/sdcard/video.mp4", tempFilename);
+                    //Removes the video on the device
+                    RunCommand("rm -f /sdcard/video.mp4");
+                }
             }
 
         }
