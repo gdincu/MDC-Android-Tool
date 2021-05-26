@@ -22,8 +22,9 @@ namespace WindowsFormsApp1
         IDictionary<string, string> HandheldDevices = new Dictionary<string, string>();
         
         //Path to the settings file
-        String Settings = Path.Combine(Environment.CurrentDirectory, "MDCAndroidTool.xml");
-        
+        static String Settings = Path.Combine(Environment.CurrentDirectory, "MDCAndroidTool.xml");
+        string ADBPath = XElement.Load(Settings).Element("ADBPath").Value;
+
         //Check used to see whether the handheld filelogs are to be saved
         bool SaveMyScan40Folder = false;
 
@@ -41,8 +42,7 @@ namespace WindowsFormsApp1
 
             //Starts the AdbServer
             AdbServer server = new AdbServer();
-            var result = server.StartServer(@"C:\Users\i.g.dincu\Downloads\platform-tools_r30.0.4-windows\platform-tools\adb.exe", restartServerIfNewer: false);
-            //var result = server.StartServer(@"E:\platform-tools\adb.exe", restartServerIfNewer: false);
+            var result = server.StartServer(ADBPath, restartServerIfNewer: false);
 
             // CheckHowManyDevicesAreCurrentlyConnected            
             int nrOfDevices = NumberOfDevicesConnected().Result;
