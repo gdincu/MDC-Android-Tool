@@ -189,20 +189,20 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             if (NumberOfDevicesConnectedEqualsOne())
                 RunCommand(ReturnScanItemCommand(Items[listBox1.SelectedItem.ToString()]));
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void Button3_Click(object sender, EventArgs e)
         {
             if (NumberOfDevicesConnectedEqualsOne())
                 RunCommand(Commands["Undocked"]);
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void Button4_Click(object sender, EventArgs e)
         {
             if (NumberOfDevicesConnectedEqualsOne())
             { 
@@ -211,7 +211,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        private async void button5_Click(object sender, EventArgs e)
+        private async void Button5_Click(object sender, EventArgs e)
         {
             if (NumberOfDevicesConnectedEqualsOne())
             {
@@ -244,49 +244,49 @@ namespace WindowsFormsApp1
 
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void GroupBox1_Enter(object sender, EventArgs e)
         {
             
         }
 
-        private void tabPage1_Click(object sender, EventArgs e)
+        private void TabPage1_Click(object sender, EventArgs e)
         {
             
         }
 
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void Button6_Click(object sender, EventArgs e)
         {
             if (NumberOfDevicesConnectedEqualsOne())
                 RunCommand(Commands["Reboot"]);
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             if (NumberOfDevicesConnectedEqualsOne())
                 RunCommand(ReturnScanItemCommand(EOTBarcodes[listBox2.SelectedItem.ToString()]));
         }
 
-        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void groupBox1_Enter_1(object sender, EventArgs e)
+        private void GroupBox1_Enter_1(object sender, EventArgs e)
         {
 
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void Button7_Click(object sender, EventArgs e)
         {
             if (NumberOfDevicesConnectedEqualsOne())
             { 
@@ -301,14 +301,14 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        private void Button8_Click(object sender, EventArgs e)
         {
             if (NumberOfDevicesConnectedEqualsOne())
                 RunCommand("am force-stop " + CurrentPackageName());
 
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void Button9_Click(object sender, EventArgs e)
         {
             if (NumberOfDevicesConnectedEqualsOne())
             { 
@@ -319,19 +319,19 @@ namespace WindowsFormsApp1
 
         }
 
-        private void listBox4_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
        
         }
 
-        private void button10_Click(object sender, EventArgs e)
+        private void Button10_Click(object sender, EventArgs e)
         {
             if (NumberOfDevicesConnectedEqualsOne())
                 RunCommand(Commands[listBox4.SelectedItem.ToString()]);
 
         }
 
-        private void button11_Click(object sender, EventArgs e)
+        private void Button11_Click(object sender, EventArgs e)
         {
             if (NumberOfDevicesConnectedEqualsOne())
             {
@@ -342,12 +342,12 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
             SaveMyScan40Folder = checkBox1.Checked;
         }
 
-        private void button12_Click(object sender, EventArgs e)
+        private void Button12_Click(object sender, EventArgs e)
         {
             if (NumberOfDevicesConnectedEqualsOne())
             {
@@ -357,7 +357,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void button13_Click(object sender, EventArgs e)
+        private void Button13_Click(object sender, EventArgs e)
         {
             if (NumberOfDevicesConnectedEqualsOne())
             {
@@ -390,22 +390,12 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        private void NumericUpDown1_ValueChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (
-                !char.IsControl(e.KeyChar) && 
-                !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.')
-                )
-                e.Handled = true;
-        }
-
-        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (
                 !char.IsControl(e.KeyChar) && 
@@ -415,23 +405,33 @@ namespace WindowsFormsApp1
                 e.Handled = true;
         }
 
-        private void groupBox3_Enter(object sender, EventArgs e)
+        private void TextBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (
+                !char.IsControl(e.KeyChar) && 
+                !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.')
+                )
+                e.Handled = true;
+        }
+
+        private void GroupBox3_Enter(object sender, EventArgs e)
         {
 
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void TextBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void button14_Click(object sender, EventArgs e)
+        private void Button14_Click(object sender, EventArgs e)
         {
             if (NumberOfDevicesConnectedEqualsOne())
                 RunExternalCMDCommand(textBox1.Text);
         }
 
-        private void button15_Click(object sender, EventArgs e)
+        private void Button15_Click(object sender, EventArgs e)
         {
             if (NumberOfDevicesConnectedEqualsOne())
             {

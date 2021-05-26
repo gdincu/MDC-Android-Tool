@@ -87,7 +87,7 @@ namespace WindowsFormsApp1
             this.button1.TabIndex = 0;
             this.button1.Text = "Add Item";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // tabControl1
             // 
@@ -105,7 +105,7 @@ namespace WindowsFormsApp1
             this.tabControl1.Size = new System.Drawing.Size(799, 388);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControl1.TabIndex = 2;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.TabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -118,7 +118,7 @@ namespace WindowsFormsApp1
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Item Scan";
             this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            this.tabPage1.Click += new System.EventHandler(this.TabPage1_Click);
             // 
             // listBox1
             // 
@@ -128,7 +128,7 @@ namespace WindowsFormsApp1
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(158, 319);
             this.listBox1.TabIndex = 1;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.ListBox1_SelectedIndexChanged);
             // 
             // tabPage2
             // 
@@ -152,7 +152,7 @@ namespace WindowsFormsApp1
             this.checkBox1.TabIndex = 2;
             this.checkBox1.Text = "Save myscan40 folder as well (Handheld only)";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
             // 
             // button5
             // 
@@ -162,7 +162,7 @@ namespace WindowsFormsApp1
             this.button5.TabIndex = 1;
             this.button5.Text = "Save logcat";
             this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.button5.Click += new System.EventHandler(this.Button5_Click);
             // 
             // button4
             // 
@@ -172,7 +172,7 @@ namespace WindowsFormsApp1
             this.button4.TabIndex = 0;
             this.button4.Text = "Clear logcat";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.Click += new System.EventHandler(this.Button4_Click);
             // 
             // tabPage3
             // 
@@ -198,7 +198,7 @@ namespace WindowsFormsApp1
             this.button12.TabIndex = 6;
             this.button12.Text = "Restart App";
             this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
+            this.button12.Click += new System.EventHandler(this.Button12_Click);
             // 
             // button8
             // 
@@ -208,7 +208,7 @@ namespace WindowsFormsApp1
             this.button8.TabIndex = 5;
             this.button8.Text = "Close App";
             this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.button8.Click += new System.EventHandler(this.Button8_Click);
             // 
             // groupBox2
             // 
@@ -231,7 +231,7 @@ namespace WindowsFormsApp1
             this.button7.TabIndex = 6;
             this.button7.Text = "Send Intent";
             this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.button7.Click += new System.EventHandler(this.Button7_Click);
             // 
             // textBox3
             // 
@@ -240,7 +240,7 @@ namespace WindowsFormsApp1
             this.textBox3.PlaceholderText = "terminalid";
             this.textBox3.Size = new System.Drawing.Size(100, 23);
             this.textBox3.TabIndex = 5;
-            this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox3_KeyPress);
+            this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox3_KeyPress);
             // 
             // textBox2
             // 
@@ -249,7 +249,7 @@ namespace WindowsFormsApp1
             this.textBox2.PlaceholderText = "storenumber";
             this.textBox2.Size = new System.Drawing.Size(100, 23);
             this.textBox2.TabIndex = 4;
-            this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
+            this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox2_KeyPress);
             // 
             // groupBox1
             // 
@@ -260,7 +260,7 @@ namespace WindowsFormsApp1
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "SelfScanEnginePlugin Address";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter_1);
+            this.groupBox1.Enter += new System.EventHandler(this.GroupBox1_Enter_1);
             // 
             // listBox3
             // 
@@ -279,7 +279,7 @@ namespace WindowsFormsApp1
             this.button2.TabIndex = 1;
             this.button2.Text = "EOT";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // listBox2
             // 
@@ -290,7 +290,7 @@ namespace WindowsFormsApp1
             this.listBox2.Size = new System.Drawing.Size(144, 259);
             this.listBox2.TabIndex = 2;
             this.listBox2.Tag = "";
-            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
+            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.ListBox2_SelectedIndexChanged);
             // 
             // button3
             // 
@@ -300,7 +300,7 @@ namespace WindowsFormsApp1
             this.button3.TabIndex = 0;
             this.button3.Text = "Device Taken";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // tabPage4
             // 
@@ -325,7 +325,7 @@ namespace WindowsFormsApp1
             this.button15.TabIndex = 4;
             this.button15.Text = "Record";
             this.button15.UseVisualStyleBackColor = true;
-            this.button15.Click += new System.EventHandler(this.button15_Click);
+            this.button15.Click += new System.EventHandler(this.Button15_Click);
             // 
             // button13
             // 
@@ -335,7 +335,7 @@ namespace WindowsFormsApp1
             this.button13.TabIndex = 3;
             this.button13.Text = "Connect over IP";
             this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
+            this.button13.Click += new System.EventHandler(this.Button13_Click);
             // 
             // button11
             // 
@@ -345,7 +345,7 @@ namespace WindowsFormsApp1
             this.button11.TabIndex = 2;
             this.button11.Text = "ScreenCap";
             this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
+            this.button11.Click += new System.EventHandler(this.Button11_Click);
             // 
             // button9
             // 
@@ -356,7 +356,7 @@ namespace WindowsFormsApp1
             this.button9.TabIndex = 1;
             this.button9.Text = "Device Details";
             this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
+            this.button9.Click += new System.EventHandler(this.Button9_Click);
             // 
             // button6
             // 
@@ -366,7 +366,7 @@ namespace WindowsFormsApp1
             this.button6.TabIndex = 0;
             this.button6.Text = "Reboot";
             this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.button6.Click += new System.EventHandler(this.Button6_Click);
             // 
             // tabPage5
             // 
@@ -391,7 +391,7 @@ namespace WindowsFormsApp1
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "ADB Command";
-            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
+            this.groupBox3.Enter += new System.EventHandler(this.GroupBox3_Enter);
             // 
             // button14
             // 
@@ -401,7 +401,7 @@ namespace WindowsFormsApp1
             this.button14.TabIndex = 1;
             this.button14.Text = "Send";
             this.button14.UseVisualStyleBackColor = true;
-            this.button14.Click += new System.EventHandler(this.button14_Click);
+            this.button14.Click += new System.EventHandler(this.Button14_Click);
             // 
             // textBox1
             // 
@@ -410,7 +410,7 @@ namespace WindowsFormsApp1
             this.textBox1.PlaceholderText = "Type your ADB command here (eg. adb disconnect)";
             this.textBox1.Size = new System.Drawing.Size(386, 23);
             this.textBox1.TabIndex = 0;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
             // 
             // button10
             // 
@@ -420,7 +420,7 @@ namespace WindowsFormsApp1
             this.button10.TabIndex = 1;
             this.button10.Text = "Run";
             this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.button10.Click += new System.EventHandler(this.Button10_Click);
             // 
             // listBox4
             // 
@@ -430,7 +430,7 @@ namespace WindowsFormsApp1
             this.listBox4.Name = "listBox4";
             this.listBox4.Size = new System.Drawing.Size(180, 274);
             this.listBox4.TabIndex = 0;
-            this.listBox4.SelectedIndexChanged += new System.EventHandler(this.listBox4_SelectedIndexChanged);
+            this.listBox4.SelectedIndexChanged += new System.EventHandler(this.ListBox4_SelectedIndexChanged);
             // 
             // Form1
             // 
