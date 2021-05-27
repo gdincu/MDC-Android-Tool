@@ -67,6 +67,8 @@ namespace WindowsFormsApp1
             this.button10 = new System.Windows.Forms.Button();
             this.listBox4 = new System.Windows.Forms.ListBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.button16 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -77,6 +79,7 @@ namespace WindowsFormsApp1
             this.tabPage5.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            this.tabPage6.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -96,6 +99,7 @@ namespace WindowsFormsApp1
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tabControl1.HotTrack = true;
@@ -432,6 +436,27 @@ namespace WindowsFormsApp1
             this.listBox4.TabIndex = 0;
             this.listBox4.SelectedIndexChanged += new System.EventHandler(this.ListBox4_SelectedIndexChanged);
             // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.button16);
+            this.tabPage6.Location = new System.Drawing.Point(4, 27);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(791, 357);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "Add/Remove Apps";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // button16
+            // 
+            this.button16.Location = new System.Drawing.Point(366, 59);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(100, 50);
+            this.button16.TabIndex = 0;
+            this.button16.Text = "Install APK";
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
+            // 
             // Form1
             // 
             this.AllowDrop = true;
@@ -460,6 +485,7 @@ namespace WindowsFormsApp1
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            this.tabPage6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -500,6 +526,8 @@ namespace WindowsFormsApp1
         private Button button14;
         private TextBox textBox1;
         private Button button15;
+        private TabPage tabPage6;
+        private Button button16;
     }
 }
 

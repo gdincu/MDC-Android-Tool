@@ -41,6 +41,7 @@
 <Command name="Connect">adb connect </Command>
 <Command name="NrOfDevices">devices | find /c /v ""</Command>
 <Command name="RecordScreen">screenrecord /sdcard/video.mp4</Command>
+<Command name="Install">adb install </Command>
 </Commands>
 
 <EOTBarcodes>
@@ -59,7 +60,10 @@
 <HandheldDevice name="MC18">MC18</HandheldDevice>
 </HandheldDevices>
 
-<ADBPath>C:\Users\i.g.dincu\Downloads\platform-tools_r30.0.4-windows\platform-tools\adb.exe</ADBPath>
+<ADBPath>E:\platform-tools\adb.exe</ADBPath>
+<!-- <ADBPath>C:\Users\i.g.dincu\Downloads\platform-tools_r30.0.4-windows\platform-tools\adb.exe</ADBPath> -->
+
+
 
 
 </root>

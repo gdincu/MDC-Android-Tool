@@ -460,5 +460,23 @@ namespace WindowsFormsApp1
             }
 
         }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            //https://stackoverflow.com/questions/6373645/c-sharp-winforms-how-to-set-main-function-stathreadattribute/6373674
+            var thread = new Thread(new ParameterizedThreadStart(param =>
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Title = "Open apk file";
+                ofd.Filter = "APK|*.apk";
+                ofd.InitialDirectory = @Environment.CurrentDirectory;
+                if (ofd.ShowDialog() == DialogResult.OK)
+                    RunExternalCMDCommand(Commands["Install"] + ofd.FileName);
+                MessageBox.Show("Apk installed successfully!", "Done", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+
+            }));
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+        }
     }
 }
