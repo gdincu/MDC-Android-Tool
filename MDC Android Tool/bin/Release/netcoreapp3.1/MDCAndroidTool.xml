@@ -24,6 +24,7 @@
 <Command name="APP_SWITCH">input keyevent KEYCODE_APP_SWITCH</Command>
 <Command name="SettingsMenu">am start -a android.settings.SETTINGS</Command>
 <Command name="WifiMenu">am start -a android.settings.WIRELESS_SETTINGS</Command>
+<Command name="VPN">am start -a android.net.vpn.SETTINGS</Command>
 <Command name="Back">input keyevent 4</Command>
 <Command name="HomeScreen">input keyevent 3</Command>
 <Command name="VolumeUp">input keyevent 24</Command>
