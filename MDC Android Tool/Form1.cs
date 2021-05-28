@@ -9,6 +9,7 @@ using System.Xml.Linq;
 using SharpAdbClient;
 using System.Net;
 using System.Threading;
+using SharpAdbClient.DeviceCommands;
 
 namespace WindowsFormsApp1
 {
@@ -165,8 +166,11 @@ namespace WindowsFormsApp1
         }
 
         //Runs an external command without using AdbClient (eg. adb disconnect while all adb shell ... commands would use the RunCommand method)
-        private void RunExternalCMDCommand(String command)
+        private int RunExternalCMDCommand(String command)
         {
+            //Assumes that something goes wrong - 0 = Success / 1 = Error
+            int result = 1;
+
             //https://stackoverflow.com/questions/19257041/run-cmd-command-without-displaying-it
             Process _myProcess = new Process
             {
@@ -186,7 +190,10 @@ namespace WindowsFormsApp1
             {
                 _myProcess.Start();
                 _myProcess.WaitForExit();
+                result = _myProcess.ExitCode;
             }
+
+            return result;
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -466,14 +473,28 @@ namespace WindowsFormsApp1
             //https://stackoverflow.com/questions/6373645/c-sharp-winforms-how-to-set-main-function-stathreadattribute/6373674
             var thread = new Thread(new ParameterizedThreadStart(param =>
             {
-                OpenFileDialog ofd = new OpenFileDialog();
-                ofd.Title = "Open apk file";
-                ofd.Filter = "APK|*.apk";
-                ofd.InitialDirectory = @Environment.CurrentDirectory;
-                if (ofd.ShowDialog() == DialogResult.OK)
-                    RunExternalCMDCommand(Commands["Install"] + ofd.FileName);
-                MessageBox.Show("Apk installed successfully!", "Done", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+                //Opens a file dialog from where the user can select an apk file
+                OpenFileDialog ofd = new OpenFileDialog
+                {
+                    Title = "Open apk file",
+                    Filter = "APK|*.apk",
+                    InitialDirectory = @Environment.CurrentDirectory
+                };
 
+                //When the user taps on the OK button
+                if (ofd.ShowDialog() == DialogResult.OK) { 
+                 //Tries to install the app
+                    int processExitCode = RunExternalCMDCommand(Commands["Install"] + "\"" + ofd.FileName + "\"");
+
+                    //Based on the System_Diagnostics_Process_ExitCode returned by the process a messagebox is displayed
+                    //https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.process.exitcode?redirectedfrom=MSDN&view=net-5.0#System_Diagnostics_Process_ExitCode
+                    if (processExitCode == 0)
+                        MessageBox.Show("Apk installed successfully!", "Done", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+                    else
+                        MessageBox.Show("Something went wrong! Please try again!", "Try again!", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+
+                }
+        
             }));
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
