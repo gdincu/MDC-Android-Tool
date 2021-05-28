@@ -63,6 +63,7 @@ namespace WindowsFormsApp1
             PopulateListBox(listBox2, EOTBarcodes);
             PopulateListBox(listBox3, URIs);
             PopulateListBox(listBox4, Commands);
+            PopulateListBox(listBox5, ReturnListOfInstalledApps());
         }
 
         //Used to read data from the Settings xml file
@@ -84,6 +85,16 @@ namespace WindowsFormsApp1
             foreach (KeyValuePair<string, string> x in dictionary)
                 listbox.Items.Add(x.Key);
         }   
+
+        //Returns a list of all currently installed apps
+        private Dictionary<string, string> ReturnListOfInstalledApps()
+        {            
+            var device = AdbClient.Instance.GetDevices().First();
+            PackageManager manager = new PackageManager(device);
+            return manager.Packages;
+        }
+
+            
 
         //Used to return the scan item command
         private string ReturnScanItemCommand(String ItemBarcode)
@@ -498,6 +509,31 @@ namespace WindowsFormsApp1
             }));
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
+        }
+
+        private void listBox5_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            var itemList = listBox5.Items.Cast<string>().ToList();
+
+            //Checks whether the list contains any items
+            if (itemList.Count > 0)
+            {
+                //Clears all items from the listbox
+                listBox5.Items.Clear();
+
+                //Filters the items and adds them back to the list
+                listBox5.Items.AddRange(itemList.Where(i => i.Contains(textBox4.Text)).ToArray());
+            }
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+                RunExternalCMDCommand(Commands["Uninstall"] + listBox5.SelectedItem);
         }
     }
 }

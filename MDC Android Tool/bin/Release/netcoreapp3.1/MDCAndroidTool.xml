@@ -42,6 +42,7 @@
 <Command name="NrOfDevices">devices | find /c /v ""</Command>
 <Command name="RecordScreen">screenrecord /sdcard/video.mp4</Command>
 <Command name="Install">adb install </Command>
+<Command name="Uninstall">adb uninstall </Command>
 </Commands>
 
 <EOTBarcodes>
