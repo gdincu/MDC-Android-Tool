@@ -25,6 +25,8 @@ namespace WindowsFormsApp1
         readonly string Settings = Path.Combine(Environment.CurrentDirectory, "MDCAndroidTool.xml");
         //Used to see whether the handheld filelogs are to be saved
         bool SaveMyScan40Folder;
+        //Used to store the list of currently installed apps
+        List<string> listOfCurrentlyInstalledApps;
 
         public Form1()
         {
@@ -64,6 +66,7 @@ namespace WindowsFormsApp1
             PopulateListBox(listBox3, URIs);
             PopulateListBox(listBox4, Commands);
             PopulateListBox(listBox5, ReturnListOfInstalledApps());
+            listOfCurrentlyInstalledApps = listBox5.Items.Cast<string>().ToList();
         }
 
         //Used to read data from the Settings xml file
@@ -518,22 +521,25 @@ namespace WindowsFormsApp1
 
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
-            var itemList = listBox5.Items.Cast<string>().ToList();
-
-            //Checks whether the list contains any items
-            if (itemList.Count > 0)
-            {
-                //Clears all items from the listbox
-                listBox5.Items.Clear();
-
-                //Filters the items and adds them back to the list
-                listBox5.Items.AddRange(itemList.Where(i => i.Contains(textBox4.Text)).ToArray());
-            }
+            
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
                 RunExternalCMDCommand(Commands["Uninstall"] + listBox5.SelectedItem);
+        }
+
+        private void textBox4_KeyUp(object sender, KeyEventArgs e)
+        {
+            //Clears all items from the listbox
+            listBox5.Items.Clear();
+
+            if (textBox4.Text.Length == 0)
+                //Adds all items back to the list
+                listBox5.Items.AddRange(listOfCurrentlyInstalledApps.ToArray());
+            else
+                //Filters the items and adds them back to the list
+                listBox5.Items.AddRange(listOfCurrentlyInstalledApps.Where(i => i.Contains(textBox4.Text)).ToArray());
         }
     }
 }

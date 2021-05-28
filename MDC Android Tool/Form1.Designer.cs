@@ -408,7 +408,7 @@ namespace WindowsFormsApp1
             this.textBox4.PlaceholderText = "Search bar";
             this.textBox4.Size = new System.Drawing.Size(261, 23);
             this.textBox4.TabIndex = 3;
-            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
+            this.textBox4.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox4_KeyUp);
             // 
             // button17
             // 
