@@ -66,7 +66,7 @@ namespace WindowsFormsApp1
             PopulateListBox(listBox3, URIs);
             PopulateListBox(listBox4, Commands);
             PopulateListBox(listBox5, ReturnListOfInstalledApps());
-            listOfCurrentlyInstalledApps = listBox5.Items.Cast<string>().ToList();
+            
         }
 
         //Used to read data from the Settings xml file
@@ -92,12 +92,10 @@ namespace WindowsFormsApp1
         //Returns a list of all currently installed apps
         private Dictionary<string, string> ReturnListOfInstalledApps()
         {            
-            var device = AdbClient.Instance.GetDevices().First();
+            DeviceData device = AdbClient.Instance.GetDevices().First();
             PackageManager manager = new PackageManager(device);
             return manager.Packages;
-        }
-
-            
+        }   
 
         //Used to return the scan item command
         private string ReturnScanItemCommand(String ItemBarcode)
@@ -519,27 +517,33 @@ namespace WindowsFormsApp1
 
         }
 
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         private void button17_Click(object sender, EventArgs e)
         {
-                RunExternalCMDCommand(Commands["Uninstall"] + listBox5.SelectedItem);
+            //Tries to uninstall the app
+            int processExitCode = RunExternalCMDCommand(Commands["Uninstall"] + listBox5.SelectedItem);
+
+            //Based on the System_Diagnostics_Process_ExitCode returned by the process a messagebox is displayed
+            if (processExitCode == 0)
+                MessageBox.Show("App uninstalled successfully!", "Done", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            else
+                MessageBox.Show(@"Something went wrong! Try uninstalling this manually via the 'Others' tab using the package name!", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
         }
 
         private void textBox4_KeyUp(object sender, KeyEventArgs e)
         {
+            //Reads the current list of values again
+            listOfCurrentlyInstalledApps = ReturnListOfInstalledApps().Values.ToList();
+
             //Clears all items from the listbox
             listBox5.Items.Clear();
 
             if (textBox4.Text.Length == 0)
                 //Adds all items back to the list
                 listBox5.Items.AddRange(listOfCurrentlyInstalledApps.ToArray());
+            
             else
                 //Filters the items and adds them back to the list
-                listBox5.Items.AddRange(listOfCurrentlyInstalledApps.Where(i => i.Contains(textBox4.Text)).ToArray());
+                listBox5.Items.AddRange(listOfCurrentlyInstalledApps.Where(i => i.ToLower().Contains(textBox4.Text.ToLower())).ToArray());
         }
     }
 }
