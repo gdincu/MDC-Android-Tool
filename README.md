@@ -6,4 +6,4 @@ Windows Forms tool created to help with sending <a href="https://gist.github.com
 
 Developed using .NET Core 3.1 - In case of issues running the app <a href="https://docs.microsoft.com/en-us/dotnet/core/install/windows?tabs=net50">this</a> Microsoft guide on supported releases might help.
 
-Various settings (including the path to the adb executable) and commands would need to be adjusted according to your needs via the MDCAndroidTool.xml file
+Various settings (including the path to the adb executable) and commands would need to be adjusted via the MDCAndroidTool.xml file for the app to run
