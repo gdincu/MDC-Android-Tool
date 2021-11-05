@@ -8,4 +8,11 @@ Developed using .NET Core 3.1 - In case of issues running the app <a href="https
 
 Various settings (including the path to the adb executable) and commands would need to be adjusted via the MDCAndroidTool.xml file for the app to run
 
-
+Some of the functionalities provided by this app include:
+- Running ADB commands
+- Rebooting the device
+- Screen capture (screenshots and recordings) that get saved locally
+- Connect to the device remotely
+- Install/ uninstall APKs
+- Close/ Restart a running app
+- Saving and clearing logcat output
