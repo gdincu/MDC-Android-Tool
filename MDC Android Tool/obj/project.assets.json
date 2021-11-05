@@ -4418,11 +4418,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj",
+      "projectUniqueName": "E:\\repos\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj",
       "projectName": "MDC Android Tool",
-      "projectPath": "E:\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj",
+      "projectPath": "E:\\repos\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj",
       "packagesPath": "C:\\Users\\Pavilion\\.nuget\\packages\\",
-      "outputPath": "E:\\MDC-Android-Tool\\MDC Android Tool\\obj\\",
+      "outputPath": "E:\\repos\\MDC-Android-Tool\\MDC Android Tool\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -4477,6 +4477,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[3.1.10, 3.1.10]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[3.1.20, 3.1.20]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[3.1.0, 3.1.0]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[3.1.0, 3.1.0]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
@@ -4485,7 +4503,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300-preview.21180.15\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-rc.2.21505.57\\RuntimeIdentifierGraph.json"
       }
     }
   }
