@@ -61,10 +61,6 @@
 <HandheldDevice name="MC18">MC18</HandheldDevice>
 </HandheldDevices>
 
-<ADBPath>E:\AndroidTool\platform-tools\adb.exe</ADBPath>
-<!-- <ADBPath>C:\Users\i.g.dincu\Downloads\platform-tools_r30.0.4-windows\platform-tools\adb.exe</ADBPath> -->
-
-
-
+<ADBPath>C:\platform-tools\adb.exe</ADBPath>
 
 </root>

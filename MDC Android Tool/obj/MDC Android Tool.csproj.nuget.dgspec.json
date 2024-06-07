@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\repos\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj": {}
+    "D:\\_Beveco\\DONE\\20240606\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj": {}
   },
   "projects": {
-    "E:\\repos\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj": {
+    "D:\\_Beveco\\DONE\\20240606\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\repos\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj",
+        "projectUniqueName": "D:\\_Beveco\\DONE\\20240606\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj",
         "projectName": "MDC Android Tool",
-        "projectPath": "E:\\repos\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj",
-        "packagesPath": "C:\\Users\\Pavilion\\.nuget\\packages\\",
-        "outputPath": "E:\\repos\\MDC-Android-Tool\\MDC Android Tool\\obj\\",
+        "projectPath": "D:\\_Beveco\\DONE\\20240606\\MDC-Android-Tool\\MDC Android Tool\\MDC Android Tool.csproj",
+        "packagesPath": "C:\\Users\\i.g.dincu\\.nuget\\packages\\",
+        "outputPath": "D:\\_Beveco\\DONE\\20240606\\MDC-Android-Tool\\MDC Android Tool\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Pavilion\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\i.g.dincu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -62,7 +62,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -73,7 +74,7 @@
             },
             {
               "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[3.1.20, 3.1.20]"
+              "version": "[3.1.32, 3.1.32]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
@@ -92,7 +93,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-rc.2.21505.57\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

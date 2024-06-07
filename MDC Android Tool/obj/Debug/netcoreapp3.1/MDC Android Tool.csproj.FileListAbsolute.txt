@@ -134,3 +134,57 @@ E:\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\win-x64\na
 E:\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
 E:\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 E:\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\MDC Android Tool.exe
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\MDC Android Tool.deps.json
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\MDC Android Tool.runtimeconfig.json
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\MDC Android Tool.runtimeconfig.dev.json
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\MDC Android Tool.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\MDC Android Tool.pdb
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Abstractions.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Core.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authorization.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authorization.Policy.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Hosting.Abstractions.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Abstractions.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Extensions.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Features.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.Abstractions.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.Core.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.ResponseCaching.Abstractions.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Routing.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Routing.Abstractions.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.WebUtilities.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Hosting.Abstractions.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.Extensions.ObjectPool.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Microsoft.Net.Http.Headers.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\SharpAdbClient.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.csproj.AssemblyReference.cache
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\WindowsFormsApp1.Form1.resources
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC_Android_Tool.Properties.Resources.resources
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.csproj.GenerateResource.cache
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.GeneratedMSBuildEditorConfig.editorconfig
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.AssemblyInfoInputs.cache
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.AssemblyInfo.cs
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.csproj.CoreCompileInputs.cache
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.csproj.CopyComplete
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.dll
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.pdb
+D:\_Beveco\DONE\20240606\MDC-Android-Tool\MDC Android Tool\obj\Debug\netcoreapp3.1\MDC Android Tool.genruntimeconfig.cache

@@ -61,16 +61,16 @@ namespace WindowsFormsApp1
             ReadValuesAsync(URIs, "URIs");
             ReadValuesAsync(HandheldDevices, "HandheldDevices");
 
-            PopulateListBox(listBox1, Items);             
+            PopulateListBox(listBox1, Items);
             PopulateListBox(listBox2, EOTBarcodes);
             PopulateListBox(listBox3, URIs);
             PopulateListBox(listBox4, Commands);
             PopulateListBox(listBox5, ReturnListOfInstalledApps());
-            
+
         }
 
         //Used to read data from the Settings xml file
-        private async void ReadValuesAsync (IDictionary<string, string> Dictionary, string TagName)
+        private async void ReadValuesAsync(IDictionary<string, string> Dictionary, string TagName)
         {
             await Task.Run(() =>
             {
@@ -87,15 +87,15 @@ namespace WindowsFormsApp1
         {
             foreach (KeyValuePair<string, string> x in dictionary)
                 listbox.Items.Add(x.Key);
-        }   
+        }
 
         //Returns a list of all currently installed apps
         private Dictionary<string, string> ReturnListOfInstalledApps()
-        {            
+        {
             DeviceData device = AdbClient.Instance.GetDevices().First();
             PackageManager manager = new PackageManager(device);
             return manager.Packages;
-        }   
+        }
 
         //Used to return the scan item command
         private string ReturnScanItemCommand(String ItemBarcode)
@@ -107,7 +107,8 @@ namespace WindowsFormsApp1
         //Used to run cmd commands (using the AdbClient)
         private void RunCommand(String command)
         {
-            if(NumberOfDevicesConnectedEqualsOne()) { 
+            if (NumberOfDevicesConnectedEqualsOne())
+            {
                 var device = AdbClient.Instance.GetDevices().First();
                 AdbClient.Instance.ExecuteRemoteCommand(command, device, null);
             }
@@ -118,7 +119,7 @@ namespace WindowsFormsApp1
         {
             var device = AdbClient.Instance.GetDevices().First();
             var receiver = new ConsoleOutputReceiver();
-            
+
             if (NumberOfDevicesConnectedEqualsOne())
                 AdbClient.Instance.ExecuteRemoteCommand(command, device, receiver);
 
@@ -132,7 +133,8 @@ namespace WindowsFormsApp1
         }
 
         //Returns true when the number of connected devices equals one
-        private bool NumberOfDevicesConnectedEqualsOne() {
+        private bool NumberOfDevicesConnectedEqualsOne()
+        {
             return ReturnNumberOfDevicesConnected().Equals(1);
         }
 
@@ -141,12 +143,22 @@ namespace WindowsFormsApp1
         {
             string resultTemp = "";
 
-            if (NumberOfDevicesConnectedEqualsOne()) { 
+            if (NumberOfDevicesConnectedEqualsOne())
+            {
                 resultTemp = GetOutputFromCommand("dumpsys activity recents");
-            resultTemp = resultTemp.Substring(resultTemp.IndexOf('#'));
+                resultTemp = resultTemp.Substring(resultTemp.IndexOf('#'));
             }
 
-            return ReturnNumberOfDevicesConnected().Equals(1) ? resultTemp.Substring(0, resultTemp.IndexOf('\r')).Split(" ")[3].Substring(2) : "";
+            resultTemp = resultTemp.Substring(0, resultTemp.IndexOf('\r'));
+
+            resultTemp = resultTemp.Split(" ")[4];
+
+            int startPos = resultTemp.IndexOf(':')+1;
+            int endPos = resultTemp.IndexOf('}') - startPos;
+           
+            resultTemp = resultTemp.Substring(startPos, endPos);
+
+            return resultTemp;
         }
 
         //Downloads a file from the device (using the AdbClient)
@@ -160,7 +172,8 @@ namespace WindowsFormsApp1
         }
 
         //Returns the selected filename
-        private string SaveFileDialogFilename(string Title, string DefaultExt,string Filter,string FileName) {
+        private string SaveFileDialogFilename(string Title, string DefaultExt, string Filter, string FileName)
+        {
 
             //https://www.c-sharpcorner.com/UploadFile/mahesh/savefiledialog-in-C-Sharp/
             SaveFileDialog saveFileDialog1 = new SaveFileDialog
@@ -224,7 +237,7 @@ namespace WindowsFormsApp1
         private void Button4_Click(object sender, EventArgs e)
         {
             if (NumberOfDevicesConnectedEqualsOne())
-            { 
+            {
                 RunCommand(Commands["ClearLogcat"]);
                 MessageBox.Show("Cleared!", "Clear logcat");
             }
@@ -265,17 +278,17 @@ namespace WindowsFormsApp1
 
         private void GroupBox1_Enter(object sender, EventArgs e)
         {
-            
+
         }
 
         private void TabPage1_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void Button6_Click(object sender, EventArgs e)
@@ -308,29 +321,30 @@ namespace WindowsFormsApp1
         private void Button7_Click(object sender, EventArgs e)
         {
             if (NumberOfDevicesConnectedEqualsOne())
-            { 
+            {
                 String _intent = Commands["Intent1"]
                 + textBox2.Text
                 + Commands["Intent2"]
                 + URIs[listBox3.SelectedItem.ToString()]
                 + Commands["Intent3"]
-                + textBox3.Text+ "'";
-            
+                + textBox3.Text + "'";
+
                 RunCommand(_intent);
             }
         }
 
         private void Button8_Click(object sender, EventArgs e)
         {
-            if (NumberOfDevicesConnectedEqualsOne())
-                RunCommand("am force-stop " + CurrentPackageName());
-
+            if (NumberOfDevicesConnectedEqualsOne()) { 
+                var currentApp = CurrentPackageName();
+                RunCommand("am force-stop " + currentApp);
+            }
         }
 
         private void Button9_Click(object sender, EventArgs e)
         {
             if (NumberOfDevicesConnectedEqualsOne())
-            { 
+            {
                 String DeviceDetails = AdbClient.Instance.GetDevices().First().Model + "_Android_" + GetOutputFromCommand(Commands["AndroidVersion"]);
                 MessageBox.Show(DeviceDetails, "Paste these details where needed!");
                 Clipboard.SetText(DeviceDetails);
@@ -340,7 +354,7 @@ namespace WindowsFormsApp1
 
         private void ListBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
-       
+
         }
 
         private void Button10_Click(object sender, EventArgs e)
@@ -417,7 +431,7 @@ namespace WindowsFormsApp1
         private void TextBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (
-                !char.IsControl(e.KeyChar) && 
+                !char.IsControl(e.KeyChar) &&
                 !char.IsDigit(e.KeyChar) &&
                 (e.KeyChar != '.')
                 )
@@ -427,7 +441,7 @@ namespace WindowsFormsApp1
         private void TextBox3_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (
-                !char.IsControl(e.KeyChar) && 
+                !char.IsControl(e.KeyChar) &&
                 !char.IsDigit(e.KeyChar) &&
                 (e.KeyChar != '.')
                 )
@@ -494,8 +508,9 @@ namespace WindowsFormsApp1
                 };
 
                 //When the user taps on the OK button
-                if (ofd.ShowDialog() == DialogResult.OK) { 
-                 //Tries to install the app
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    //Tries to install the app
                     int processExitCode = RunExternalCMDCommand(Commands["Install"] + "\"" + ofd.FileName + "\"");
 
                     //Based on the System_Diagnostics_Process_ExitCode returned by the process a messagebox is displayed
@@ -506,7 +521,7 @@ namespace WindowsFormsApp1
                         MessageBox.Show("Something went wrong! Please try again!", "Try again!", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
 
                 }
-        
+
             }));
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
@@ -532,7 +547,7 @@ namespace WindowsFormsApp1
         private void textBox4_KeyUp(object sender, KeyEventArgs e)
         {
             //Reads the current list of values again
-            listOfCurrentlyInstalledApps = ReturnListOfInstalledApps().Values.ToList();
+            listOfCurrentlyInstalledApps = ReturnListOfInstalledApps().Keys.ToList();
 
             //Clears all items from the listbox
             listBox5.Items.Clear();
@@ -540,10 +555,15 @@ namespace WindowsFormsApp1
             if (textBox4.Text.Length == 0)
                 //Adds all items back to the list
                 listBox5.Items.AddRange(listOfCurrentlyInstalledApps.ToArray());
-            
+
             else
                 //Filters the items and adds them back to the list
                 listBox5.Items.AddRange(listOfCurrentlyInstalledApps.Where(i => i.ToLower().Contains(textBox4.Text.ToLower())).ToArray());
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

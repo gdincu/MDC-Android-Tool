@@ -32,511 +32,511 @@ namespace WindowsFormsApp1
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.button1 = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.button12 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button7 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.listBox3 = new System.Windows.Forms.ListBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.button15 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.button17 = new System.Windows.Forms.Button();
-            this.listBox5 = new System.Windows.Forms.ListBox();
-            this.button16 = new System.Windows.Forms.Button();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button14 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button10 = new System.Windows.Forms.Button();
-            this.listBox4 = new System.Windows.Forms.ListBox();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.tabPage4.SuspendLayout();
-            this.tabPage6.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.tabPage5.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
-            this.SuspendLayout();
+            button1 = new Button();
+            tabControl1 = new TabControl();
+            tabPage1 = new TabPage();
+            listBox1 = new ListBox();
+            tabPage2 = new TabPage();
+            checkBox1 = new CheckBox();
+            button5 = new Button();
+            button4 = new Button();
+            tabPage3 = new TabPage();
+            button12 = new Button();
+            button8 = new Button();
+            groupBox2 = new GroupBox();
+            button7 = new Button();
+            textBox3 = new TextBox();
+            textBox2 = new TextBox();
+            groupBox1 = new GroupBox();
+            listBox3 = new ListBox();
+            button2 = new Button();
+            listBox2 = new ListBox();
+            button3 = new Button();
+            tabPage4 = new TabPage();
+            button15 = new Button();
+            button13 = new Button();
+            button11 = new Button();
+            button9 = new Button();
+            button6 = new Button();
+            tabPage6 = new TabPage();
+            groupBox4 = new GroupBox();
+            textBox4 = new TextBox();
+            button17 = new Button();
+            listBox5 = new ListBox();
+            button16 = new Button();
+            tabPage5 = new TabPage();
+            groupBox3 = new GroupBox();
+            button14 = new Button();
+            textBox1 = new TextBox();
+            button10 = new Button();
+            listBox4 = new ListBox();
+            bindingSource1 = new BindingSource(components);
+            tabControl1.SuspendLayout();
+            tabPage1.SuspendLayout();
+            tabPage2.SuspendLayout();
+            tabPage3.SuspendLayout();
+            groupBox2.SuspendLayout();
+            groupBox1.SuspendLayout();
+            tabPage4.SuspendLayout();
+            tabPage6.SuspendLayout();
+            groupBox4.SuspendLayout();
+            tabPage5.SuspendLayout();
+            groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
+            SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(177, 15);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 50);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Add Item";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            button1.Location = new System.Drawing.Point(177, 15);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(100, 50);
+            button1.TabIndex = 0;
+            button1.Text = "Add Item";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += Button1_Click;
             // 
             // tabControl1
             // 
-            this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage6);
-            this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tabControl1.HotTrack = true;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 3;
-            this.tabControl1.Size = new System.Drawing.Size(799, 388);
-            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
-            this.tabControl1.TabIndex = 2;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.TabControl1_SelectedIndexChanged);
+            tabControl1.Appearance = TabAppearance.FlatButtons;
+            tabControl1.Controls.Add(tabPage1);
+            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Controls.Add(tabPage3);
+            tabControl1.Controls.Add(tabPage4);
+            tabControl1.Controls.Add(tabPage6);
+            tabControl1.Controls.Add(tabPage5);
+            tabControl1.Dock = DockStyle.Top;
+            tabControl1.HotTrack = true;
+            tabControl1.Location = new System.Drawing.Point(0, 0);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 3;
+            tabControl1.Size = new System.Drawing.Size(799, 388);
+            tabControl1.SizeMode = TabSizeMode.FillToRight;
+            tabControl1.TabIndex = 2;
+            tabControl1.SelectedIndexChanged += TabControl1_SelectedIndexChanged;
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.button1);
-            this.tabPage1.Controls.Add(this.listBox1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 27);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(791, 357);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Item Scan";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Click += new System.EventHandler(this.TabPage1_Click);
+            tabPage1.Controls.Add(button1);
+            tabPage1.Controls.Add(listBox1);
+            tabPage1.Location = new System.Drawing.Point(4, 27);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new System.Drawing.Size(791, 357);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "Item Scan";
+            tabPage1.UseVisualStyleBackColor = true;
+            tabPage1.Click += TabPage1_Click;
             // 
             // listBox1
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 15;
-            this.listBox1.Location = new System.Drawing.Point(13, 15);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(158, 319);
-            this.listBox1.TabIndex = 1;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.ListBox1_SelectedIndexChanged);
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new System.Drawing.Point(13, 15);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new System.Drawing.Size(158, 319);
+            listBox1.TabIndex = 1;
+            listBox1.SelectedIndexChanged += ListBox1_SelectedIndexChanged;
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.checkBox1);
-            this.tabPage2.Controls.Add(this.button5);
-            this.tabPage2.Controls.Add(this.button4);
-            this.tabPage2.Location = new System.Drawing.Point(4, 27);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(791, 357);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Logs";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            tabPage2.Controls.Add(checkBox1);
+            tabPage2.Controls.Add(button5);
+            tabPage2.Controls.Add(button4);
+            tabPage2.Location = new System.Drawing.Point(4, 27);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new System.Drawing.Size(791, 357);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Logs";
+            tabPage2.UseVisualStyleBackColor = true;
             // 
             // checkBox1
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(137, 73);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(267, 19);
-            this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "Save myscan40 folder as well (Handheld only)";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new System.Drawing.Point(137, 73);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new System.Drawing.Size(267, 19);
+            checkBox1.TabIndex = 2;
+            checkBox1.Text = "Save myscan40 folder as well (Handheld only)";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += CheckBox1_CheckedChanged;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(12, 73);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(100, 50);
-            this.button5.TabIndex = 1;
-            this.button5.Text = "Save logcat";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.Button5_Click);
+            button5.Location = new System.Drawing.Point(12, 73);
+            button5.Name = "button5";
+            button5.Size = new System.Drawing.Size(100, 50);
+            button5.TabIndex = 1;
+            button5.Text = "Save logcat";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += Button5_Click;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(12, 17);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(100, 50);
-            this.button4.TabIndex = 0;
-            this.button4.Text = "Clear logcat";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.Button4_Click);
+            button4.Location = new System.Drawing.Point(12, 17);
+            button4.Name = "button4";
+            button4.Size = new System.Drawing.Size(100, 50);
+            button4.TabIndex = 0;
+            button4.Text = "Clear logcat";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += Button4_Click;
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.button12);
-            this.tabPage3.Controls.Add(this.button8);
-            this.tabPage3.Controls.Add(this.groupBox2);
-            this.tabPage3.Controls.Add(this.button2);
-            this.tabPage3.Controls.Add(this.listBox2);
-            this.tabPage3.Controls.Add(this.button3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 27);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(791, 357);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "TripStart & EOT";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            tabPage3.Controls.Add(button12);
+            tabPage3.Controls.Add(button8);
+            tabPage3.Controls.Add(groupBox2);
+            tabPage3.Controls.Add(button2);
+            tabPage3.Controls.Add(listBox2);
+            tabPage3.Controls.Add(button3);
+            tabPage3.Location = new System.Drawing.Point(4, 27);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new Padding(3);
+            tabPage3.Size = new System.Drawing.Size(791, 357);
+            tabPage3.TabIndex = 2;
+            tabPage3.Text = "TripStart & EOT";
+            tabPage3.UseVisualStyleBackColor = true;
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(237, 19);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(100, 50);
-            this.button12.TabIndex = 6;
-            this.button12.Text = "Restart App";
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.Button12_Click);
+            button12.Location = new System.Drawing.Point(237, 19);
+            button12.Name = "button12";
+            button12.Size = new System.Drawing.Size(100, 50);
+            button12.TabIndex = 6;
+            button12.Text = "Restart App";
+            button12.UseVisualStyleBackColor = true;
+            button12.Click += Button12_Click;
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(130, 19);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(100, 50);
-            this.button8.TabIndex = 5;
-            this.button8.Text = "Close App";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.Button8_Click);
+            button8.Location = new System.Drawing.Point(130, 19);
+            button8.Name = "button8";
+            button8.Size = new System.Drawing.Size(100, 50);
+            button8.TabIndex = 5;
+            button8.Text = "Close App";
+            button8.UseVisualStyleBackColor = true;
+            button8.Click += Button8_Click;
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button7);
-            this.groupBox2.Controls.Add(this.textBox3);
-            this.groupBox2.Controls.Add(this.textBox2);
-            this.groupBox2.Controls.Add(this.groupBox1);
-            this.groupBox2.Location = new System.Drawing.Point(492, 87);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(291, 153);
-            this.groupBox2.TabIndex = 4;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Manual Intent";
+            groupBox2.Controls.Add(button7);
+            groupBox2.Controls.Add(textBox3);
+            groupBox2.Controls.Add(textBox2);
+            groupBox2.Controls.Add(groupBox1);
+            groupBox2.Location = new System.Drawing.Point(492, 87);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new System.Drawing.Size(291, 153);
+            groupBox2.TabIndex = 4;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Manual Intent";
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(113, 92);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(170, 51);
-            this.button7.TabIndex = 6;
-            this.button7.Text = "Send Intent";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.Button7_Click);
+            button7.Location = new System.Drawing.Point(113, 92);
+            button7.Name = "button7";
+            button7.Size = new System.Drawing.Size(170, 51);
+            button7.TabIndex = 6;
+            button7.Text = "Send Intent";
+            button7.UseVisualStyleBackColor = true;
+            button7.Click += Button7_Click;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(6, 120);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.PlaceholderText = "terminalid";
-            this.textBox3.Size = new System.Drawing.Size(100, 23);
-            this.textBox3.TabIndex = 5;
-            this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox3_KeyPress);
+            textBox3.Location = new System.Drawing.Point(6, 120);
+            textBox3.Name = "textBox3";
+            textBox3.PlaceholderText = "terminalid";
+            textBox3.Size = new System.Drawing.Size(100, 23);
+            textBox3.TabIndex = 5;
+            textBox3.KeyPress += TextBox3_KeyPress;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(6, 91);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.PlaceholderText = "storenumber";
-            this.textBox2.Size = new System.Drawing.Size(100, 23);
-            this.textBox2.TabIndex = 4;
-            this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox2_KeyPress);
+            textBox2.Location = new System.Drawing.Point(6, 91);
+            textBox2.Name = "textBox2";
+            textBox2.PlaceholderText = "storenumber";
+            textBox2.Size = new System.Drawing.Size(100, 23);
+            textBox2.TabIndex = 4;
+            textBox2.KeyPress += TextBox2_KeyPress;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.listBox3);
-            this.groupBox1.Location = new System.Drawing.Point(6, 22);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(277, 63);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "SelfScanEnginePlugin Address";
-            this.groupBox1.Enter += new System.EventHandler(this.GroupBox1_Enter_1);
+            groupBox1.Controls.Add(listBox3);
+            groupBox1.Location = new System.Drawing.Point(6, 22);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new System.Drawing.Size(277, 63);
+            groupBox1.TabIndex = 3;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "SelfScanEnginePlugin Address";
+            groupBox1.Enter += GroupBox1_Enter_1;
             // 
             // listBox3
             // 
-            this.listBox3.FormattingEnabled = true;
-            this.listBox3.ItemHeight = 15;
-            this.listBox3.Location = new System.Drawing.Point(6, 22);
-            this.listBox3.Name = "listBox3";
-            this.listBox3.Size = new System.Drawing.Size(265, 34);
-            this.listBox3.TabIndex = 0;
+            listBox3.FormattingEnabled = true;
+            listBox3.ItemHeight = 15;
+            listBox3.Location = new System.Drawing.Point(6, 22);
+            listBox3.Name = "listBox3";
+            listBox3.Size = new System.Drawing.Size(265, 34);
+            listBox3.TabIndex = 0;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(173, 87);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 50);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "EOT";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
+            button2.Location = new System.Drawing.Point(173, 87);
+            button2.Name = "button2";
+            button2.Size = new System.Drawing.Size(100, 50);
+            button2.TabIndex = 1;
+            button2.Text = "EOT";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += Button2_Click;
             // 
             // listBox2
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 15;
-            this.listBox2.Location = new System.Drawing.Point(23, 87);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(144, 259);
-            this.listBox2.TabIndex = 2;
-            this.listBox2.Tag = "";
-            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.ListBox2_SelectedIndexChanged);
+            listBox2.FormattingEnabled = true;
+            listBox2.ItemHeight = 15;
+            listBox2.Location = new System.Drawing.Point(23, 87);
+            listBox2.Name = "listBox2";
+            listBox2.Size = new System.Drawing.Size(144, 259);
+            listBox2.TabIndex = 2;
+            listBox2.Tag = "";
+            listBox2.SelectedIndexChanged += ListBox2_SelectedIndexChanged;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(24, 19);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 50);
-            this.button3.TabIndex = 0;
-            this.button3.Text = "Device Taken";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.Button3_Click);
+            button3.Location = new System.Drawing.Point(24, 19);
+            button3.Name = "button3";
+            button3.Size = new System.Drawing.Size(100, 50);
+            button3.TabIndex = 0;
+            button3.Text = "Device Taken";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += Button3_Click;
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.button15);
-            this.tabPage4.Controls.Add(this.button13);
-            this.tabPage4.Controls.Add(this.button11);
-            this.tabPage4.Controls.Add(this.button9);
-            this.tabPage4.Controls.Add(this.button6);
-            this.tabPage4.Location = new System.Drawing.Point(4, 27);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(791, 357);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Device";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            tabPage4.Controls.Add(button15);
+            tabPage4.Controls.Add(button13);
+            tabPage4.Controls.Add(button11);
+            tabPage4.Controls.Add(button9);
+            tabPage4.Controls.Add(button6);
+            tabPage4.Location = new System.Drawing.Point(4, 27);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Padding = new Padding(3);
+            tabPage4.Size = new System.Drawing.Size(791, 357);
+            tabPage4.TabIndex = 3;
+            tabPage4.Text = "Device";
+            tabPage4.UseVisualStyleBackColor = true;
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(135, 77);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(100, 50);
-            this.button15.TabIndex = 4;
-            this.button15.Text = "Record";
-            this.button15.UseVisualStyleBackColor = true;
-            this.button15.Click += new System.EventHandler(this.Button15_Click);
+            button15.Location = new System.Drawing.Point(135, 77);
+            button15.Name = "button15";
+            button15.Size = new System.Drawing.Size(100, 50);
+            button15.TabIndex = 4;
+            button15.Text = "Record";
+            button15.UseVisualStyleBackColor = true;
+            button15.Click += Button15_Click;
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(28, 134);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(100, 50);
-            this.button13.TabIndex = 3;
-            this.button13.Text = "Connect over IP";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.Button13_Click);
+            button13.Location = new System.Drawing.Point(28, 134);
+            button13.Name = "button13";
+            button13.Size = new System.Drawing.Size(100, 50);
+            button13.TabIndex = 3;
+            button13.Text = "Connect over IP";
+            button13.UseVisualStyleBackColor = true;
+            button13.Click += Button13_Click;
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(134, 20);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(100, 50);
-            this.button11.TabIndex = 2;
-            this.button11.Text = "ScreenCap";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.Button11_Click);
+            button11.Location = new System.Drawing.Point(134, 20);
+            button11.Name = "button11";
+            button11.Size = new System.Drawing.Size(100, 50);
+            button11.TabIndex = 2;
+            button11.Text = "ScreenCap";
+            button11.UseVisualStyleBackColor = true;
+            button11.Click += Button11_Click;
             // 
             // button9
             // 
-            this.button9.FlatAppearance.BorderSize = 0;
-            this.button9.Location = new System.Drawing.Point(28, 77);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(100, 50);
-            this.button9.TabIndex = 1;
-            this.button9.Text = "Device Details";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.Button9_Click);
+            button9.FlatAppearance.BorderSize = 0;
+            button9.Location = new System.Drawing.Point(28, 77);
+            button9.Name = "button9";
+            button9.Size = new System.Drawing.Size(100, 50);
+            button9.TabIndex = 1;
+            button9.Text = "Device Details";
+            button9.UseVisualStyleBackColor = true;
+            button9.Click += Button9_Click;
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(28, 20);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(100, 50);
-            this.button6.TabIndex = 0;
-            this.button6.Text = "Reboot";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.Button6_Click);
+            button6.Location = new System.Drawing.Point(28, 20);
+            button6.Name = "button6";
+            button6.Size = new System.Drawing.Size(100, 50);
+            button6.TabIndex = 0;
+            button6.Text = "Reboot";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += Button6_Click;
             // 
             // tabPage6
             // 
-            this.tabPage6.Controls.Add(this.groupBox4);
-            this.tabPage6.Controls.Add(this.button16);
-            this.tabPage6.Location = new System.Drawing.Point(4, 27);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(791, 357);
-            this.tabPage6.TabIndex = 5;
-            this.tabPage6.Text = "Add/Remove Apps";
-            this.tabPage6.UseVisualStyleBackColor = true;
+            tabPage6.Controls.Add(groupBox4);
+            tabPage6.Controls.Add(button16);
+            tabPage6.Location = new System.Drawing.Point(4, 27);
+            tabPage6.Name = "tabPage6";
+            tabPage6.Padding = new Padding(3);
+            tabPage6.Size = new System.Drawing.Size(791, 357);
+            tabPage6.TabIndex = 5;
+            tabPage6.Text = "Add/Remove Apps";
+            tabPage6.UseVisualStyleBackColor = true;
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.textBox4);
-            this.groupBox4.Controls.Add(this.button17);
-            this.groupBox4.Controls.Add(this.listBox5);
-            this.groupBox4.Location = new System.Drawing.Point(8, 9);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(379, 330);
-            this.groupBox4.TabIndex = 2;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Current apps";
+            groupBox4.Controls.Add(textBox4);
+            groupBox4.Controls.Add(button17);
+            groupBox4.Controls.Add(listBox5);
+            groupBox4.Location = new System.Drawing.Point(8, 9);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new System.Drawing.Size(379, 330);
+            groupBox4.TabIndex = 2;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "Current apps";
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(6, 289);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.PlaceholderText = "Search bar";
-            this.textBox4.Size = new System.Drawing.Size(261, 23);
-            this.textBox4.TabIndex = 3;
-            this.textBox4.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox4_KeyUp);
+            textBox4.Location = new System.Drawing.Point(6, 289);
+            textBox4.Name = "textBox4";
+            textBox4.PlaceholderText = "Search bar";
+            textBox4.Size = new System.Drawing.Size(261, 23);
+            textBox4.TabIndex = 3;
+            textBox4.TextChanged += textBox4_TextChanged;
+            textBox4.KeyUp += textBox4_KeyUp;
             // 
             // button17
             // 
-            this.button17.Location = new System.Drawing.Point(273, 274);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(100, 50);
-            this.button17.TabIndex = 2;
-            this.button17.Text = "Uninstall";
-            this.button17.UseVisualStyleBackColor = true;
-            this.button17.Click += new System.EventHandler(this.button17_Click);
+            button17.Location = new System.Drawing.Point(273, 274);
+            button17.Name = "button17";
+            button17.Size = new System.Drawing.Size(100, 50);
+            button17.TabIndex = 2;
+            button17.Text = "Uninstall";
+            button17.UseVisualStyleBackColor = true;
+            button17.Click += button17_Click;
             // 
             // listBox5
             // 
-            this.listBox5.FormattingEnabled = true;
-            this.listBox5.ItemHeight = 15;
-            this.listBox5.Location = new System.Drawing.Point(6, 22);
-            this.listBox5.Name = "listBox5";
-            this.listBox5.Size = new System.Drawing.Size(367, 244);
-            this.listBox5.TabIndex = 1;
-            this.listBox5.SelectedIndexChanged += new System.EventHandler(this.listBox5_SelectedIndexChanged);
+            listBox5.FormattingEnabled = true;
+            listBox5.ItemHeight = 15;
+            listBox5.Location = new System.Drawing.Point(6, 22);
+            listBox5.Name = "listBox5";
+            listBox5.Size = new System.Drawing.Size(367, 244);
+            listBox5.TabIndex = 1;
+            listBox5.SelectedIndexChanged += listBox5_SelectedIndexChanged;
             // 
             // button16
             // 
-            this.button16.Location = new System.Drawing.Point(409, 9);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(100, 50);
-            this.button16.TabIndex = 0;
-            this.button16.Text = "Install APK";
-            this.button16.UseVisualStyleBackColor = true;
-            this.button16.Click += new System.EventHandler(this.button16_Click);
+            button16.Location = new System.Drawing.Point(409, 9);
+            button16.Name = "button16";
+            button16.Size = new System.Drawing.Size(100, 50);
+            button16.TabIndex = 0;
+            button16.Text = "Install APK";
+            button16.UseVisualStyleBackColor = true;
+            button16.Click += button16_Click;
             // 
             // tabPage5
             // 
-            this.tabPage5.Controls.Add(this.groupBox3);
-            this.tabPage5.Controls.Add(this.button10);
-            this.tabPage5.Controls.Add(this.listBox4);
-            this.tabPage5.Location = new System.Drawing.Point(4, 27);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(791, 357);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "Others";
-            this.tabPage5.UseVisualStyleBackColor = true;
+            tabPage5.Controls.Add(groupBox3);
+            tabPage5.Controls.Add(button10);
+            tabPage5.Controls.Add(listBox4);
+            tabPage5.Location = new System.Drawing.Point(4, 27);
+            tabPage5.Name = "tabPage5";
+            tabPage5.Padding = new Padding(3);
+            tabPage5.Size = new System.Drawing.Size(791, 357);
+            tabPage5.TabIndex = 4;
+            tabPage5.Text = "Others";
+            tabPage5.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button14);
-            this.groupBox3.Controls.Add(this.textBox1);
-            this.groupBox3.Location = new System.Drawing.Point(369, 108);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(399, 116);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "ADB Command";
-            this.groupBox3.Enter += new System.EventHandler(this.GroupBox3_Enter);
+            groupBox3.Controls.Add(button14);
+            groupBox3.Controls.Add(textBox1);
+            groupBox3.Location = new System.Drawing.Point(369, 108);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new System.Drawing.Size(399, 116);
+            groupBox3.TabIndex = 2;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "ADB Command";
+            groupBox3.Enter += GroupBox3_Enter;
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(7, 52);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(100, 50);
-            this.button14.TabIndex = 1;
-            this.button14.Text = "Send";
-            this.button14.UseVisualStyleBackColor = true;
-            this.button14.Click += new System.EventHandler(this.Button14_Click);
+            button14.Location = new System.Drawing.Point(7, 52);
+            button14.Name = "button14";
+            button14.Size = new System.Drawing.Size(100, 50);
+            button14.TabIndex = 1;
+            button14.Text = "Send";
+            button14.UseVisualStyleBackColor = true;
+            button14.Click += Button14_Click;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(7, 23);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.PlaceholderText = "Type your ADB command here (eg. adb disconnect)";
-            this.textBox1.Size = new System.Drawing.Size(386, 23);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
+            textBox1.Location = new System.Drawing.Point(7, 23);
+            textBox1.Name = "textBox1";
+            textBox1.PlaceholderText = "Type your ADB command here (eg. adb disconnect)";
+            textBox1.Size = new System.Drawing.Size(386, 23);
+            textBox1.TabIndex = 0;
+            textBox1.TextChanged += TextBox1_TextChanged;
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(215, 18);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(100, 50);
-            this.button10.TabIndex = 1;
-            this.button10.Text = "Run";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.Button10_Click);
+            button10.Location = new System.Drawing.Point(215, 18);
+            button10.Name = "button10";
+            button10.Size = new System.Drawing.Size(100, 50);
+            button10.TabIndex = 1;
+            button10.Text = "Run";
+            button10.UseVisualStyleBackColor = true;
+            button10.Click += Button10_Click;
             // 
             // listBox4
             // 
-            this.listBox4.FormattingEnabled = true;
-            this.listBox4.ItemHeight = 15;
-            this.listBox4.Location = new System.Drawing.Point(29, 18);
-            this.listBox4.Name = "listBox4";
-            this.listBox4.Size = new System.Drawing.Size(180, 274);
-            this.listBox4.TabIndex = 0;
-            this.listBox4.SelectedIndexChanged += new System.EventHandler(this.ListBox4_SelectedIndexChanged);
+            listBox4.FormattingEnabled = true;
+            listBox4.ItemHeight = 15;
+            listBox4.Location = new System.Drawing.Point(29, 18);
+            listBox4.Name = "listBox4";
+            listBox4.Size = new System.Drawing.Size(180, 274);
+            listBox4.TabIndex = 0;
+            listBox4.SelectedIndexChanged += ListBox4_SelectedIndexChanged;
             // 
             // Form1
             // 
-            this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(799, 406);
-            this.Controls.Add(this.tabControl1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "Form1";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MDC Android Tool";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage6.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.tabPage5.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
-            this.ResumeLayout(false);
-
+            AllowDrop = true;
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(799, 406);
+            Controls.Add(tabControl1);
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "MDC Android Tool";
+            Load += Form1_Load;
+            tabControl1.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            tabPage2.ResumeLayout(false);
+            tabPage2.PerformLayout();
+            tabPage3.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            groupBox1.ResumeLayout(false);
+            tabPage4.ResumeLayout(false);
+            tabPage6.ResumeLayout(false);
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
+            tabPage5.ResumeLayout(false);
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
+            ResumeLayout(false);
         }
 
 
