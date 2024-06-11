@@ -10,6 +10,7 @@ using SharpAdbClient;
 using System.Net;
 using System.Threading;
 using SharpAdbClient.DeviceCommands;
+using System.Text.RegularExpressions;
 
 namespace WindowsFormsApp1
 {
@@ -79,6 +80,19 @@ namespace WindowsFormsApp1
 
         }
 
+        //Used to allow or remove permissions
+        private void UpdatePermission(string packageName, string permissionName, string status)
+        {
+            //Tries to uninstall the app
+            int processExitCode = RunExternalCMDCommand("adb shell appops set " + packageName + " " + permissionName + " " + status);
+
+            //Based on the System_Diagnostics_Process_ExitCode returned by the process a messagebox is displayed
+            if (processExitCode == 0)
+                MessageBox.Show("Permission " + status + "!", "Done", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            else
+                MessageBox.Show(@"Something went wrong! Try updating permissions manually!", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+        }
+
         //Used to populate listbox values based on a dictionary
         private void PopulateListBox(ListBox listbox, IDictionary<string, string> dictionary)
         {
@@ -93,6 +107,29 @@ namespace WindowsFormsApp1
             PackageManager manager = new PackageManager(device);
             return manager.Packages;
         }
+
+        public List<string> ReturnListOfPermissions(string packageName)
+        {
+            DeviceData device = AdbClient.Instance.GetDevices().First();
+            PackageManager manager = new PackageManager(device);
+            var receiver = new ConsoleOutputReceiver();
+            var command = $"appops get {packageName}";
+
+            AdbClient.Instance.ExecuteRemoteCommand(command, device, receiver);
+
+            var permissions = new List<string>();
+
+            var regex = new Regex(@"(\w+): (allow|ignore|default); time=[^\n]+");
+            var matches = regex.Matches(receiver.ToString());
+
+            foreach (Match match in matches)
+            {
+                permissions.Add(match.Groups[1].Value);
+            }
+
+            return permissions;
+        }
+
 
         //Used to return the scan item command
         private string ReturnScanItemCommand(String ItemBarcode)
@@ -147,11 +184,22 @@ namespace WindowsFormsApp1
             }
 
             resultTemp = resultTemp.Substring(0, resultTemp.IndexOf('\r'));
+            int startPos = 0;
+            int endPos = 0;
 
-            resultTemp = resultTemp.Split(" ")[4];
-
-            int startPos = resultTemp.IndexOf(':') + 1;
-            int endPos = resultTemp.IndexOf('}') - startPos;
+            int AndroidVer = Int32.Parse(GetOutputFromCommand(Commands["AndroidVersion"]));
+            if (AndroidVer >= 13)
+            {
+                resultTemp = resultTemp.Split(" ")[4];
+                startPos = resultTemp.IndexOf(':') + 1;
+                endPos = resultTemp.IndexOf('}') - startPos;
+            }
+            else
+            {
+                resultTemp = resultTemp.Split(" ")[3];
+                startPos = resultTemp.IndexOf('=') + 1;
+                endPos = resultTemp.Length- startPos;
+            }
 
             resultTemp = resultTemp.Substring(startPos, endPos);
 
@@ -456,7 +504,13 @@ namespace WindowsFormsApp1
 
         private void listBox5_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (listBox5.SelectedItem != null)
+            {
+                listBox1.Items.Clear();
+                string currentApp = listBox5.SelectedItem.ToString();
+                var PossibleStates = ReturnListOfPermissions(currentApp);
+                listBox1.Items.AddRange(PossibleStates.ToArray());
+            }
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -520,6 +574,49 @@ namespace WindowsFormsApp1
                 string currentApp = CurrentPackageName();
                 RunCommand("am force-stop " + currentApp);
                 RunCommand(Commands["StartApp"] + currentApp + " 1");
+            }
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (listBox5.SelectedItem != null && listBox1.SelectedItem != null)
+            {
+                UpdatePermission(listBox5.SelectedItem.ToString(), listBox1.SelectedItem.ToString(), "allow");
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (listBox5.SelectedItem != null && listBox1.SelectedItem != null)
+            {
+                UpdatePermission(listBox5.SelectedItem.ToString(), listBox1.SelectedItem.ToString(), "ignore");
+            }
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            if (listBox5.SelectedItem != null)
+            {
+                foreach (var item in listBox1.Items)
+                {
+                    UpdatePermission(listBox5.SelectedItem.ToString(), item.ToString(), "allow");
+                }
+            }
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            if (listBox5.SelectedItem != null)
+            {
+                foreach (var item in listBox1.Items)
+                {
+                    UpdatePermission(listBox5.SelectedItem.ToString(), item.ToString(), "ignore");
+                }
             }
         }
     }

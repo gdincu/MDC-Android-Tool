@@ -45,6 +45,11 @@ namespace WindowsFormsApp1
             button9 = new Button();
             button6 = new Button();
             tabPage6 = new TabPage();
+            button18 = new Button();
+            button12 = new Button();
+            button8 = new Button();
+            button7 = new Button();
+            listBox1 = new ListBox();
             button2 = new Button();
             button1 = new Button();
             groupBox4 = new GroupBox();
@@ -187,6 +192,11 @@ namespace WindowsFormsApp1
             // 
             // tabPage6
             // 
+            tabPage6.Controls.Add(button18);
+            tabPage6.Controls.Add(button12);
+            tabPage6.Controls.Add(button8);
+            tabPage6.Controls.Add(button7);
+            tabPage6.Controls.Add(listBox1);
             tabPage6.Controls.Add(button2);
             tabPage6.Controls.Add(button1);
             tabPage6.Controls.Add(groupBox4);
@@ -199,9 +209,59 @@ namespace WindowsFormsApp1
             tabPage6.Text = "Apps";
             tabPage6.UseVisualStyleBackColor = true;
             // 
+            // button18
+            // 
+            button18.Location = new System.Drawing.Point(657, 238);
+            button18.Name = "button18";
+            button18.Size = new System.Drawing.Size(64, 35);
+            button18.TabIndex = 12;
+            button18.Text = "IgnoreAll";
+            button18.UseVisualStyleBackColor = true;
+            button18.Click += button18_Click;
+            // 
+            // button12
+            // 
+            button12.Location = new System.Drawing.Point(479, 238);
+            button12.Name = "button12";
+            button12.Size = new System.Drawing.Size(64, 35);
+            button12.TabIndex = 11;
+            button12.Text = "AllowAll";
+            button12.UseVisualStyleBackColor = true;
+            button12.Click += button12_Click;
+            // 
+            // button8
+            // 
+            button8.Location = new System.Drawing.Point(587, 238);
+            button8.Name = "button8";
+            button8.Size = new System.Drawing.Size(64, 35);
+            button8.TabIndex = 10;
+            button8.Text = "Ignore";
+            button8.UseVisualStyleBackColor = true;
+            button8.Click += button8_Click;
+            // 
+            // button7
+            // 
+            button7.Location = new System.Drawing.Point(409, 238);
+            button7.Name = "button7";
+            button7.Size = new System.Drawing.Size(64, 35);
+            button7.TabIndex = 9;
+            button7.Text = "Allow";
+            button7.UseVisualStyleBackColor = true;
+            button7.Click += button7_Click;
+            // 
+            // listBox1
+            // 
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new System.Drawing.Point(409, 78);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new System.Drawing.Size(312, 154);
+            listBox1.TabIndex = 5;
+            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
+            // 
             // button2
             // 
-            button2.Location = new System.Drawing.Point(515, 65);
+            button2.Location = new System.Drawing.Point(621, 9);
             button2.Name = "button2";
             button2.Size = new System.Drawing.Size(100, 50);
             button2.TabIndex = 8;
@@ -402,6 +462,11 @@ namespace WindowsFormsApp1
         private Button button3;
         private Button button2;
         private Button button1;
+        private ListBox listBox1;
+        private Button button8;
+        private Button button7;
+        private Button button18;
+        private Button button12;
     }
 }
 
