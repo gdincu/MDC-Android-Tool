@@ -61,9 +61,6 @@ namespace WindowsFormsApp1
             ReadValuesAsync(URIs, "URIs");
             ReadValuesAsync(HandheldDevices, "HandheldDevices");
 
-            PopulateListBox(listBox1, Items);
-            PopulateListBox(listBox2, EOTBarcodes);
-            PopulateListBox(listBox3, URIs);
             PopulateListBox(listBox4, Commands);
             PopulateListBox(listBox5, ReturnListOfInstalledApps());
 
@@ -153,9 +150,9 @@ namespace WindowsFormsApp1
 
             resultTemp = resultTemp.Split(" ")[4];
 
-            int startPos = resultTemp.IndexOf(':')+1;
+            int startPos = resultTemp.IndexOf(':') + 1;
             int endPos = resultTemp.IndexOf('}') - startPos;
-           
+
             resultTemp = resultTemp.Substring(startPos, endPos);
 
             return resultTemp;
@@ -221,19 +218,6 @@ namespace WindowsFormsApp1
             return result;
         }
 
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            if (NumberOfDevicesConnectedEqualsOne())
-                RunCommand(ReturnScanItemCommand(Items[listBox1.SelectedItem.ToString()]));
-
-        }
-
-        private void Button3_Click(object sender, EventArgs e)
-        {
-            if (NumberOfDevicesConnectedEqualsOne())
-                RunCommand(Commands["Undocked"]);
-        }
-
         private void Button4_Click(object sender, EventArgs e)
         {
             if (NumberOfDevicesConnectedEqualsOne())
@@ -297,50 +281,6 @@ namespace WindowsFormsApp1
                 RunCommand(Commands["Reboot"]);
         }
 
-        private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Button2_Click(object sender, EventArgs e)
-        {
-            if (NumberOfDevicesConnectedEqualsOne())
-                RunCommand(ReturnScanItemCommand(EOTBarcodes[listBox2.SelectedItem.ToString()]));
-        }
-
-        private void ListBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void GroupBox1_Enter_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Button7_Click(object sender, EventArgs e)
-        {
-            if (NumberOfDevicesConnectedEqualsOne())
-            {
-                String _intent = Commands["Intent1"]
-                + textBox2.Text
-                + Commands["Intent2"]
-                + URIs[listBox3.SelectedItem.ToString()]
-                + Commands["Intent3"]
-                + textBox3.Text + "'";
-
-                RunCommand(_intent);
-            }
-        }
-
-        private void Button8_Click(object sender, EventArgs e)
-        {
-            if (NumberOfDevicesConnectedEqualsOne()) { 
-                var currentApp = CurrentPackageName();
-                RunCommand("am force-stop " + currentApp);
-            }
-        }
-
         private void Button9_Click(object sender, EventArgs e)
         {
             if (NumberOfDevicesConnectedEqualsOne())
@@ -375,20 +315,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void CheckBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            SaveMyScan40Folder = checkBox1.Checked;
-        }
 
-        private void Button12_Click(object sender, EventArgs e)
-        {
-            if (NumberOfDevicesConnectedEqualsOne())
-            {
-                string currentApp = CurrentPackageName();
-                RunCommand("am force-stop " + currentApp);
-                RunCommand(Commands["StartApp"] + currentApp + " 1");
-            }
-        }
 
         private void Button13_Click(object sender, EventArgs e)
         {
@@ -564,6 +491,36 @@ namespace WindowsFormsApp1
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int processExitCode = RunExternalCMDCommand(Commands["ClearAppData"] + listBox5.SelectedItem);
+
+            //Based on the System_Diagnostics_Process_ExitCode returned by the process a messagebox is displayed
+            if (processExitCode == 0)
+                MessageBox.Show("App cache cleared successfully!", "Done", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            else
+                MessageBox.Show(@"Something went wrong! Try again manually!", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (NumberOfDevicesConnectedEqualsOne())
+            {
+                var currentApp = CurrentPackageName();
+                RunCommand("am force-stop " + currentApp);
+            }
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            if (NumberOfDevicesConnectedEqualsOne())
+            {
+                string currentApp = CurrentPackageName();
+                RunCommand("am force-stop " + currentApp);
+                RunCommand(Commands["StartApp"] + currentApp + " 1");
+            }
         }
     }
 }
